@@ -49,7 +49,7 @@ DEF JOHTO_LANDMARK EQU const_value
 	const LANDMARK_DARK_CAVE         ; 2c
 	const LANDMARK_ROUTE_46          ; 2d
 	const LANDMARK_SILVER_CAVE       ; 2e
-	const LANDMARK_STARTER_TOWN
+	const LANDMARK_ROCK_SALT_TOWN	 ; 2f
 DEF JOHTO_LANDMARK_LAST EQU const_value - 1
 
 DEF KANTO_LANDMARK EQU const_value

@@ -1,13 +1,13 @@
 	object_const_def
-  const STARTER_TOWN_BOOKWORM
-  const STARTER_TOWN_BOOKWORMS_HOOTHOOT
+  const ROCK_SALT_BOOKWORM
+  const ROCK_SALT_BOOKWORMS_HOOTHOOT
 	
-StarterTownBookwormsHouse_MapScripts:
+RockSaltBookwormsHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-StarterTownBookwormScript:
+RockSaltBookwormScript:
   opentext
   writetext Text_CallMeIshmael
   closetext
@@ -20,7 +20,7 @@ StarterTownBookwormScript:
   end
 
 
-StarterTownBookwormsHoothootScript:
+RockSaltBookwormsHoothootScript:
   jumptextfaceplayer Text_BookwormsHoothoot
 
 Text_CallMeIshmael:
@@ -44,17 +44,17 @@ Text_BookwormsHoothoot:
   line "Hoot!"
   done
 
-StarterTownBookwormsHouse_MapEvents:
+RockSaltBookwormsHouse_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-  warp_event 4, 7, STARTER_TOWN, 2
-  warp_event 5, 7, STARTER_TOWN, 2
+  warp_event 4, 7, ROCK_SALT_TOWN, 2
+  warp_event 5, 7, ROCK_SALT_TOWN, 2
 
 	def_coord_events
 
 	def_bg_events
 
 	def_object_events
-	object_event 3, 5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownBookwormScript, -1
-	object_event 7, 5, SPRITE_BIRD, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownBookwormsHoothootScript, -1
+	object_event 3, 5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltBookwormScript, -1
+	object_event 7, 5, SPRITE_BIRD, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltBookwormsHoothootScript, -1

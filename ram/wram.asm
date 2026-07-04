@@ -3114,7 +3114,7 @@ wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
-wStarterTownSceneID::                             db
+wRockSaltTownSceneID::                             db
 
 	ds 48
 

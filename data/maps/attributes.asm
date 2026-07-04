@@ -715,6 +715,9 @@ ENDM
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00
 
-	map_attributes StarterTown, STARTER_TOWN, $05
-	map_attributes StarterTownBookwormsHouse, STARTER_TOWN_BOOKWORMS_HOUSE, $00
-	map_attributes StarterTownPlayersHouse, STARTER_TOWN_PLAYERS_HOUSE, $00
+	map_attributes RockSaltTown, ROCK_SALT_TOWN, $05
+	map_attributes RockSaltPlayersHouse, ROCK_SALT_PLAYERS_HOUSE, $00
+	; map_attributes RockSaltRivalsHouse, ROCK_SALT_RIVALS_HOUSE, $00
+	; map_attributes RockSaltLab, ROCK_SALT_LAB, $00
+	map_attributes RockSaltBookwormsHouse, ROCK_SALT_BOOKWORMS_HOUSE, $00
+	; map_attributes RockSaltOldMansHouse, ROCK_SALT_OLD_MANS_HOUSE, $00

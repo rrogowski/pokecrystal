@@ -1048,13 +1048,13 @@ GoldenrodDeptStoreRoof_Blocks:
 
 SECTION "Map Blocks 4", ROMX
 
-StarterTown_Blocks:
-	INCBIN "maps/StarterTown.blk"
+RockSaltTown_Blocks:
+	INCBIN "maps/RockSaltTown.blk"
 
-StarterTownBookwormsHouse_Blocks:
-	INCBIN "maps/StarterTownBookwormsHouse.blk"
+RockSaltBookwormsHouse_Blocks:
+	INCBIN "maps/RockSaltBookwormsHouse.blk"
 
-StarterTownPlayersHouse_Blocks:
-	INCBIN "maps/StarterTownPlayersHouse.blk"
+RockSaltPlayersHouse_Blocks:
+	INCBIN "maps/RockSaltPlayersHouse.blk"
 
 ENDSECTION

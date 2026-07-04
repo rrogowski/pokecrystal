@@ -484,8 +484,8 @@ SECTION "Map Scripts 25", ROMX
 
 INCLUDE "maps/SilverCaveOutside.asm"
 INCLUDE "maps/Route10North.asm"
-INCLUDE "maps/StarterTown.asm"
-INCLUDE "maps/StarterTownBookwormsHouse.asm"
-INCLUDE "maps/StarterTownPlayersHouse.asm"
+INCLUDE "maps/RockSaltTown.asm"
+INCLUDE "maps/RockSaltBookwormsHouse.asm"
+INCLUDE "maps/RockSaltPlayersHouse.asm"
 
 ENDSECTION
