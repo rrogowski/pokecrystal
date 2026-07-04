@@ -37,6 +37,12 @@ Text_Sorry:
   text "Sorry, I was just"
   line "reading my favo-"
   cont "rite book!"
+
+  para "It's about an"
+  line "obsessed captain"
+  cont "hunting down the"
+  cont "legendary white"
+  cont "WAILORD!"
   prompt
 
 Text_BookwormsHoothoot:

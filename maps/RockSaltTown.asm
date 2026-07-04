@@ -22,6 +22,7 @@ RockSaltTownNoopScene:
 	end
 
 RockSaltTown_OldManStopsYouScene:
+	faceplayer
 	opentext
 	writetext Text_Wait
 	closetext
@@ -124,7 +125,7 @@ RockSaltTownPlayersHouseSignText:
     done
 
 RockSaltTownRivalsHouseSign:
-    jumptext RockSaltTownPlayersHouseSignText
+    jumptext RockSaltTownRivalsHouseSigntText
 
 RockSaltTownRivalsHouseSigntText:
     text "<RIVAL>'s HOUSE"
