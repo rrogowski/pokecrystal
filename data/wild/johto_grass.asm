@@ -1710,4 +1710,32 @@ JohtoGrassWildMons:
 	db 44, GOLBAT
 	end_grass_wildmons
 
+	def_grass_wildmons ROCK_SALT_TOWN
+	db 2 percent, 2 percent, 2 percent ; encounter rates: morn/day/nite
+	;	morn
+	db 4, PIDGEY
+	db 3, SENTRET
+	db 3, LEDYBA
+	db 4, SENTRET
+	db 3, HOPPIP
+	db 4, HOPPIP
+	db 5, TEDDIURSA
+	;	day
+	db 3, PIDGEY
+	db 4, RATTATA
+	db 3, CATERPIE
+	db 3, SENTRET
+	db 4, CATERPIE
+	db 4, STANTLER
+	db 5, STANTLER
+	;	nite
+	db 4, HOOTHOOT
+	db 3, SPINARAK
+	db 3, WEEDLE
+	db 4, POLIWAG
+	db 3, WEEDLE
+	db 4, GASTLY
+	db 5, MURKROW
+	end_grass_wildmons
+
 	db -1 ; end
