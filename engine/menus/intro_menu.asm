@@ -64,6 +64,7 @@ NewGame:
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
+	call InitializePlayerInfo
 	;call OakSpeech
 	call InitializeWorld
 
@@ -86,6 +87,15 @@ PlayerProfileSetup:
 	ld c, 0
 	farcall InitMobileProfile
 	ret
+
+InitializePlayerInfo:
+	ld hl, .PlayerName
+	ld de, wPlayerName
+	ld bc, NAME_LENGTH
+	call CopyBytes
+	ret
+
+.PlayerName: db "Kit@"
 
 if DEF(_DEBUG)
 DebugRoom: ; unreferenced
