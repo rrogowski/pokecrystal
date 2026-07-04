@@ -592,6 +592,20 @@ DoPlayerMovement::
 	ld h, [hl]
 	ld l, a
 	ld a, [hl]
+
+  ldh a, [hJoyDown]
+	or ~(PAD_A | PAD_B)
+	inc a
+	ld a, [hl]
+	jr nz, .no_wtw
+	cp COLL_01
+	jr z, .no_wtw
+	ld a, COLL_LADDER
+	ld [wWalkingTileCollision], a
+	ret
+
+.no_wtw:
+	ld a, [hl]
 	ld [wWalkingTileCollision], a
 	ret
 

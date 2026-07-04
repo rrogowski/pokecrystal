@@ -1,6 +1,9 @@
 	object_const_def
     const ROCK_SALT_TOWN_OLD_MAN
-    ; const ROCK_SALT_TOWN_WOMAN_BLOCKING_CAVE
+    const ROCK_SALT_TOWN_WOMAN_BLOCKING_CAVE
+    const ROCK_SALT_TOWN_MEOWTH
+		const ROCK_SALT_TOWN_SENTRET
+    const ROCK_SALT_TOWN_EEVEE
     const ROCK_SALT_TOWN_TAUROS_1
     const ROCK_SALT_TOWN_TAUROS_2
     const ROCK_SALT_TOWN_TAUROS_3
@@ -93,6 +96,132 @@ RockSaltTownTaurosText:
     text "TAUROS: Moo!"
     done
 
+RockSaltTownMeowthScript:
+	faceplayer
+	opentext
+	writetext Text_Meowth
+	cry MEOWTH
+	waitbutton
+	closetext
+	reanchormap
+	pokepic MEOWTH
+	waitbutton
+	closepokepic
+	closetext
+
+	opentext
+	getmonname STRING_BUFFER_3, MEOWTH
+	writetext Text_ChooseStarter
+	yesorno
+	closetext
+	iffalse DidntPickStarterScript
+
+	getmonname STRING_BUFFER_3, MEOWTH
+	opentext
+	writetext Text_ReceivedStarter
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	promptbutton
+	givepoke MEOWTH, 5, BERRY
+	closetext
+	disappear ROCK_SALT_TOWN_MEOWTH
+
+	end
+
+Text_Meowth:
+	text "MEOWTH: Mee Owth!"
+	done
+
+RockSaltTownSentretScript:
+	faceplayer
+	opentext
+	writetext Text_Sentret
+	cry SENTRET
+	waitbutton
+	closetext
+	reanchormap
+	pokepic SENTRET
+	waitbutton
+	closepokepic
+	closetext
+
+	opentext
+	getmonname STRING_BUFFER_3, SENTRET
+	writetext Text_ChooseStarter
+	yesorno
+	closetext
+	iffalse DidntPickStarterScript
+
+	getmonname STRING_BUFFER_3, SENTRET
+	opentext
+	writetext Text_ReceivedStarter
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	promptbutton
+	givepoke SENTRET, 5, BERRY
+	closetext
+	disappear ROCK_SALT_TOWN_SENTRET
+
+	end
+
+Text_Sentret:
+	text "SENTRET: Screech!"
+	done
+
+RockSaltTownEeveeScript:
+	faceplayer
+	opentext
+	writetext Text_Eevee
+	cry EEVEE
+	waitbutton
+	closetext
+	reanchormap
+	pokepic EEVEE
+	waitbutton
+	closepokepic
+	closetext
+
+	opentext
+	getmonname STRING_BUFFER_3, EEVEE
+	writetext Text_ChooseStarter
+	yesorno
+	closetext
+	iffalse DidntPickStarterScript
+
+	getmonname STRING_BUFFER_3, EEVEE
+	opentext
+	writetext Text_ReceivedStarter
+	playsound SFX_CAUGHT_MON
+	waitsfx
+	promptbutton
+	givepoke EEVEE, 5, BERRY
+	closetext
+	disappear ROCK_SALT_TOWN_EEVEE
+
+	end
+
+Text_Eevee:
+	text "EEVEE: Ee-vee?"
+	done
+
+Text_ChooseStarter:
+	text "Do you want the"
+	line "@"
+	text_ram wStringBuffer3
+	text "?"
+	done
+
+Text_ReceivedStarter:
+	text "<PLAYER> received"
+	line "the @"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+DidntPickStarterScript:
+	closetext
+	end
+
 RockSaltTownYoungsterScript:
     faceplayer
     opentext
@@ -162,6 +291,9 @@ RockSaltTown_MapEvents:
 	def_object_events
 	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
 	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTown_WomanBlockingCaveScene, -1
+	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_MEOWTH_AS_STARTER
+	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_SENTRET_AS_STARTER
+	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_EEVEE_AS_STARTER
 	object_event 21,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 23,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 37,  6, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
