@@ -1048,6 +1048,9 @@ GoldenrodDeptStoreRoof_Blocks:
 
 SECTION "Map Blocks 4", ROMX
 
+StarterTown_Blocks:
+	INCBIN "maps/StarterTown.blk"
+
 StarterTownPlayersHouse_Blocks:
 	INCBIN "maps/StarterTownPlayersHouse.blk"
 

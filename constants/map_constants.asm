@@ -501,8 +501,9 @@ ENDM
 	map_const ROUTE_31_VIOLET_GATE,                         5,  4 ; 11
 	endgroup
 
-	newgroup STARTER_TOWN
-	map_const STARTER_TOWN_PLAYERS_HOUSE, 5, 4
+	newgroup STARTER_TOWN 										  ; 27
+	map_const STARTER_TOWN_PLAYERS_HOUSE,  					 5, 4 ;  1
+	map_const STARTER_TOWN,				 				    20, 9 ;  2
 	endgroup
 
-DEF NUM_MAP_GROUPS EQU const_value ; 26
+DEF NUM_MAP_GROUPS EQU const_value ; 27
