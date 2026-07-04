@@ -672,4 +672,4 @@ CableClubGroupSprites:
 	db SPRITE_POKEDEX
 
 StarterTownSprites:
-	db SPRITE_TWIN
+	db SPRITE_GRAMPS
