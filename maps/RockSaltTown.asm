@@ -22,6 +22,7 @@ RockSaltTownNoopScene:
 	end
 
 RockSaltTown_OldManStopsYouScene:
+	faceplayer
 	opentext
 	writetext Text_Wait
 	closetext
