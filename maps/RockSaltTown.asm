@@ -64,14 +64,25 @@ Text_ItsDangerous:
 	prompt
 
 RockSaltTownOldManScript:
-    faceplayer
-    opentext 
-    writetext RockSaltTownOldManText
-    waitbutton
-    closetext
-    end
+	faceplayer
 
-RockSaltTownOldManText:
+	checkevent EVENT_CHOSE_STARTER
+	iffalse .NoStarter
+
+	opentext
+	writetext Text_RockSaltTownOldManHasStarter
+	waitbutton
+	closetext
+	end
+    
+.NoStarter:
+	opentext 
+	writetext Text_RockSaltTownOldManNoStarter
+	waitbutton
+	closetext
+	end
+
+Text_RockSaltTownOldManHasStarter:
     text "That's a mighty"
     line "fine #MON you've"
     cont "got there!"
@@ -79,6 +90,12 @@ RockSaltTownOldManText:
     para "NOW you're ready"
     line "to take on the"
     cont "tall grass!"
+    done
+
+Text_RockSaltTownOldManNoStarter:
+    text "You need a #MON"
+    line "to be safe out"
+    cont "there!"
     done 
 
 RockSaltTownFruitTree:
@@ -109,6 +126,9 @@ RockSaltTownMeowthScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_CHOSE_STARTER
+	iftrue CantChooseAnotherStarterScript
+
 	opentext
 	getmonname STRING_BUFFER_3, MEOWTH
 	writetext Text_ChooseStarter
@@ -124,7 +144,10 @@ RockSaltTownMeowthScript:
 	promptbutton
 	givepoke MEOWTH, 5, BERRY
 	closetext
+
 	disappear ROCK_SALT_TOWN_MEOWTH
+	setevent EVENT_CHOSE_STARTER
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
 
 	end
 
@@ -145,6 +168,9 @@ RockSaltTownSentretScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_CHOSE_STARTER
+	iftrue CantChooseAnotherStarterScript
+
 	opentext
 	getmonname STRING_BUFFER_3, SENTRET
 	writetext Text_ChooseStarter
@@ -160,7 +186,10 @@ RockSaltTownSentretScript:
 	promptbutton
 	givepoke SENTRET, 5, BERRY
 	closetext
+
 	disappear ROCK_SALT_TOWN_SENTRET
+	setevent EVENT_CHOSE_STARTER
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
 
 	end
 
@@ -181,6 +210,9 @@ RockSaltTownEeveeScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_CHOSE_STARTER
+	iftrue CantChooseAnotherStarterScript
+
 	opentext
 	getmonname STRING_BUFFER_3, EEVEE
 	writetext Text_ChooseStarter
@@ -196,7 +228,10 @@ RockSaltTownEeveeScript:
 	promptbutton
 	givepoke EEVEE, 5, BERRY
 	closetext
+
 	disappear ROCK_SALT_TOWN_EEVEE
+	setevent EVENT_CHOSE_STARTER
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
 
 	end
 
@@ -217,6 +252,9 @@ Text_ReceivedStarter:
 	text_ram wStringBuffer3
 	text "!"
 	done
+
+CantChooseAnotherStarterScript:
+	end
 
 DidntPickStarterScript:
 	closetext
@@ -291,9 +329,9 @@ RockSaltTown_MapEvents:
 	def_object_events
 	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
 	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTown_WomanBlockingCaveScene, -1
-	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_MEOWTH_AS_STARTER
-	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_SENTRET_AS_STARTER
-	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_EEVEE_AS_STARTER
+	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
+	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
+	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_STARTER_EEVEE
 	object_event 21,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 23,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 37,  6, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
