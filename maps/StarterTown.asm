@@ -8,6 +8,7 @@
     const STARTER_TOWN_TAUROS_5
     const STARTER_TOWN_TAUROS_6
     const STARTER_TOWN_FRUIT_TREE
+    const STARTER_TOWN_YOUNGSTER
 
 
 StarterTown_MapScripts:
@@ -79,7 +80,7 @@ StarterTownOldManText:
 StarterTownFruitTree:
    fruittree FRUITTREE_STARTER_TOWN
 
-StarterTownTauros:
+StarterTownTaurosScript:
     opentext
 	writetext StarterTownTaurosText
 	cry TAUROS
@@ -89,6 +90,23 @@ StarterTownTauros:
 
 StarterTownTaurosText:
     text "TAUROS: Moo!"
+    done
+
+StarterTownYoungsterScript:
+    faceplayer
+    opentext
+    writetext StarterTownYoungsterText
+    waitbutton
+    closetext
+    end
+
+StarterTownYoungsterText:
+    text "My dad said a"
+    line "really strong"
+    
+    para "#mon lives in"
+    line "the cave just"
+    cont "outside of town!"
     done
 
 StarterTownLabSign:
@@ -139,11 +157,11 @@ StarterTown_MapEvents:
 	def_object_events
 	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, StarterTownOldManScript, -1
 	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTown_WomanBlockingCaveScene, -1
-	object_event 21,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
-	object_event 23,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
-	object_event 37,  6, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
-	object_event 35,  5, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
-	object_event 30,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
-	object_event 32,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTauros, -1
+	object_event 21,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
+	object_event 23,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
+	object_event 37,  6, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
+	object_event 35,  5, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
+	object_event 30,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
+	object_event 32,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownTaurosScript, -1
 	object_event 24, 11, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownFruitTree, -1
-    ; object_event 
+    object_event 22,  12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, StarterTownYoungsterScript, -1
