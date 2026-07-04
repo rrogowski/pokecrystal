@@ -714,3 +714,4 @@ ENDM
 	map_attributes Route30BerryHouse, ROUTE_30_BERRY_HOUSE, $00
 	map_attributes MrPokemonsHouse, MR_POKEMONS_HOUSE, $00
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00
+	map_attributes StarterTownPlayersHouse, STARTER_TOWN_PLAYERS_HOUSE, $00

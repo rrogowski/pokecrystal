@@ -30,6 +30,7 @@ OutdoorSprites:
 	dw NewBarkGroupSprites
 	dw SaffronGroupSprites
 	dw CherrygroveGroupSprites
+	dw StarterTownSprites
 	assert_table_length NUM_MAP_GROUPS
 
 PalletGroupSprites:
@@ -669,3 +670,6 @@ CableClubGroupSprites:
 	db SPRITE_FISHING_GURU
 	db SPRITE_POKE_BALL
 	db SPRITE_POKEDEX
+
+StarterTownSprites:
+	db SPRITE_TWIN
