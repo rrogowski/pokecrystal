@@ -125,7 +125,7 @@ RockSaltTownPlayersHouseSignText:
     done
 
 RockSaltTownRivalsHouseSign:
-    jumptext RockSaltTownPlayersHouseSignText
+    jumptext RockSaltTownRivalsHouseSigntText
 
 RockSaltTownRivalsHouseSigntText:
     text "<RIVAL>'s HOUSE"
