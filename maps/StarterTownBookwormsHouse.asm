@@ -1,0 +1,60 @@
+	object_const_def
+  const STARTER_TOWN_BOOKWORM
+  const STARTER_TOWN_BOOKWORMS_HOOTHOOT
+	
+StarterTownBookwormsHouse_MapScripts:
+	def_scene_scripts
+
+	def_callbacks
+
+StarterTownBookwormScript:
+  opentext
+  writetext Text_CallMeIshmael
+  closetext
+
+  faceplayer
+  opentext
+  writetext Text_Sorry
+  closetext
+
+  end
+
+
+StarterTownBookwormsHoothootScript:
+  jumptextfaceplayer Text_BookwormsHoothoot
+
+Text_CallMeIshmael:
+  text "“Call me Ishmael."
+  line "Some years ago--"
+  cont "never mind how"
+  cont "long precisely--"
+  cont "having little or"
+  cont "no money in my"
+  cont "purse”--"
+  prompt
+
+Text_Sorry:
+  text "Sorry, I was just"
+  line "reading my favo-"
+  cont "rite book!"
+  prompt
+
+Text_BookwormsHoothoot:
+  text "HOOTHOOT: Hoot!"
+  line "Hoot!"
+  done
+
+StarterTownBookwormsHouse_MapEvents:
+	db 0, 0 ; filler
+
+	def_warp_events
+  warp_event 4, 7, STARTER_TOWN, 2
+  warp_event 5, 7, STARTER_TOWN, 2
+
+	def_coord_events
+
+	def_bg_events
+
+	def_object_events
+	object_event 3, 5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownBookwormScript, -1
+	object_event 7, 5, SPRITE_BIRD, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTownBookwormsHoothootScript, -1

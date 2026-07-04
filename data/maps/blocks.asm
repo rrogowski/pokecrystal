@@ -1051,6 +1051,9 @@ SECTION "Map Blocks 4", ROMX
 StarterTown_Blocks:
 	INCBIN "maps/StarterTown.blk"
 
+StarterTownBookwormsHouse_Blocks:
+	INCBIN "maps/StarterTownBookwormsHouse.blk"
+
 StarterTownPlayersHouse_Blocks:
 	INCBIN "maps/StarterTownPlayersHouse.blk"
 

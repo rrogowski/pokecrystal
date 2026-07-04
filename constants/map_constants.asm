@@ -502,6 +502,7 @@ ENDM
 	endgroup
 
 	newgroup STARTER_TOWN 										  ; 27
+	map_const STARTER_TOWN_BOOKWORMS_HOUSE,  				 5, 4
 	map_const STARTER_TOWN_PLAYERS_HOUSE,  					 5, 4 ;  1
 	map_const STARTER_TOWN,				 				    20, 9 ;  2
 	endgroup
