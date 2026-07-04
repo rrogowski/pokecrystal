@@ -502,12 +502,12 @@ ENDM
 	endgroup
 
 	newgroup ROCK_SALT 										  ; 27
-	map_const ROCK_SALT_TOWN,				 				    20, 9 ;  1
-	map_const ROCK_SALT_PLAYERS_HOUSE,  					 5, 4 ;  2
-	; map_const ROCK_SALT_RIVALS_HOUSE,					 x, y ;  3
-	; map_const ROCK_SALT_LAB,							 x, y ;  4
+	map_const ROCK_SALT_TOWN,				 			20, 9 ;  1
+	map_const ROCK_SALT_PLAYERS_HOUSE,  				 5, 4 ;  2
+	map_const ROCK_SALT_RIVALS_HOUSE,					 5, 4 ;  3
+	map_const ROCK_SALT_LAB,							 5, 6 ;  4
 	map_const ROCK_SALT_BOOKWORMS_HOUSE,  				 5, 4 ;  5
-	; map const ROCK_SALT_OLD_MANS_HOUSE,				 x, y ;  6
+	map_const ROCK_SALT_OLD_MANS_HOUSE,					 4, 4 ;  6
 	endgroup
 
 DEF NUM_MAP_GROUPS EQU const_value ; 27

@@ -48,8 +48,8 @@ RockSaltBookwormsHouse_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-  warp_event 4, 7, ROCK_SALT_TOWN, 2
-  warp_event 5, 7, ROCK_SALT_TOWN, 2
+  warp_event 4, 7, ROCK_SALT_TOWN, 4
+  warp_event 5, 7, ROCK_SALT_TOWN, 4
 
 	def_coord_events
 

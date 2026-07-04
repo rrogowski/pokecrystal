@@ -144,7 +144,10 @@ RockSaltTown_MapEvents:
 
 	def_warp_events
 	warp_event 27, 13, ROCK_SALT_PLAYERS_HOUSE, 1
+	warp_event 19,  7, ROCK_SALT_RIVALS_HOUSE, 1
+	warp_event 26,  7, ROCK_SALT_LAB, 1
 	warp_event 33, 11, ROCK_SALT_BOOKWORMS_HOUSE, 1
+	warp_event 15, 11, ROCK_SALT_OLD_MANS_HOUSE, 1
 	
 
 	def_coord_events

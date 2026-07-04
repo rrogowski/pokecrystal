@@ -1051,10 +1051,19 @@ SECTION "Map Blocks 4", ROMX
 RockSaltTown_Blocks:
 	INCBIN "maps/RockSaltTown.blk"
 
+RockSaltPlayersHouse_Blocks:
+	INCBIN "maps/RockSaltPlayersHouse.blk"
+
+RockSaltRivalsHouse_Blocks:
+	INCBIN "maps/RockSaltPlayersHouse.blk"
+
+RockSaltLab_Blocks:
+	INCBIN "maps/ElmsLab.blk"
+
 RockSaltBookwormsHouse_Blocks:
 	INCBIN "maps/RockSaltBookwormsHouse.blk"
 
-RockSaltPlayersHouse_Blocks:
-	INCBIN "maps/RockSaltPlayersHouse.blk"
+RockSaltOldMansHouse_Blocks:
+	INCBIN "maps/House1.blk"
 
 ENDSECTION
