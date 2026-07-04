@@ -12,6 +12,7 @@
     const ROCK_SALT_TOWN_TAUROS_6
     const ROCK_SALT_TOWN_FRUIT_TREE
     const ROCK_SALT_TOWN_YOUNGSTER
+	const ROCK_SALT_TOWN_GARDENER
 
 
 RockSaltTown_MapScripts:
@@ -277,6 +278,20 @@ RockSaltTownYoungsterText:
     cont "outside of town!"
     done
 
+RockSaltTownGardenerScript:
+	faceplayer
+	opentext
+	writetext RockSaltTownGardenerText
+	waitbutton
+	closetext
+	end
+
+RockSaltTownGardenerText:
+	text "I feel most at"
+	line "peace when I'm"
+	cont "gardening."
+	done
+
 RockSaltTownLabSign:
 	jumptext RockSaltTownLabSignText
 
@@ -328,7 +343,7 @@ RockSaltTown_MapEvents:
 
 	def_object_events
 	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
-	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTown_WomanBlockingCaveScene, -1
+	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTown_WomanBlockingCaveScene, -1
 	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
 	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
 	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_STARTER_EEVEE
@@ -340,3 +355,4 @@ RockSaltTown_MapEvents:
 	object_event 32,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 24, 11, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
     object_event 22,  12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
+	object_event 29, 10, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1

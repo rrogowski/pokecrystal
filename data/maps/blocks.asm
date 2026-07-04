@@ -1058,7 +1058,7 @@ RockSaltRivalsHouse_Blocks:
 	INCBIN "maps/RockSaltPlayersHouse.blk"
 
 RockSaltLab_Blocks:
-	INCBIN "maps/ElmsLab.blk"
+	INCBIN "maps/RockSaltLab.blk"
 
 RockSaltBookwormsHouse_Blocks:
 	INCBIN "maps/RockSaltBookwormsHouse.blk"
