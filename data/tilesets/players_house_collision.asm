@@ -14,7 +14,7 @@
 	tilecoll WALL, FLOOR, FLOOR, FLOOR ; 0d
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 0e
 	tilecoll WALL, WALL, WALL, WALL ; 0f
-	tilecoll WALL, WALL, PC, FLOOR ; 10
+	tilecoll WALL, WALL, WALL, FLOOR ; 10
 	tilecoll WALL, WALL, TV, WALL ; 11
 	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 12
 	tilecoll FLOOR, TV, FLOOR, WALL ; 13
