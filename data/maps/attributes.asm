@@ -716,4 +716,5 @@ ENDM
 	map_attributes Route31VioletGate, ROUTE_31_VIOLET_GATE, $00
 
 	map_attributes StarterTown, STARTER_TOWN, $05
+	map_attributes StarterTownBookwormsHouse, STARTER_TOWN_BOOKWORMS_HOUSE, $00
 	map_attributes StarterTownPlayersHouse, STARTER_TOWN_PLAYERS_HOUSE, $00

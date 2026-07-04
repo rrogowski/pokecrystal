@@ -126,6 +126,7 @@ StarterTown_MapEvents:
 
 	def_warp_events
 	warp_event 27, 13, STARTER_TOWN_PLAYERS_HOUSE, 1
+	warp_event 33, 11, STARTER_TOWN_BOOKWORMS_HOUSE, 1
 	
 
 	def_coord_events
