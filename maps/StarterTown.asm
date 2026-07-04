@@ -4,6 +4,7 @@
 StarterTown_MapScripts:
 	def_scene_scripts
 	scene_script StarterTownNoopScene, SCENE_STARTER_TOWN_OLD_MAN_STOPS_YOU
+	scene_script StarterTownNoopScene, SCENE_STARTER_TOWN_NOOP
 
 	def_callbacks
 
@@ -14,13 +15,36 @@ StarterTown_OldManStopsYouScene:
 	opentext
 	writetext Text_Wait
 	closetext
+
+	follow PLAYER, STARTER_TOWN_OLD_MAN
+	applymovement PLAYER, StarterTown_OldManWalksYouBack
+	stopfollow
+	turnobject STARTER_TOWN_OLD_MAN, RIGHT
+
+	opentext
+	writetext Text_ItsDangerous
+	closetext
+
+	applymovement STARTER_TOWN_OLD_MAN, StarterTown_OldManReturnsToStartingLocation
+
 	end
 
+StarterTown_OldManWalksYouBack:
+	step RIGHT
+	turn_head LEFT
+	step_end
+
+StarterTown_OldManReturnsToStartingLocation:
+	step UP
+	turn_head DOWN
+	step_end
 
 Text_Wait:
-	text " Wait! <PLAYER>!"
+	text "Wait! <PLAYER>!"
+	prompt
 
-	para "It's dangerous to"
+Text_ItsDangerous:
+	text "It's dangerous to"
 	line "go out without a"
 	cont "#MON!"
 	prompt
@@ -57,6 +81,13 @@ StarterTownPlayersHouseSignText:
     text "<PLAYER>'s house"
     done
 
+StarterTown_WomanBlockingCaveScene:
+	jumptext Text_WomanBlockingCave
+
+Text_WomanBlockingCave:
+	text "You can't go in"
+	line "here just yet!"
+	done
 
 StarterTown_MapEvents:
 	db 0, 0 ; filler
@@ -75,3 +106,4 @@ StarterTown_MapEvents:
 
 	def_object_events
     object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, StarterTownOldManScript, -1
+	object_event 10, 6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, StarterTown_WomanBlockingCaveScene, -1
