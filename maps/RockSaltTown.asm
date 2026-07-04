@@ -127,8 +127,11 @@ RockSaltTownMeowthScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_TALKED_TO_PROF_HALITE
+	iffalse CantChooseStarter
+
 	checkevent EVENT_CHOSE_STARTER
-	iftrue CantChooseAnotherStarterScript
+	iftrue CantChooseStarter
 
 	opentext
 	getmonname STRING_BUFFER_3, MEOWTH
@@ -169,8 +172,11 @@ RockSaltTownSentretScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_TALKED_TO_PROF_HALITE
+	iffalse CantChooseStarter
+
 	checkevent EVENT_CHOSE_STARTER
-	iftrue CantChooseAnotherStarterScript
+	iftrue CantChooseStarter
 
 	opentext
 	getmonname STRING_BUFFER_3, SENTRET
@@ -211,8 +217,11 @@ RockSaltTownEeveeScript:
 	closepokepic
 	closetext
 
+	checkevent EVENT_TALKED_TO_PROF_HALITE
+	iffalse CantChooseStarter
+
 	checkevent EVENT_CHOSE_STARTER
-	iftrue CantChooseAnotherStarterScript
+	iftrue CantChooseStarter
 
 	opentext
 	getmonname STRING_BUFFER_3, EEVEE
@@ -254,7 +263,7 @@ Text_ReceivedStarter:
 	text "!"
 	done
 
-CantChooseAnotherStarterScript:
+CantChooseStarter:
 	end
 
 DidntPickStarterScript:
@@ -324,14 +333,14 @@ Text_WomanBlockingCave:
 RockSaltTown_MapEvents:
 	db 0, 0 ; filler
 
-
 	def_warp_events
 	warp_event 27, 13, ROCK_SALT_PLAYERS_HOUSE, 1
 	warp_event 19,  7, ROCK_SALT_RIVALS_HOUSE, 1
 	warp_event 26,  7, ROCK_SALT_LAB, 1
 	warp_event 33, 11, ROCK_SALT_BOOKWORMS_HOUSE, 1
 	warp_event 15, 11, ROCK_SALT_OLD_MANS_HOUSE, 1
-	
+	warp_event 26, 3, ROCK_SALT_LAB, 3
+	warp_event 27, 3, ROCK_SALT_LAB, 3
 
 	def_coord_events
 	coord_event 12, 13, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
