@@ -86,14 +86,14 @@ Script_DontSaveAndEndTheSession:
 	special BattleTowerAction
 	closetext
 	special FadeOutToWhite
-	warpfacing UP, BATTLE_TOWER_1F, 7, 7
+	; warpfacing UP, BATTLE_TOWER_1F, 7, 7
 	opentext
 	sjump Script_BattleTowerHopeToServeYouAgain
 
 Script_FailedBattleTowerChallenge:
 	pause 60
 	special BattleTowerFade
-	warpfacing UP, BATTLE_TOWER_1F, 7, 7
+	; warpfacing UP, BATTLE_TOWER_1F, 7, 7
 	setval BATTLETOWERACTION_CHALLENGECANCELED
 	special BattleTowerAction
 	opentext
@@ -105,7 +105,7 @@ Script_FailedBattleTowerChallenge:
 Script_BeatenAllTrainers:
 	pause 60
 	special BattleTowerFade
-	warpfacing UP, BATTLE_TOWER_1F, 7, 7
+	; warpfacing UP, BATTLE_TOWER_1F, 7, 7
 Script_BeatenAllTrainers2:
 	opentext
 	writetext Text_CongratulationsYouveBeatenAllTheTrainers

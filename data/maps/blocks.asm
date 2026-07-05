@@ -1016,11 +1016,11 @@ RuinsOfAlphAerodactylWordRoom_Blocks:
 DragonShrine_Blocks:
 	INCBIN "maps/DragonShrine.blk"
 
-BattleTower1F_Blocks:
-	INCBIN "maps/BattleTower1F.blk"
+; BattleTower1F_Blocks:
+; 	INCBIN "maps/BattleTower1F.blk"
 
-BattleTowerBattleRoom_Blocks:
-	INCBIN "maps/BattleTowerBattleRoom.blk"
+; BattleTowerBattleRoom_Blocks:
+; 	INCBIN "maps/BattleTowerBattleRoom.blk"
 
 PokecomCenterAdminOfficeMobile_Blocks:
 	INCBIN "maps/PokecomCenterAdminOfficeMobile.blk"
@@ -1031,11 +1031,11 @@ MobileTradeRoom_Blocks:
 MobileBattleRoom_Blocks:
 	INCBIN "maps/MobileBattleRoom.blk"
 
-BattleTowerHallway_Blocks:
-	INCBIN "maps/BattleTowerHallway.blk"
+; BattleTowerHallway_Blocks:
+; 	INCBIN "maps/BattleTowerHallway.blk"
 
-BattleTowerElevator_Blocks:
-	INCBIN "maps/BattleTowerElevator.blk"
+; BattleTowerElevator_Blocks:
+; 	INCBIN "maps/BattleTowerElevator.blk"
 
 BattleTowerOutside_Blocks:
 	INCBIN "maps/BattleTowerOutside.blk"
