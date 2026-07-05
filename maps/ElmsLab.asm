@@ -1209,11 +1209,11 @@ ElmGiveTicketText2:
 	line "PROF.OAK in KANTO!"
 	done
 
-ElmsLabMonEggText: ; unreferenced
-	text "It's the #MON"
-	line "EGG being studied"
-	cont "by PROF.ELM."
-	done
+; ElmsLabMonEggText: ; unreferenced
+;	text "It's the #MON"
+;	line "EGG being studied"
+;	cont "by PROF.ELM."
+;	done
 
 AideText_GiveYouPotion:
 	text "<PLAY_G>, I want"

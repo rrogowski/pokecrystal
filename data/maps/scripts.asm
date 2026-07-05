@@ -491,4 +491,9 @@ INCLUDE "maps/RockSaltRivalsHouse.asm"
 INCLUDE "maps/RockSaltLab.asm"
 INCLUDE "maps/RockSaltBookwormsHouse.asm"
 INCLUDE "maps/RockSaltOldMansHouse.asm"
+;   Rock Salt Cave  ;   2
+INCLUDE "maps/RockSaltCave1F.asm"
+INCLUDE "maps/RockSaltCave1B.asm"
+INCLUDE "maps/RockSaltCave2B.asm"
+INCLUDE "maps/RockSaltCaveCavern.asm"
 ENDSECTION

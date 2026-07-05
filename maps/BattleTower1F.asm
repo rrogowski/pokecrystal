@@ -165,39 +165,6 @@ Script_WaitButton:
 	closetext
 	end
 
-Script_ChooseChallenge2: ; unreferenced
-	writetext Text_SaveBeforeEnteringBattleRoom
-	yesorno
-	iffalse Script_Menu_ChallengeExplanationCancel
-	special TryQuickSave
-	iffalse Script_Menu_ChallengeExplanationCancel
-	setval BATTLETOWERACTION_SET_EXPLANATION_READ
-	special BattleTowerAction
-	special Function1700ba
-	ifequal $a, Script_Menu_ChallengeExplanationCancel
-	ifnotequal $0, Script_MobileError
-	writetext Text_ReceivedAListOfLeadersOnTheHonorRoll
-	turnobject BATTLETOWER1F_RECEPTIONIST, LEFT
-	writetext Text_PleaseConfirmOnThisMonitor
-	waitbutton
-	turnobject BATTLETOWER1F_RECEPTIONIST, DOWN
-	closetext
-	end
-
-Script_StartChallenge: ; unreferenced
-	setval BATTLETOWERACTION_LEVEL_CHECK
-	special BattleTowerAction
-	ifnotequal $0, Script_AMonLevelExceeds
-	setval BATTLETOWERACTION_UBERS_CHECK
-	special BattleTowerAction
-	ifnotequal $0, Script_MayNotEnterABattleRoomUnderL70
-	special CheckForBattleTowerRules
-	ifnotequal FALSE, Script_WaitButton
-	setval BATTLETOWERACTION_05
-	special BattleTowerAction
-	ifequal $0, .zero
-	writetext Text_CantBeRegistered_PreviousRecordDeleted
-	sjump .continue
 
 .zero
 	writetext Text_CantBeRegistered

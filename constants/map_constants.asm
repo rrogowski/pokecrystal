@@ -154,6 +154,10 @@ ENDM
 	map_const SAFARI_ZONE_FUCHSIA_GATE_BETA,                5,  4 ; 89
 	map_const SAFARI_ZONE_BETA,                            10, 18 ; 90
 	map_const VICTORY_ROAD,                                10, 36 ; 91
+	map_const ROCK_SALT_CAVE_1F,						   15, 21 ; 92
+	map_const ROCK_SALT_CAVE_1B,						   18, 18 ; 93
+	map_const ROCK_SALT_CAVE_2B,						    5,  9 ; 94
+	map_const ROCK_SALT_CAVE_CAVERN,						5,  9 ; 95
 	endgroup
 
 	newgroup ECRUTEAK                                             ;  4
@@ -502,12 +506,13 @@ ENDM
 	endgroup
 
 	newgroup ROCK_SALT 										  ; 27
-	map_const ROCK_SALT_TOWN,				 			20, 9 ;  1
+	map_const ROCK_SALT_TOWN,				 			25, 12 ;  1
 	map_const ROCK_SALT_PLAYERS_HOUSE,  				 5, 4 ;  2
 	map_const ROCK_SALT_RIVALS_HOUSE,					 5, 4 ;  3
 	map_const ROCK_SALT_LAB,							 5, 6 ;  4
 	map_const ROCK_SALT_BOOKWORMS_HOUSE,  				 5, 4 ;  5
 	map_const ROCK_SALT_OLD_MANS_HOUSE,					 4, 4 ;  6
+	map_const TOWN_2,									 5, 9 ; make new group soon
 	endgroup
-
+											
 DEF NUM_MAP_GROUPS EQU const_value ; 27

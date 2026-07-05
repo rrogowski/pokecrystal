@@ -721,3 +721,11 @@ ENDM
 	map_attributes RockSaltLab, ROCK_SALT_LAB, $00
 	map_attributes RockSaltBookwormsHouse, ROCK_SALT_BOOKWORMS_HOUSE, $00
 	map_attributes RockSaltOldMansHouse, ROCK_SALT_OLD_MANS_HOUSE, $00
+
+	
+	map_attributes RockSaltCave1F, ROCK_SALT_CAVE_1F, $09
+	map_attributes RockSaltCave1B, ROCK_SALT_CAVE_1B, $09
+	map_attributes RockSaltCave2B, ROCK_SALT_CAVE_2B, $09
+	map_attributes RockSaltCaveCavern, ROCK_SALT_CAVE_CAVERN, $09
+
+	map_attributes Town2, TOWN_2, $00

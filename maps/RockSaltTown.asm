@@ -2,7 +2,7 @@
     const ROCK_SALT_TOWN_OLD_MAN
     const ROCK_SALT_TOWN_JADE
     const ROCK_SALT_TOWN_MEOWTH
-		const ROCK_SALT_TOWN_SENTRET
+	const ROCK_SALT_TOWN_SENTRET
     const ROCK_SALT_TOWN_EEVEE
     const ROCK_SALT_TOWN_TAUROS_1
     const ROCK_SALT_TOWN_TAUROS_2
@@ -434,34 +434,35 @@ RockSaltTown_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event 27, 13, ROCK_SALT_PLAYERS_HOUSE, 1
-	warp_event 19,  7, ROCK_SALT_RIVALS_HOUSE, 1
-	warp_event 26,  7, ROCK_SALT_LAB, 1
-	warp_event 33, 11, ROCK_SALT_BOOKWORMS_HOUSE, 1
-	warp_event 15, 11, ROCK_SALT_OLD_MANS_HOUSE, 1
-	warp_event 26, 3, ROCK_SALT_LAB, 3
-	warp_event 27, 3, ROCK_SALT_LAB, 3
+	warp_event 29, 19, ROCK_SALT_PLAYERS_HOUSE, 1
+	warp_event 21, 13, ROCK_SALT_RIVALS_HOUSE, 1
+	warp_event 28, 13, ROCK_SALT_LAB, 1
+	warp_event 35, 17, ROCK_SALT_BOOKWORMS_HOUSE, 1
+	warp_event 17, 17, ROCK_SALT_OLD_MANS_HOUSE, 1
+	warp_event 28,  9, ROCK_SALT_LAB, 3
+	warp_event 29,  9, ROCK_SALT_LAB, 3
+	warp_event 12, 11, ROCK_SALT_CAVE_1F, 6
 
 	def_coord_events
-	coord_event 12, 13, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
+	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
 
 	def_bg_events
-	bg_event 24,  8, BGEVENT_READ, RockSaltTownLabSign
-	bg_event 25, 13, BGEVENT_READ, RockSaltTownPlayersHouseSign
-    bg_event 21,  9, BGEVENT_READ, RockSaltTownRivalsHouseSign
+	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
+	bg_event 27, 19, BGEVENT_READ, RockSaltTownPlayersHouseSign
+	bg_event 23, 15, BGEVENT_READ, RockSaltTownRivalsHouseSign
 
 	def_object_events
-	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
-	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTownJadeScript, EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
-	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
-	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
-	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_STARTER_EEVEE
-	object_event 21,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 23,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 37,  6, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 35,  5, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 30,  3, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 32,  4, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 24, 11, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
-    object_event 22,  12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
-	object_event 29, 10, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1
+	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
+	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTownJadeScript, EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
+	object_event 24,  7, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
+	object_event 35,  8, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
+	object_event 41, 16, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_STARTER_EEVEE
+	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 37, 11, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 32,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
+	object_event 24, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
+	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1
