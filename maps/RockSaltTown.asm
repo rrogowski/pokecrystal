@@ -364,7 +364,6 @@ RockSaltTownJadeScript:
 	applymovement ROCK_SALT_TOWN_JADE, Movement_JadeEntersCave
 	waitsfx
 	disappear ROCK_SALT_TOWN_JADE
-	setevent EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
 	
 	end
 
