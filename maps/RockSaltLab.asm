@@ -128,6 +128,32 @@ Text_YouCanPickOne:
 
     done
 
+RockSaltLabHealingMachineScript:
+	checkevent EVENT_CHOSE_STARTER
+	iffalse .CantHeal
+
+    special StubbedTrainerRankings_Healings
+	special HealParty
+	playmusic MUSIC_NONE
+	setval HEALMACHINE_ELMS_LAB
+	special HealMachineAnim
+	pause 30
+	special RestartMapMusic
+	end
+
+.CantHeal:
+	opentext
+    writetext Text_IfIHadAPokemon
+    waitbutton
+	closetext
+	end
+
+Text_IfIHadAPokemon:
+	text "If I had a #MON"
+    line "I could heal them"
+    cont "with this machine!"
+	done
+
 RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
@@ -140,6 +166,7 @@ RockSaltLab_MapEvents:
 	def_coord_events
 
 	def_bg_events
+    bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
 
 	def_object_events
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltProfHaliteScript, -1
