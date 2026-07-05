@@ -1,6 +1,6 @@
 	object_const_def
     const ROCK_SALT_TOWN_OLD_MAN
-    const ROCK_SALT_TOWN_WOMAN_BLOCKING_CAVE
+    const ROCK_SALT_TOWN_JADE
     const ROCK_SALT_TOWN_MEOWTH
 		const ROCK_SALT_TOWN_SENTRET
     const ROCK_SALT_TOWN_EEVEE
@@ -322,13 +322,114 @@ RockSaltTownRivalsHouseSigntText:
     text "<RIVAL>'s HOUSE"
     done
 
-RockSaltTown_WomanBlockingCaveScene:
-	jumptext Text_WomanBlockingCave
+RockSaltTownJadeScript:
+	faceplayer
 
-Text_WomanBlockingCave:
-	text "You can't go in"
-	line "here just yet!"
+	opentext
+	writetext Text_CantEnterCave
+	yesorno
+	closetext
+	
+	iftrue .TooDangerous
+
+	showemote EMOTE_QUESTION, ROCK_SALT_TOWN_JADE, 15
+	opentext
+	writetext Text_AreYouSure
+	yesorno
+	closetext
+
+	iftrue .TooDangerous
+
+	turnobject ROCK_SALT_TOWN_JADE, UP
+	pause 40
+	showemote EMOTE_SHOCK, ROCK_SALT_TOWN_JADE, 15
+	faceplayer
+	
+	opentext
+	writetext Text_JadeBattle
+	waitbutton
+	closetext
+
+	winlosstext Text_JadeBeaten, 0
+	loadtrainer JADE, JADE1
+	startbattle
+	reloadmapafterbattle
+
+	opentext
+	writetext Text_FollowMe
+	waitbutton
+	closetext
+
+	playsound SFX_ENTER_DOOR
+	applymovement ROCK_SALT_TOWN_JADE, Movement_JadeEntersCave
+	waitsfx
+	disappear ROCK_SALT_TOWN_JADE
+	setevent EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
+	
+	end
+
+.TooDangerous:
+	opentext
+	writetext Text_TooDangerous
+	waitbutton
+	closetext
+
+	end
+
+Text_JadeBeaten:
+	text "You... beat me."
 	done
+
+Text_CantEnterCave:
+	text "What? You want to"
+	line "enter this cave?"
+	
+	para "I'm sorry, but I"
+	line "can't allow you"
+	cont "inside."
+
+	para "Why? ... Because"
+	line "there's a terrible"
+	cont "creature inside."
+
+	para "Spooky, huh?"
+
+	done
+
+Text_AreYouSure:
+	text "You're really not"
+	line "scared? Not even"
+	cont "a little?"
+
+	done
+
+Text_TooDangerous:
+	text "That's what I"
+	line "thought! It's too"
+	cont "dangerous!"
+
+	done
+
+Text_JadeBattle:
+	text "Hmm..."
+
+	para "You're ready to"
+	line "face what's inside,"
+	cont "are you?"
+
+	para "Okay! But you're"
+	line "gonna have to get"
+	cont "through me first!"
+
+	done
+
+Text_FollowMe:
+	text "Ugh. Follow me."
+	done
+
+Movement_JadeEntersCave:
+	step UP
+	step_end
 
 RockSaltTown_MapEvents:
 	db 0, 0 ; filler
@@ -352,7 +453,7 @@ RockSaltTown_MapEvents:
 
 	def_object_events
 	object_event 12, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
-	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_STILL, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTown_WomanBlockingCaveScene, -1
+	object_event 10,  6, SPRITE_DAISY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTownJadeScript, EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
 	object_event 22, 1, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
 	object_event 33, 2, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
 	object_event 39, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownEeveeScript, EVENT_CHOSE_STARTER_EEVEE

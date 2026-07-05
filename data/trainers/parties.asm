@@ -3495,3 +3495,9 @@ MysticalmanGroup:
 	db 23, HAUNTER,    LICK, HYPNOSIS, MEAN_LOOK, CURSE
 	db 25, ELECTRODE,  SCREECH, SONICBOOM, THUNDER, ROLLOUT
 	db -1 ; end
+
+JadeGroup:
+	; JADE1
+	db "JADE@", TRAINERTYPE_ITEM
+	db 8, CHIKORITA, BERRY
+	db -1 ; end
