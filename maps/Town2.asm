@@ -1,11 +1,11 @@
 	object_const_def
 
-GlobalTerminal1F_MapScripts:
+Town2_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-GlobalTerminal1F_MapEvents:
+Town2_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events

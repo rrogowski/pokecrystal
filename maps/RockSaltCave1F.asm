@@ -50,17 +50,17 @@ RockSaltCave1F_MapEvents:
 	def_warp_events
 	warp_event  7, 5, ROCK_SALT_CAVE_1B, 1
 	warp_event  15, 5, ROCK_SALT_CAVE_1B, 2
-	warp_event 25,  6, TOWN_2, 1
+	warp_event 25,  5, TOWN_2, 1
 	warp_event 13, 17, ROCK_SALT_CAVE_CAVERN, 1
 	warp_event 19, 31, ROCK_SALT_CAVE_1B, 5
-	warp_event 11, 38, ROCK_SALT_TOWN, 8
+	warp_event 11, 37, ROCK_SALT_TOWN, 8
 
 	def_coord_events
 
 	def_bg_events
 
 	def_object_events
-    object_event    21, 18, SPRITE_POKEFAN_M,   SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, PAL_NPC_BROWN,  OBJECTTYPE_SCRIPT,  0,  RockSaltCave1FPokefanMWarningScript,   -1  ;   EVENT_ROCK_SALT_CAVE_QUEST
+	object_event    21, 18, SPRITE_POKEFAN_M,   SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, PAL_NPC_BROWN,  OBJECTTYPE_SCRIPT,  0,  RockSaltCave1FPokefanMWarningScript,   -1  ;   EVENT_ROCK_SALT_CAVE_QUEST
     ; object_event    11, 28, SPRITE_LASS,        SPRITEMOVEDATA_STANDING_DOWN,   0,  0,  -1, -1, PAL_NPC_RED,    OBJECTTYPE_TRAINER, 4,  RockSaltCave1FLassCaseyScript,    -1  ;   
     ; object_event    06, 18, SPRITE_FISHER,      SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, 0,    OBJECTTYPE_TRAINER, 0,  RockSaltCave1FFisherPaulScript,   -1  ;
     ; object_event    13, 22, SPRITE_POKEFAN_M,        SPRITEMOVEDATA_STANDING_UP,     0,    0,  -1, -1, PAL_NPC_BLUE, 0, OBJECTTYPE_TRAINER, 2, RockSaltCave1FPokefanMichaelScript, -1 ; 

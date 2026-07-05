@@ -155,7 +155,7 @@ ENDM
 	map_const SAFARI_ZONE_BETA,                            10, 18 ; 90
 	map_const VICTORY_ROAD,                                10, 36 ; 91
 	map_const ROCK_SALT_CAVE_1F,						   15, 21 ; 92
-	map_const ROCK_SALT_CAVE_1B,						   18, 18 ; 93
+	map_const ROCK_SALT_CAVE_1B,						   10, 18 ; 93
 	map_const ROCK_SALT_CAVE_2B,						    5,  9 ; 94
 	map_const ROCK_SALT_CAVE_CAVERN,						5,  9 ; 95
 	endgroup

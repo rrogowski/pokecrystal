@@ -592,6 +592,7 @@ DoPlayerMovement::
 	ld h, [hl]
 	ld l, a
 	ld a, [hl]
+	
 
   ldh a, [hJoyDown]
 	or ~(PAD_A | PAD_B)

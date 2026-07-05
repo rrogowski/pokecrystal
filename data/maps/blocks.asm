@@ -955,4 +955,7 @@ RockSaltCave2B_Blocks:
 RockSaltCaveCavern_Blocks:
 	INCBIN "maps/RockSaltCaveCavern.blk"
 
+Town2_Blocks:
+	INCBIN "maps/Town2.blk"
+
 ENDSECTION

@@ -496,4 +496,6 @@ INCLUDE "maps/RockSaltCave1F.asm"
 INCLUDE "maps/RockSaltCave1B.asm"
 INCLUDE "maps/RockSaltCave2B.asm"
 INCLUDE "maps/RockSaltCaveCavern.asm"
+;   Town2           ;   3
+INCLUDE "maps/Town2.asm"
 ENDSECTION
