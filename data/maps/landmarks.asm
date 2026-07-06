@@ -56,6 +56,7 @@ Landmarks:
 	landmark 148,  68, SilverCaveName
 	landmark 100, 100, RockSaltTownName
 	landmark 99, 99, RockSaltCaveName
+	landmark 99, 98, Route101Name
 	landmark 98, 98, PeppercornVillageName
 	
 	assert_table_length KANTO_LANDMARK
@@ -124,6 +125,7 @@ LakeOfRageName:      db "LAKE OF<BSP>RAGE@"
 SilverCaveName:      db "SILVER CAVE@"
 RockSaltTownName:     db "ROCK SALT<BSP>TOWN@"
 RockSaltCaveName:	db "ROCK SALT<BSP>CAVE@"
+Route101Name:		db "ROUTE 101@"
 PeppercornVillageName: db "PEPPERCORN<BSP>VILLAGE@"
 SproutTowerName:     db "SPROUT<BSP>TOWER@"
 RuinsOfAlphName:     db "RUINS<BSP>OF ALPH@"
@@ -205,6 +207,7 @@ Route43Name:         db "ROUTE 43@"
 Route44Name:         db "ROUTE 44@"
 Route45Name:         db "ROUTE 45@"
 Route46Name:         db "ROUTE 46@"
+
 DarkCaveName:        db "DARK CAVE@"
 IlexForestName:      db "ILEX<BSP>FOREST@"
 BurnedTowerName:     db "BURNED<BSP>TOWER@"

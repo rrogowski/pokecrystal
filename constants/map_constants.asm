@@ -516,5 +516,7 @@ ENDM
 
 	newgroup PEPPERCORN							  			   ; 28
 	map_const ROUTE_101,								30,  9 ;  1
-	; map_const PEPPERCORN_VILLAGE,						 X,  Y ;  2				
+	; map_const PEPPERCORN_VILLAGE,						 X,  Y ;  2		
+	endgroup
+			
 DEF NUM_MAP_GROUPS EQU const_value ; 28
