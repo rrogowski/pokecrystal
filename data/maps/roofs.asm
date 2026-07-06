@@ -39,6 +39,7 @@ MapGroupRoofs:
 	db -1             ; 25
 	db ROOF_NEW_BARK  ; 26 (Cherrygrove)
 	db ROOF_AZALEA    ; 27 (Rock Salt)
+	db ROOF_AZALEA	  ; 28 (Peppercorn)
 	assert_table_length NUM_MAP_GROUPS + 1
 
 Roofs:

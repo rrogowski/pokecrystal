@@ -50,7 +50,7 @@ RockSaltCave1F_MapEvents:
 	def_warp_events
 	warp_event  7, 5, ROCK_SALT_CAVE_1B, 1
 	warp_event  15, 5, ROCK_SALT_CAVE_1B, 2
-	warp_event 25,  5, TOWN_2, 1
+	warp_event 25,  5, ROUTE_101, 1
 	warp_event 13, 17, ROCK_SALT_CAVE_CAVERN, 1
 	warp_event 19, 31, ROCK_SALT_CAVE_1B, 5
 	warp_event 11, 37, ROCK_SALT_TOWN, 8

@@ -55,8 +55,9 @@ Landmarks:
 	landmark 124,  88, Route46Name
 	landmark 148,  68, SilverCaveName
 	landmark 100, 100, RockSaltTownName
-	landmark 98, 98, Town2Name
 	landmark 99, 99, RockSaltCaveName
+	landmark 98, 98, PeppercornVillageName
+	
 	assert_table_length KANTO_LANDMARK
 	landmark  52, 108, PalletTownName
 	landmark  52,  92, Route1Name
@@ -122,8 +123,8 @@ BlackthornCityName:  db "BLACKTHORN<BSP>CITY@"
 LakeOfRageName:      db "LAKE OF<BSP>RAGE@"
 SilverCaveName:      db "SILVER CAVE@"
 RockSaltTownName:     db "ROCK SALT<BSP>TOWN@"
-Town2Name: 				db "TOWN 2@"
 RockSaltCaveName:	db "ROCK SALT<BSP>CAVE@"
+PeppercornVillageName: db "PEPPERCORN<BSP>VILLAGE@"
 SproutTowerName:     db "SPROUT<BSP>TOWER@"
 RuinsOfAlphName:     db "RUINS<BSP>OF ALPH@"
 UnionCaveName:       db "UNION CAVE@"

@@ -31,6 +31,7 @@ OutdoorSprites:
 	dw SaffronGroupSprites
 	dw CherrygroveGroupSprites
 	dw RockSaltGroupSprites
+	dw PeppercornGroupSprites
 	assert_table_length NUM_MAP_GROUPS
 
 PalletGroupSprites:
@@ -673,6 +674,34 @@ CableClubGroupSprites:
 
 RockSaltGroupSprites:
 	; 12 non-walking filler sprites
+	db SPRITE_POKEDEX
+	db SPRITE_TAUROS
+	db SPRITE_UNOWN
+	db SPRITE_KAREN
+	db SPRITE_POKEFAN_M
+	db SPRITE_NONE
+	db SPRITE_NONE
+	db SPRITE_NONE
+	db SPRITE_NONE
+	db SPRITE_NONE
+	db SPRITE_NONE
+	db SPRITE_NONE
+	; 9 walking sprites
+	db SPRITE_DAISY
+	db SPRITE_GRAMPS
+	db SPRITE_SCIENTIST
+	db SPRITE_YOUNGSTER
+	db SPRITE_NONE
+	db SPRITE_WILL
+	db SPRITE_MONSTER
+	db SPRITE_OAK
+	db SPRITE_NONE
+	; 2 non-walking sprites
+	db SPRITE_POKE_BALL
+	db SPRITE_FRUIT_TREE
+
+PeppercornGroupSprites:
+; 12 non-walking filler sprites
 	db SPRITE_POKEDEX
 	db SPRITE_TAUROS
 	db SPRITE_UNOWN

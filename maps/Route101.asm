@@ -1,11 +1,11 @@
 	object_const_def
 
-Town2_MapScripts:
+Route101_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
 
-Town2_MapEvents:
+Route101_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
