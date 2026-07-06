@@ -728,5 +728,5 @@ ENDM
 	map_attributes RockSaltCave2B, ROCK_SALT_CAVE_2B, $09
 	map_attributes RockSaltCaveCavern, ROCK_SALT_CAVE_CAVERN, $09
 
-	map_attributes Route101, ROUTE_101, $00
+	map_attributes Route101, ROUTE_101, $05
 	; map_attributes PeppercornVillage, PEPPERCORN_VILLAGE, $00
