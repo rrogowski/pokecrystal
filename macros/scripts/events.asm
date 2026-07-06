@@ -1065,4 +1065,10 @@ MACRO checksave
 	db checksave_command
 ENDM
 
+	const sketchunown_command ; $a9
+MACRO sketchunown
+	db sketchunown_command
+	db \1 ; letter
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

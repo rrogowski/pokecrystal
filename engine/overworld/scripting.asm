@@ -234,6 +234,7 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
+	dw Script_sketchunown								 ; aa
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2350,6 +2351,12 @@ Script_checksave:
 	farcall CheckSave
 	ld a, c
 	ld [wScriptVar], a
+	ret
+
+Script_sketchunown:
+	call GetScriptByte
+	ld [wUnownLetter], a
+	farcall _SketchUnown
 	ret
 
 Script_checkver_duplicate: ; unreferenced

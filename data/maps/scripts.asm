@@ -430,7 +430,7 @@ INCLUDE "maps/Route26.asm"
 INCLUDE "maps/Route28.asm"
 INCLUDE "maps/Route31.asm"
 INCLUDE "maps/Route39.asm"
-INCLUDE "maps/Route40.asm"
+; INCLUDE "maps/Route40.asm"
 INCLUDE "maps/Route41.asm"
 INCLUDE "maps/Route12.asm"
 

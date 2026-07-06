@@ -46,4 +46,8 @@ PrintUnownWord:
 	ld [hli], a
 	jr .loop
 
+_SketchUnown::
+	call UpdateUnownDex
+	ret
+
 INCLUDE "data/pokemon/unown_words.asm"
