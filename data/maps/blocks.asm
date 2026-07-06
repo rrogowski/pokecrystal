@@ -150,7 +150,7 @@ ManiasHouse_Blocks:
 CianwoodPharmacy_Blocks:
 CianwoodPhotoStudio_Blocks:
 CianwoodLugiaSpeechHouse_Blocks:
-PokeSeersHouse_Blocks:
+; PokeSeersHouse_Blocks:
 ViridianNicknameSpeechHouse_Blocks:
 Route2NuggetHouse_Blocks:
 PlayersNeighborsHouse_Blocks:
@@ -957,5 +957,8 @@ RockSaltCaveCavern_Blocks:
 
 Route101_Blocks:
 	INCBIN "maps/Route101.blk"
+
+PeppercornVillage_Blocks:
+	INCBIN "maps/PeppercornVillage.blk"
 
 ENDSECTION

@@ -432,7 +432,7 @@ ENDM
 	map_const CIANWOOD_PHARMACY,                            4,  4 ;  7
 	map_const CIANWOOD_PHOTO_STUDIO,                        4,  4 ;  8
 	map_const CIANWOOD_LUGIA_SPEECH_HOUSE,                  4,  4 ;  9
-	map_const POKE_SEERS_HOUSE,                             4,  4 ; 10
+	; map_const POKE_SEERS_HOUSE,                             4,  4 ; 10
 	; map_const BATTLE_TOWER_1F,                              8,  5 ; 11
 	; map_const BATTLE_TOWER_BATTLE_ROOM,                     4,  4 ; 12
 	; map_const BATTLE_TOWER_ELEVATOR,                        2,  2 ; 13
@@ -516,7 +516,7 @@ ENDM
 
 	newgroup PEPPERCORN							  			   ; 28
 	map_const ROUTE_101,								30,  9 ;  1
-	; map_const PEPPERCORN_VILLAGE,						 X,  Y ;  2		
+	map_const PEPPERCORN_VILLAGE,						 15,  18 ;  2		
 	endgroup
 			
 DEF NUM_MAP_GROUPS EQU const_value ; 28

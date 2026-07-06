@@ -667,7 +667,7 @@ ENDM
 	map_attributes CianwoodPharmacy, CIANWOOD_PHARMACY, $00
 	map_attributes CianwoodPhotoStudio, CIANWOOD_PHOTO_STUDIO, $00
 	map_attributes CianwoodLugiaSpeechHouse, CIANWOOD_LUGIA_SPEECH_HOUSE, $00
-	map_attributes PokeSeersHouse, POKE_SEERS_HOUSE, $00
+	; map_attributes PokeSeersHouse, POKE_SEERS_HOUSE, $00
 	; map_attributes BattleTower1F, BATTLE_TOWER_1F, $00
 	; map_attributes BattleTowerBattleRoom, BATTLE_TOWER_BATTLE_ROOM, $00
 	; map_attributes BattleTowerElevator, BATTLE_TOWER_ELEVATOR, $00
@@ -728,5 +728,8 @@ ENDM
 	map_attributes RockSaltCave2B, ROCK_SALT_CAVE_2B, $09
 	map_attributes RockSaltCaveCavern, ROCK_SALT_CAVE_CAVERN, $09
 
-	map_attributes Route101, ROUTE_101, $05
-	; map_attributes PeppercornVillage, PEPPERCORN_VILLAGE, $00
+	map_attributes Route101, ROUTE_101, $05 | SOUTH
+	connection south, PeppercornVillage, PEPPERCORN_VILLAGE, 20
+
+	map_attributes PeppercornVillage, PEPPERCORN_VILLAGE, $05 | NORTH
+	connection north, Route101, ROUTE_101, -20
