@@ -24,7 +24,7 @@ RockSaltJadesHouseJadeScript:
 	applymovement ROCK_SALT_JADES_HOUSE_JADE, .Movement_LeaveHousePart1
 	scall .JadeTurnAround
 	appear ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
-	applymovement PLAYER, .Movement_HidePlayerFacingLeftAndPanDown
+	applymovement PLAYER, .Movement_HidePlayerAndPanDown
 	scall .CallChikorita
 	applymovement PLAYER, .Movement_PanUpAndShowPlayerFacingLeft
 	disappear ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
@@ -34,7 +34,7 @@ RockSaltJadesHouseJadeScript:
 	applymovement ROCK_SALT_JADES_HOUSE_JADE, .Movement_LeaveHousePart1WalkAroundPlayer
 	scall .JadeTurnAround
 	appear ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
-	applymovement PLAYER, .Movement_HidePlayerFacingUpAndPanDown
+	applymovement PLAYER, .Movement_HidePlayerAndPanDown
 	scall .CallChikorita
 	applymovement PLAYER, .Movement_PanUpAndShowPlayerFacingUp
 	disappear ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
@@ -89,14 +89,7 @@ RockSaltJadesHouseJadeScript:
 	step DOWN
 	step_end
 
-.Movement_HidePlayerFacingLeftAndPanDown:
-	hide_object
-	slow_step DOWN
-	slow_step DOWN
-	slow_step DOWN
-	step_end
-
-.Movement_HidePlayerFacingUpAndPanDown:
+.Movement_HidePlayerAndPanDown:
 	hide_object
 	slow_step DOWN
 	slow_step DOWN
@@ -117,7 +110,6 @@ RockSaltJadesHouseJadeScript:
 	step_end
 
 .Movement_PanUpAndShowPlayerFacingLeft:
-	slow_step UP
 	slow_step UP
 	slow_step UP
 	turn_head LEFT
