@@ -95,7 +95,7 @@ InitializePlayerInfo:
 	call CopyBytes
 	ret
 
-.PlayerName: db "Kit@"
+.PlayerName: db "KIT@"
 
 if DEF(_DEBUG)
 DebugRoom: ; unreferenced

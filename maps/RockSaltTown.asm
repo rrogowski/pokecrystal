@@ -17,12 +17,18 @@
 
 RockSaltTown_MapScripts:
 	def_scene_scripts
+	scene_script RockSaltTownNoopScene, SCENE_ROCK_SALT_TOWN_JADE_CALLS_PLAYER_TO_ACTION
 	scene_script RockSaltTownNoopScene, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
 	scene_script RockSaltTownNoopScene, SCENE_ROCK_SALT_TOWN_NOOP
 
 	def_callbacks
 
 RockSaltTownNoopScene:
+	end
+
+RockSaltTown_JadeCallsPlayerToActionScene:
+	specialphonecall SPECIALCALL_JADE_CALL_TO_ACTION
+	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
 	end
 
 RockSaltTown_OldManStopsYouScene:
@@ -312,14 +318,14 @@ RockSaltTownPlayersHouseSign:
     jumptext RockSaltTownPlayersHouseSignText
 
 RockSaltTownPlayersHouseSignText:
-    text "<PLAYER>'s HOUSE"
+    text "<PLAYER>'S HOUSE"
     done
 
 RockSaltTownRivalsHouseSign:
     jumptext RockSaltTownRivalsHouseSigntText
 
 RockSaltTownRivalsHouseSigntText:
-    text "<RIVAL>'s HOUSE"
+    text "JADE'S HOUSE"
     done
 
 RockSaltTownJadeScript:
@@ -444,6 +450,7 @@ RockSaltTown_MapEvents:
 	warp_event 12, 11, ROCK_SALT_CAVE_1F, 6
 
 	def_coord_events
+	coord_event 29, 20, SCENE_ROCK_SALT_TOWN_JADE_CALLS_PLAYER_TO_ACTION, RockSaltTown_JadeCallsPlayerToActionScene
 	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
 
 	def_bg_events
