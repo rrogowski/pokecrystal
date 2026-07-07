@@ -321,10 +321,10 @@ RockSaltTownPlayersHouseSignText:
     text "<PLAYER>'S HOUSE"
     done
 
-RockSaltTownRivalsHouseSign:
-    jumptext RockSaltTownRivalsHouseSigntText
+RockSaltTownJadesHouseSign:
+    jumptext RockSaltTownJadesHouseSigntText
 
-RockSaltTownRivalsHouseSigntText:
+RockSaltTownJadesHouseSigntText:
     text "JADE'S HOUSE"
     done
 
@@ -441,7 +441,7 @@ RockSaltTown_MapEvents:
 
 	def_warp_events
 	warp_event 29, 19, ROCK_SALT_PLAYERS_HOUSE, 1
-	warp_event 21, 13, ROCK_SALT_RIVALS_HOUSE, 1
+	warp_event 21, 13, ROCK_SALT_JADES_HOUSE, 1
 	warp_event 28, 13, ROCK_SALT_LAB, 1
 	warp_event 35, 17, ROCK_SALT_BOOKWORMS_HOUSE, 1
 	warp_event 17, 17, ROCK_SALT_OLD_MANS_HOUSE, 1
@@ -456,7 +456,7 @@ RockSaltTown_MapEvents:
 	def_bg_events
 	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
 	bg_event 27, 19, BGEVENT_READ, RockSaltTownPlayersHouseSign
-	bg_event 23, 15, BGEVENT_READ, RockSaltTownRivalsHouseSign
+	bg_event 23, 15, BGEVENT_READ, RockSaltTownJadesHouseSign
 
 	def_object_events
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1

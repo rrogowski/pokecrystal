@@ -717,7 +717,7 @@ ENDM
 
 	map_attributes RockSaltTown, ROCK_SALT_TOWN, $05
 	map_attributes RockSaltPlayersHouse, ROCK_SALT_PLAYERS_HOUSE, $00
-	map_attributes RockSaltRivalsHouse, ROCK_SALT_RIVALS_HOUSE, $00
+	map_attributes RockSaltJadesHouse, ROCK_SALT_JADES_HOUSE, $00
 	map_attributes RockSaltLab, ROCK_SALT_LAB, $00
 	map_attributes RockSaltBookwormsHouse, ROCK_SALT_BOOKWORMS_HOUSE, $00
 	map_attributes RockSaltOldMansHouse, ROCK_SALT_OLD_MANS_HOUSE, $00

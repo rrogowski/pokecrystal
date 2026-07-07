@@ -15,5 +15,5 @@ NonTrainerCallerNames:
 .bill:     db "BILL:@"
 .elm:      db "PROF.ELM:@"
 .bikeshop: db "BIKE SHOP:@"
-.jade:     db "JADE:<LF>   RIVAL@"
+.jade:     db "JADE:@"
 .buena:    db "BUENA:<LF>   DISC JOCKEY@"

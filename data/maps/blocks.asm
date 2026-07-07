@@ -931,7 +931,7 @@ RockSaltTown_Blocks:
 RockSaltPlayersHouse_Blocks:
 	INCBIN "maps/RockSaltPlayersHouse.blk"
 
-RockSaltRivalsHouse_Blocks:
+RockSaltJadesHouse_Blocks:
 	INCBIN "maps/RockSaltPlayersHouse.blk"
 
 RockSaltLab_Blocks:

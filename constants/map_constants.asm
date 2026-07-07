@@ -508,7 +508,7 @@ ENDM
 	newgroup ROCK_SALT 										  ; 27
 	map_const ROCK_SALT_TOWN,				 			25, 12 ;  1
 	map_const ROCK_SALT_PLAYERS_HOUSE,  				 5, 4 ;  2
-	map_const ROCK_SALT_RIVALS_HOUSE,					 5, 4 ;  3
+	map_const ROCK_SALT_JADES_HOUSE,					 5, 4 ;  3
 	map_const ROCK_SALT_LAB,							 5, 6 ;  4
 	map_const ROCK_SALT_BOOKWORMS_HOUSE,  				 5, 4 ;  5
 	map_const ROCK_SALT_OLD_MANS_HOUSE,					 4, 4 ;  6

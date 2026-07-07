@@ -2200,6 +2200,7 @@ wWalkingIntoEdgeWarp:: db
 wMovementAnimation:: db
 wWalkingDirection:: db
 wFacingDirection:: db
+wLastFacingDirection:: db
 wWalkingX:: db
 wWalkingY:: db
 wWalkingTileCollision:: db
