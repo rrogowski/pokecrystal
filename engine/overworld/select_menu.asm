@@ -123,6 +123,7 @@ UseRegisteredItem:
 	dw .Current
 	dw .Party
 	dw .Overworld
+	dw .Graphic
 
 .NoFunction:
 	call OpenText
@@ -160,6 +161,15 @@ UseRegisteredItem:
 	scf
 	ld a, HMENURETURN_SCRIPT
 	ldh [hMenuReturn], a
+	ret
+
+.Graphic:
+	call ReanchorMap
+	call FadeToMenu
+	call DoItemEffect
+	call CloseSubmenu
+	call CloseText
+	and a
 	ret
 
 .CantUse:

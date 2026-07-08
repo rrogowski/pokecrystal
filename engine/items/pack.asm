@@ -438,6 +438,7 @@ UseItem:
 	dw .Current ; ITEMMENU_CURRENT
 	dw .Party   ; ITEMMENU_PARTY
 	dw .Field   ; ITEMMENU_CLOSE
+	dw .Graphic ; ITEMMENU_GRAPHIC
 
 .Oak:
 	ld hl, OakThisIsntTheTimeText
@@ -472,6 +473,16 @@ UseItem:
 	jr z, .Oak
 	ld a, PACKSTATE_QUITRUNSCRIPT
 	ld [wJumptableIndex], a
+	ret
+
+.Graphic:
+	; call FadeToMenu
+	call DoItemEffect
+	; xor a
+	; ldh [hBGMapMode], a
+	call Pack_InitGFX
+	call WaitBGMap_DrawPackGFX
+	call Pack_InitColors
 	ret
 
 TossMenu:

@@ -28,6 +28,7 @@ DEF NUM_ITEM_TYPES EQU const_value - 1
 	const ITEMMENU_CURRENT ; 4
 	const ITEMMENU_PARTY   ; 5
 	const ITEMMENU_CLOSE   ; 6
+	const ITEMMENU_GRAPHIC ; 7
 
 ; item actions
 	const_def 6
