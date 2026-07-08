@@ -346,11 +346,11 @@ CeladonMansion3F_Blocks:
 CeladonMansionRoof_Blocks:
 	INCBIN "maps/CeladonMansionRoof.blk"
 
-CeladonGameCorner_Blocks:
-	INCBIN "maps/CeladonGameCorner.blk"
+; CeladonGameCorner_Blocks:
+; 	INCBIN "maps/CeladonGameCorner.blk"
 
-CeladonGameCornerPrizeRoom_Blocks:
-	INCBIN "maps/CeladonGameCornerPrizeRoom.blk"
+; CeladonGameCornerPrizeRoom_Blocks:
+; 	INCBIN "maps/CeladonGameCornerPrizeRoom.blk"
 
 Colosseum_Blocks:
 	INCBIN "maps/Colosseum.blk"
@@ -692,8 +692,8 @@ DanceTheater_Blocks:
 EcruteakTinTowerEntrance_Blocks:
 	INCBIN "maps/EcruteakTinTowerEntrance.blk"
 
-GoldenrodGameCorner_Blocks:
-	INCBIN "maps/GoldenrodGameCorner.blk"
+; GoldenrodGameCorner_Blocks:
+; 	INCBIN "maps/GoldenrodGameCorner.blk"
 
 Route35NationalParkGate_Blocks:
 	INCBIN "maps/Route35NationalParkGate.blk"
@@ -931,7 +931,7 @@ RockSaltTown_Blocks:
 RockSaltPlayersHouse_Blocks:
 	INCBIN "maps/RockSaltPlayersHouse.blk"
 
-RockSaltRivalsHouse_Blocks:
+RockSaltJadesHouse_Blocks:
 	INCBIN "maps/RockSaltPlayersHouse.blk"
 
 RockSaltLab_Blocks:

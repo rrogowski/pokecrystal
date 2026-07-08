@@ -63,8 +63,9 @@ NewGame:
 	ld [wDebugFlags], a
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
-	call PlayerProfileSetup
+	;call PlayerProfileSetup
 	call InitializePlayerInfo
+	call InitializeEvents
 	;call OakSpeech
 	call InitializeWorld
 
@@ -95,7 +96,21 @@ InitializePlayerInfo:
 	call CopyBytes
 	ret
 
-.PlayerName: db "Kit@"
+.PlayerName: db "KIT@"
+
+InitializeEvents:
+	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
+	ld [wSpecialPhoneCallID], a
+
+	ret
 
 if DEF(_DEBUG)
 DebugRoom: ; unreferenced

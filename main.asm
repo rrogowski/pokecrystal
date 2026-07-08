@@ -371,6 +371,7 @@ INCLUDE "engine/phone/scripts/unused.asm"
 INCLUDE "engine/phone/scripts/mom.asm"
 INCLUDE "engine/phone/scripts/bill.asm"
 INCLUDE "engine/phone/scripts/elm.asm"
+INCLUDE "engine/phone/scripts/jade.asm"
 INCLUDE "engine/phone/scripts/jack.asm"
 INCLUDE "engine/phone/scripts/beverly.asm"
 INCLUDE "engine/phone/scripts/huey.asm"
@@ -681,6 +682,22 @@ SECTION "Crystal Events", ROMX
 
 INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "engine/events/odd_egg.asm"
+
+
+SECTION "Quests", ROMX
+
+INCLUDE "data/quests/names.asm"
+INCLUDE "engine/menus/quests_menu.asm"
+INCLUDE "engine/quests/advance_quest.asm"
+INCLUDE "engine/quests/can_turn_in_quest.asm"
+INCLUDE "engine/quests/get_quest_goal.asm"
+INCLUDE "engine/quests/get_quest_name.asm"
+INCLUDE "engine/quests/get_quest_progress.asm"
+INCLUDE "engine/quests/is_quest_turned_in.asm"
+INCLUDE "engine/quests/is_quest_unlocked.asm"
+INCLUDE "engine/quests/set_quest_goal.asm"
+INCLUDE "engine/quests/turn_in_quest.asm"
+INCLUDE "engine/quests/unlock_quest.asm"
 
 
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]

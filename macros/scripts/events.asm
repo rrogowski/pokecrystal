@@ -1065,7 +1065,32 @@ MACRO checksave
 	db checksave_command
 ENDM
 
-	const sketchunown_command ; $a9
+	const unlockquest_command ; $aa
+MACRO unlockquest
+	db unlockquest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
+	const setquestgoal_command ; $aa
+MACRO setquestgoal
+	db setquestgoal_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+	db \2 ; goal
+ENDM
+
+	const advancequest_command ; $aa
+MACRO advancequest
+	db advancequest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
+	const turninquest_command ; $aa
+MACRO turninquest
+	db turninquest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
+	const sketchunown_command ; $ab
 MACRO sketchunown
 	db sketchunown_command
 	db \1 ; letter

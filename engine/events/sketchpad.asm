@@ -1,26 +1,17 @@
-OpenSketchpad:
-		call .InitGFX
-		call .LoadUnownFont
-		call .PrintBorder
-		call .PrintUnowns
-    call JoyWaitAorB
-		call .RestorePackGFX
-    ret
-
-.InitGFX:
-	call LoadStandardMenuHeader
+Sketchpad:
 	call ClearBGPalettes
 	call ClearTilemap
-	ld b, SCGB_POKEDEX_UNOWN_MODE
+
+	call .LoadUnownFont
+	call .PrintBorder
+	call .PrintUnowns
+
+	call WaitBGMap
+	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
-	ret
 
-.RestorePackGFX:
-	call ClearBGPalettes
-	call CloseWindow
-	farcall Pack_InitGFX
-	farcall Pack_InitColors
+	call JoyWaitAorB
 	ret
 
 .LoadUnownFont:

@@ -568,7 +568,7 @@ ENDM
 	map_attributes GoldenrodDeptStore6F, GOLDENROD_DEPT_STORE_6F, $00
 	map_attributes GoldenrodDeptStoreElevator, GOLDENROD_DEPT_STORE_ELEVATOR, $00
 	map_attributes GoldenrodDeptStoreRoof, GOLDENROD_DEPT_STORE_ROOF, $24
-	map_attributes GoldenrodGameCorner, GOLDENROD_GAME_CORNER, $00
+	; map_attributes GoldenrodGameCorner, GOLDENROD_GAME_CORNER, $00
 	map_attributes GoldenrodPokecenter1F, GOLDENROD_POKECENTER_1F, $00
 	map_attributes PokecomCenterAdminOfficeMobile, POKECOM_CENTER_ADMIN_OFFICE_MOBILE, $00
 	map_attributes IlexForestAzaleaGate, ILEX_FOREST_AZALEA_GATE, $00
@@ -653,8 +653,8 @@ ENDM
 	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00
 	map_attributes CeladonPokecenter1F, CELADON_POKECENTER_1F, $00
 	map_attributes CeladonPokecenter2FBeta, CELADON_POKECENTER_2F_BETA, $00
-	map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00
-	map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00
+	; map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00
+	; map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00
 	map_attributes CeladonGym, CELADON_GYM, $00
 	map_attributes CeladonCafe, CELADON_CAFE, $00
 	map_attributes Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $00
@@ -717,7 +717,7 @@ ENDM
 
 	map_attributes RockSaltTown, ROCK_SALT_TOWN, $05
 	map_attributes RockSaltPlayersHouse, ROCK_SALT_PLAYERS_HOUSE, $00
-	map_attributes RockSaltRivalsHouse, ROCK_SALT_RIVALS_HOUSE, $00
+	map_attributes RockSaltJadesHouse, ROCK_SALT_JADES_HOUSE, $00
 	map_attributes RockSaltLab, ROCK_SALT_LAB, $00
 	map_attributes RockSaltBookwormsHouse, ROCK_SALT_BOOKWORMS_HOUSE, $00
 	map_attributes RockSaltOldMansHouse, ROCK_SALT_OLD_MANS_HOUSE, $00

@@ -274,7 +274,7 @@ ENDM
 	map_const GOLDENROD_DEPT_STORE_6F,                      8,  4 ; 16
 	map_const GOLDENROD_DEPT_STORE_ELEVATOR,                2,  2 ; 17
 	map_const GOLDENROD_DEPT_STORE_ROOF,                    8,  4 ; 18
-	map_const GOLDENROD_GAME_CORNER,                       10,  7 ; 19
+	; map_const GOLDENROD_GAME_CORNER,                       10,  7 ; 19
 	map_const GOLDENROD_POKECENTER_1F,                      5,  4 ; 20
 	map_const POKECOM_CENTER_ADMIN_OFFICE_MOBILE,          16, 16 ; 21
 	map_const ILEX_FOREST_AZALEA_GATE,                      5,  4 ; 22
@@ -412,8 +412,8 @@ ENDM
 	map_const CELADON_MANSION_ROOF_HOUSE,                   4,  4 ; 16
 	map_const CELADON_POKECENTER_1F,                        5,  4 ; 17
 	map_const CELADON_POKECENTER_2F_BETA,                   8,  4 ; 18
-	map_const CELADON_GAME_CORNER,                         10,  7 ; 19
-	map_const CELADON_GAME_CORNER_PRIZE_ROOM,               3,  3 ; 20
+	; map_const CELADON_GAME_CORNER,                         10,  7 ; 19
+	; map_const CELADON_GAME_CORNER_PRIZE_ROOM,               3,  3 ; 20
 	map_const CELADON_GYM,                                  5,  9 ; 21
 	map_const CELADON_CAFE,                                 6,  4 ; 22
 	map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE,                4,  4 ; 23
@@ -508,7 +508,7 @@ ENDM
 	newgroup ROCK_SALT 										  ; 27
 	map_const ROCK_SALT_TOWN,				 			25, 12 ;  1
 	map_const ROCK_SALT_PLAYERS_HOUSE,  				 5, 4 ;  2
-	map_const ROCK_SALT_RIVALS_HOUSE,					 5, 4 ;  3
+	map_const ROCK_SALT_JADES_HOUSE,					 5, 4 ;  3
 	map_const ROCK_SALT_LAB,							 5, 6 ;  4
 	map_const ROCK_SALT_BOOKWORMS_HOUSE,  				 5, 4 ;  5
 	map_const ROCK_SALT_OLD_MANS_HOUSE,					 4, 4 ;  6

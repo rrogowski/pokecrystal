@@ -1126,10 +1126,6 @@ BicycleEffect:
 	farcall BikeFunction
 	ret
 
-SketchpadEffect:
-	farcall OpenSketchpad
-	ret
-
 EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
 	call UseItem_SelectMon
@@ -2924,4 +2920,8 @@ GetMthMoveOfCurrentMon:
 	ld c, a
 	ld b, 0
 	add hl, bc
+	ret
+
+SketchpadEffect:
+	farcall Sketchpad
 	ret

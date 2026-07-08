@@ -406,3 +406,10 @@ MACRO battle_bg_effect
 \1BattleTurn::     db
 \1Param::          db
 ENDM
+
+MACRO quest_struct
+\1IsUnlocked:: db
+\1Progress:: db
+\1Goal:: db
+\1IsTurnedIn:: db
+ENDM
