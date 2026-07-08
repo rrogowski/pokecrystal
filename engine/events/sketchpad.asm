@@ -1,15 +1,16 @@
 OpenSketchpad:
-		call .InitGFX
-		call .LoadUnownFont
-		call .PrintBorder
-		call .PrintUnowns
-    call JoyWaitAorB
-		call .RestorePackGFX
-    ret
+	call .InitGFX
+	call .LoadUnownFont
+	call .PrintBorder
+	call .PrintUnowns
+	call JoyWaitAorB
+	call .RestorePackGFX
+	ret
 
 .InitGFX:
 	call LoadStandardMenuHeader
 	call ClearBGPalettes
+	call ClearSprites
 	call ClearTilemap
 	ld b, SCGB_POKEDEX_UNOWN_MODE
 	call GetSGBLayout

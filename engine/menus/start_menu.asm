@@ -9,6 +9,7 @@
 	const STARTMENUITEM_EXIT     ; 6
 	const STARTMENUITEM_POKEGEAR ; 7
 	const STARTMENUITEM_QUIT     ; 8
+	const STARTMENUITEM_QUESTS   ; 9
 
 StartMenu::
 	call ClearWindowData
@@ -185,7 +186,8 @@ StartMenu::
 	dw StartMenu_Exit,     .ExitString,     .ExitDesc
 	dw StartMenu_Pokegear, .PokegearString, .PokegearDesc
 	dw StartMenu_Quit,     .QuitString,     .QuitDesc
-
+	dw StartMenu_Quests,   .QuestsString,   .QuestsDesc
+	
 .PokedexString:  db "#DEX@"
 .PartyString:    db "#MON@"
 .PackString:     db "PACK@"
@@ -195,6 +197,7 @@ StartMenu::
 .ExitString:     db "EXIT@"
 .PokegearString: db "<POKE>GEAR@"
 .QuitString:     db "QUIT@"
+.QuestsString:   db "QUESTS@"
 
 .PokedexDesc:
 	db   "#MON"
@@ -223,6 +226,10 @@ StartMenu::
 .OptionDesc:
 	db   "Change"
 	next "settings@"
+
+.QuestsDesc:
+	db   "View"
+	next "quests@"
 
 .ExitDesc:
 	db   "Close this"
@@ -336,6 +343,8 @@ endr
 .no_save
 
 	ld a, STARTMENUITEM_OPTION
+	call .AppendMenuList
+	ld a, STARTMENUITEM_QUESTS
 	call .AppendMenuList
 	ld a, STARTMENUITEM_EXIT
 	call .AppendMenuList
@@ -539,4 +548,11 @@ StartMenu_Pokemon:
 	push af
 	call ExitAllMenus
 	pop af
+	ret
+
+StartMenu_Quests:
+	call FadeToMenu
+	farcall QuestsMenu
+	call CloseSubmenu
+	ld a, 0
 	ret
