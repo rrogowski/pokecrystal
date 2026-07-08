@@ -3627,6 +3627,18 @@ w5_MobileOpponentBattleWinMessage:: ds $c
 w5_MobileOpponentBattleLossMessage:: ds $c
 
 
+SECTION "Quests RAM", WRAMX
+
+; index corresponds to QUEST_* (see constants/quest_constants.asm)
+wQuests::
+	quest_struct IntoTheUnown
+	quest_struct TroubleWithTauros
+wQuestsEnd::
+	assert wQuestsEnd - wQuests == NUM_QUESTS * QUEST_STRUCT_LENGTH
+
+; temporary storage for QUEST_* (see constants/quest_constants.asm)
+wCurQuest:: db
+
 SECTION "Scratch RAM", WRAMX
 
 UNION

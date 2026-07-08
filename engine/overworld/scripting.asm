@@ -234,7 +234,10 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
-	dw Script_sketchunown								 ; aa
+	dw Script_unlockquest
+	dw Script_setquestgoal
+	dw Script_advancequest
+	dw Script_sketchunown
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2353,16 +2356,53 @@ Script_checksave:
 	ld [wScriptVar], a
 	ret
 
+Script_unlockquest:
+	call GetScriptByte
+	ld c, a
+	farcall UnlockQuest
+	farcall GetQuestName
+
+	ld de, wStringBuffer1
+	ld a, STRING_BUFFER_3
+	call CopyConvertedText
+
+	ld b, BANK(.UnlockQuestScript)
+	ld de, .UnlockQuestScript
+	jp ScriptCall
+	ret
+
+.UnlockQuestScript:
+	opentext
+	playsound SFX_GET_EGG
+	writetext .Text_UnlockedQuest
+	waitsfx
+	waitbutton
+	closetext
+	end
+
+.Text_UnlockedQuest:
+	text "<PLAYER> unlocked"
+	line "@"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+Script_setquestgoal:
+	call GetScriptByte
+	ld c, a
+	call GetScriptByte
+	ld e, a
+	farcall SetQuestGoal
+	ret
+
+Script_advancequest:
+	call GetScriptByte
+	ld c, a
+	farcall AdvanceQuest
+	ret
+
 Script_sketchunown:
 	call GetScriptByte
 	ld [wUnownLetter], a
 	farcall _SketchUnown
 	ret
-
-Script_checkver_duplicate: ; unreferenced
-	ld a, [.gs_version]
-	ld [wScriptVar], a
-	ret
-
-.gs_version:
-	db GS_VERSION

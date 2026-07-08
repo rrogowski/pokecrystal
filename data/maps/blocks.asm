@@ -692,8 +692,8 @@ DanceTheater_Blocks:
 EcruteakTinTowerEntrance_Blocks:
 	INCBIN "maps/EcruteakTinTowerEntrance.blk"
 
-GoldenrodGameCorner_Blocks:
-	INCBIN "maps/GoldenrodGameCorner.blk"
+; GoldenrodGameCorner_Blocks:
+; 	INCBIN "maps/GoldenrodGameCorner.blk"
 
 Route35NationalParkGate_Blocks:
 	INCBIN "maps/Route35NationalParkGate.blk"
