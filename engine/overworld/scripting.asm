@@ -237,6 +237,7 @@ ScriptCommandTable:
 	dw Script_unlockquest
 	dw Script_setquestgoal
 	dw Script_advancequest
+	dw Script_turninquest
 	dw Script_sketchunown
 	assert_table_length NUM_EVENT_COMMANDS
 
@@ -2399,6 +2400,12 @@ Script_advancequest:
 	call GetScriptByte
 	ld c, a
 	farcall AdvanceQuest
+	ret
+
+Script_turninquest:
+	call GetScriptByte
+	ld c, a
+	farcall TurnInQuest
 	ret
 
 Script_sketchunown:

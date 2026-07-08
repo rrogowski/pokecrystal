@@ -1,5 +1,6 @@
 QuestsMenu:
 	call ClearBGPalettes
+	farcall LoadStatsScreenPageTilesGFX
 	
 	hlcoord 0, 0
 	ld b, SCREEN_HEIGHT - 2
@@ -31,6 +32,43 @@ QuestsMenu:
 	and a
 	jp z, .PrintLockedQuest
 
+	ld hl, wCurQuest
+	ld c, [hl]
+	call IsQuestTurnedIn
+
+	push af
+	ld de, .TurnedInCoords
+	call .HLCoords
+	pop af
+
+	cp 1
+	jr z, .TurnedIn
+
+	ld hl, wCurQuest
+	ld c, [hl]
+	call CanTurnInQuest
+
+	push af
+	ld de, .TurnedInCoords
+	call .HLCoords
+	pop af
+
+	cp 1
+	jr z, .CanTurnIn
+
+	jp .NameAndProgress
+
+.TurnedIn
+	ld a, '⁂'
+	ld [hl], a
+	jp .NameAndProgress
+
+.CanTurnIn
+	ld a, '!'
+	ld [hl], a
+	jp .NameAndProgress
+
+.NameAndProgress
 	ld hl, wCurQuest
 	ld c, [hl]
 	call GetQuestName
@@ -111,7 +149,7 @@ endr
 	ret
 
 .PrintTwoDigitNumber:
-	ld a, "0"
+	ld a, '0'
 	ld b, a
 	ld a, e
 .tens
@@ -126,7 +164,7 @@ endr
 	ld [hli], a
 	pop af
 
-	add a, "0"
+	add a, '0'
 	ld [hl], a
 	ret
 
@@ -136,6 +174,12 @@ endr
 	ld de, .Text_LockedQuest
 	call PlaceString
 	ret
+
+.TurnedInCoords:
+	dwcoord 1, 2
+	dwcoord 1, 5
+	dwcoord 1, 8
+	dwcoord 1, 11
 
 .NameCoords:
 	dwcoord 2, 2

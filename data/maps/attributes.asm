@@ -653,8 +653,8 @@ ENDM
 	map_attributes CeladonMansionRoofHouse, CELADON_MANSION_ROOF_HOUSE, $00
 	map_attributes CeladonPokecenter1F, CELADON_POKECENTER_1F, $00
 	map_attributes CeladonPokecenter2FBeta, CELADON_POKECENTER_2F_BETA, $00
-	map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00
-	map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00
+	; map_attributes CeladonGameCorner, CELADON_GAME_CORNER, $00
+	; map_attributes CeladonGameCornerPrizeRoom, CELADON_GAME_CORNER_PRIZE_ROOM, $00
 	map_attributes CeladonGym, CELADON_GYM, $00
 	map_attributes CeladonCafe, CELADON_CAFE, $00
 	map_attributes Route16FuchsiaSpeechHouse, ROUTE_16_FUCHSIA_SPEECH_HOUSE, $00

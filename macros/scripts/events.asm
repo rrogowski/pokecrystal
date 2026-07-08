@@ -1084,6 +1084,12 @@ MACRO advancequest
 	db \1 ; QUEST_* (see constants/quest_constants.asm)
 ENDM
 
+	const turninquest_command ; $aa
+MACRO turninquest
+	db turninquest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
 	const sketchunown_command ; $ab
 MACRO sketchunown
 	db sketchunown_command
