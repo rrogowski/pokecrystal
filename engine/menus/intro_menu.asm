@@ -107,6 +107,9 @@ InitializeEvents:
 	ld b, SET_FLAG
 	call EventFlagAction
 
+	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
+	ld [wSpecialPhoneCallID], a
+
 	ret
 
 if DEF(_DEBUG)
