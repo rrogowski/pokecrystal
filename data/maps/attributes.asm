@@ -728,8 +728,8 @@ ENDM
 	map_attributes RockSaltCave2B, ROCK_SALT_CAVE_2B, $09
 	map_attributes RockSaltCaveCavern, ROCK_SALT_CAVE_CAVERN, $09
 
-	map_attributes Route101, ROUTE_101, $05 | SOUTH
+	map_attributes Route101, ROUTE_101, $05
 	connection south, PeppercornVillage, PEPPERCORN_VILLAGE, 20
 
-	map_attributes PeppercornVillage, PEPPERCORN_VILLAGE, $05 | NORTH
+	map_attributes PeppercornVillage, PEPPERCORN_VILLAGE, $05
 	connection north, Route101, ROUTE_101, -20
