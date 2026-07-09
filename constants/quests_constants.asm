@@ -6,6 +6,9 @@ const_def
 	const QUEST_COVER_TO_COVER
 DEF NUM_QUESTS EQU const_value
 
+def NUM_QUESTS_PER_PAGE EQU 4
+DEF NUM_QUEST_PAGES EQU NUM_QUESTS / NUM_QUESTS_PER_PAGE
+
 ; quest_struct members (see macros/ram.asm)
 rsreset
 	DEF QUEST_STRUCT_IS_UNLOCKED rb

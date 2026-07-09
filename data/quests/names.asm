@@ -21,4 +21,4 @@ QuestNames:
   db "Morning Moon@"
 
 .CoverToCoverName:
-  db "CoverToCover@"
+  db "Cover To Cover@"

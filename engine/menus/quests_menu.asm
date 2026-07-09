@@ -2,25 +2,93 @@ QuestsMenu:
 	call ClearBGPalettes
 	farcall LoadStatsScreenPageTilesGFX
 	
+.JoypadLoop
+
 	hlcoord 0, 0
 	ld b, SCREEN_HEIGHT - 2
 	ld c, SCREEN_WIDTH - 2
 	call Textbox
 	
-	ld a, QUEST_INTO_THE_UNOWN
-	ld [wCurQuest], a
-	call .PrintQuest
+	ld hl, wQuestsMenuPage
+	ld b, [hl]
 
-	ld a, QUEST_TROUBLE_WITH_TAUROS
-	ld [wCurQuest], a
-	call .PrintQuest
+	hlcoord 17, 15
+	ld a, b
+	add '1'
+	ld [hl], a
 
+	ld c, QUEST_INTO_THE_UNOWN
+	cp b
+	jr z, .PrintQuests
+
+.find_first_quest_on_page_loop
+rept NUM_QUESTS_PER_PAGE
+	inc c
+endr
+	dec b
+	jr nz, .find_first_quest_on_page_loop
+
+.PrintQuests
+	ld a, c
+	cp NUM_QUESTS
+	jr nc, .render
+
+	ld b, NUM_QUESTS_PER_PAGE
+
+.PrintQuestLoop
+	ld a, c
+	ld [wCurQuest], a
+	push bc
+	call .PrintQuest
+	pop bc
+	inc c
+
+	dec b
+	jr z, .render
+
+	ld a, c
+	cp NUM_QUESTS
+	jr c, .PrintQuestLoop
+
+.render
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	call SetDefaultBGPAndOBP
-	
-	call JoyWaitAorB
+
+.wait_for_joypad
+	call GetJoypad
+	ldh a, [hJoyPressed]
+	and PAD_A | PAD_B
+	jr nz, .exit
+
+	ldh a, [hJoyPressed]
+	and PAD_LEFT
+	jr nz, .prev_page
+
+	ldh a, [hJoyPressed]
+	and PAD_RIGHT
+	jr nz, .next_page
+
+	jr .wait_for_joypad
+
+.prev_page
+	ld hl, wQuestsMenuPage
+	ld b, [hl]
+	dec b
+	ld [hl], b
+
+	jp .JoypadLoop
+
+.next_page
+	ld hl, wQuestsMenuPage
+	ld b, [hl]
+	inc b
+	ld [hl], b
+
+	jp .JoypadLoop
+
+.exit
 	ret
 
 ; INPUTS
@@ -87,8 +155,6 @@ QuestsMenu:
 	ld de, .ProgressCoords
 	call .HLCoords
 	pop de
-	; NOTE: assumes e < 10
-	; this will NOT work for 2-digit values
 	call .PrintNumber
 
 	inc hl
@@ -109,7 +175,7 @@ QuestsMenu:
 	ret
 
 ; INPUTS
-;   de = pointer to coords
+;   de = pointer to coords array
 ;   [wCurQuest] = QUEST_* (see constants/quest_constants.asm)
 ; OUTPUTS
 ;   hl = coords
@@ -119,6 +185,17 @@ QuestsMenu:
 	ld d, 0
 	ld e, [hl]
 	pop hl
+
+	; e = e % NUM_QUESTS_PER_PAGE
+.hlcoords_loop
+	ld a, e
+	cp NUM_QUESTS_PER_PAGE
+	jr c, .hlcoords_done
+	sub NUM_QUESTS_PER_PAGE
+	ld e, a
+	jr .hlcoords_loop
+
+.hlcoords_done
 	
 rept 2
 	add hl, de
@@ -180,30 +257,28 @@ endr
 	dwcoord 1, 5
 	dwcoord 1, 8
 	dwcoord 1, 11
+	dwcoord 1, 14
 
 .NameCoords:
 	dwcoord 2, 2
 	dwcoord 2, 5
 	dwcoord 2, 8
 	dwcoord 2, 11
+	dwcoord 2, 14
 
 .ProgressCoords:
 	dwcoord 2, 3
 	dwcoord 2, 6
 	dwcoord 2, 9
 	dwcoord 2, 12
+	dwcoord 2, 15
 
 .GoalCoords:
 	dwcoord 7, 3
 	dwcoord 7, 6
 	dwcoord 7, 9
 	dwcoord 7, 12
-
-.Text_Progress:
-	db "-- / --@"
-
-.Text_IntoTheUnown:
-	db " 1 / 26@"
+	dwcoord 7, 15
 
 .Text_LockedQuest:
 	db "???<LF>"

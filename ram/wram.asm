@@ -3642,6 +3642,8 @@ wQuestsEnd::
 ; temporary storage for QUEST_* (see constants/quest_constants.asm)
 wCurQuest:: db
 
+wQuestsMenuPage:: db ; zero-indexed
+
 SECTION "Scratch RAM", WRAMX
 
 UNION
