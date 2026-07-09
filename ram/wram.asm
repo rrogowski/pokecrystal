@@ -3627,12 +3627,15 @@ w5_MobileOpponentBattleWinMessage:: ds $c
 w5_MobileOpponentBattleLossMessage:: ds $c
 
 
-SECTION "Quests RAM", WRAMX
+SECTION "Quests RAM", WRAM0
 
 ; index corresponds to QUEST_* (see constants/quest_constants.asm)
 wQuests::
 	quest_struct IntoTheUnown
 	quest_struct TroubleWithTauros
+	quest_struct BuggingOut
+	quest_struct MorningMoon
+	quest_struct CoverToCover
 wQuestsEnd::
 	assert wQuestsEnd - wQuests == NUM_QUESTS * QUEST_STRUCT_LENGTH
 

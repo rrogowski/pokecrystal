@@ -3,6 +3,9 @@ QuestNames:
 	table_width 2
 	dw .IntoTheUnownName
 	dw .TroubleWithTaurosName
+	dw .BuggingOutName
+	dw .MorningMoonName
+	dw .CoverToCoverName
 	assert_table_length NUM_QUESTS
 
 .IntoTheUnownName:
@@ -10,3 +13,12 @@ QuestNames:
 
 .TroubleWithTaurosName:
   db "Trouble w/ Tauros@"
+
+.BuggingOutName:
+  db "Bugging Out@"
+
+.MorningMoonName:
+  db "Morning Moon@"
+
+.CoverToCoverName:
+  db "CoverToCover@"
