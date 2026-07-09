@@ -86,4 +86,5 @@ MapScenes::
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
 	scene_var ROCK_SALT_TOWN,                              wRockSaltTownSceneID
 	scene_var ROCK_SALT_PLAYERS_HOUSE,                     wRockSaltPlayersHouseSceneID
+	scene_var ROCK_SALT_CAVE_1F,                           wRockSaltCave1FSceneID
 	db -1 ; end

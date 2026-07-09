@@ -9,11 +9,87 @@
     ; const   ROCK_SALT_CAVE_1F_POKEBALL_2
     ; const   ROCK_SALT_CAVE_1F_POKEBALL_3
     ; const   ROCK_SALT_CAVE_1F_POKEBALL_4
+    const ROCK_SALT_CAVE_1F_UNOWN
 
 RockSaltCave1F_MapScripts:
 	def_scene_scripts
+	scene_script RockSaltCave1FNoopScene, SCENE_ROCK_SALT_CAVE_UNOWN_ENCOUNTER
+	scene_script RockSaltCave1FNoopScene, SCENE_ROCK_SALT_CAVE_NOOP
 
 	def_callbacks
+
+RockSaltCave1FNoopScene:
+	end
+
+RockSaltCave1F_UnownEncounterScene:
+    cry UNOWN
+    showemote EMOTE_SHOCK, ROCK_SALT_CAVE_1F_UNOWN, 15
+    waitsfx
+
+    applymovement ROCK_SALT_CAVE_1F_UNOWN, .Movement_UnownCirclesPlayerClockwise
+    pause 10
+    applymovement ROCK_SALT_CAVE_1F_UNOWN, .Movement_UnownCirclesPlayerCounterclockwise
+    pause 10
+
+    setval UNOWN_L
+    writemem wUnownLetter
+    reanchormap
+	pokepic UNOWN
+	cry UNOWN
+	waitbutton
+	closepokepic
+
+    opentext
+    writetext .Text_DexError
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_CAVE_1F_UNOWN, .Movement_UnownCirclesPlayerClockwise
+    applymovement ROCK_SALT_CAVE_1F_UNOWN, .Movement_UnownFleesCave
+    playsound SFX_ENTER_DOOR
+	waitsfx
+	disappear ROCK_SALT_CAVE_1F_UNOWN
+    
+    setscene SCENE_ROCK_SALT_CAVE_NOOP
+	end
+
+.Movement_UnownCirclesPlayerClockwise:
+    fast_slide_step_right
+    fast_slide_step_down
+    fast_slide_step_down
+    fast_slide_step_left
+    fast_slide_step_left
+    fast_slide_step_left
+    fast_slide_step_up
+    fast_slide_step_up
+    fast_slide_step_right
+    step_end
+
+.Movement_UnownCirclesPlayerCounterclockwise
+    fast_slide_step_left
+    fast_slide_step_down
+    fast_slide_step_down
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_up
+    fast_slide_step_up
+    fast_slide_step_left
+    step_end
+
+.Movement_UnownFleesCave:
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_right
+    fast_slide_step_right
+    step_end
+
+.Text_DexError:
+    text "#DEX: Error!"
+    line "Data not found!"
+    done
 
 RockSaltCave1FPokefanMWarningScript:
     faceplayer
@@ -56,6 +132,8 @@ RockSaltCave1F_MapEvents:
 	warp_event 11, 37, ROCK_SALT_TOWN, 8
 
 	def_coord_events
+    coord_event 19, 6, SCENE_ROCK_SALT_CAVE_UNOWN_ENCOUNTER, RockSaltCave1F_UnownEncounterScene
+    coord_event 20, 6, SCENE_ROCK_SALT_CAVE_UNOWN_ENCOUNTER, RockSaltCave1F_UnownEncounterScene
 
 	def_bg_events
 
@@ -70,5 +148,4 @@ RockSaltCave1F_MapEvents:
     ; object_event    19, 12, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FPokeBallScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_POKEBALL
     ; object_event    7, 13, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FTMSpikesScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_TM_SPIKES
     ; object_event    17, 24, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FNuggetScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_NUGGET
-    
-    
+    object_event 20, 5, SPRITE_UNOWN, SPRITEMOVEDATA_POKEMON, 0,  0,  -1, -1, 0,  OBJECTTYPE_SCRIPT, 0, -1, EVENT_UNOWN_FIRST_ENCOUNTERED

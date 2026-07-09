@@ -1470,7 +1470,9 @@
 	const EVENT_CHOSE_STARTER_SENTRET
 	const EVENT_CHOSE_STARTER_EEVEE
 	const EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
-; Unused: next 42 events
+
+	const EVENT_UNOWN_FIRST_ENCOUNTERED
+; Unused: next 41 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800
