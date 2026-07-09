@@ -19,6 +19,8 @@ Route101_JadeGivesSketchpadScene:
 	waitbutton
 	closetext
 
+	showemote EMOTE_SHOCK, ROUTE_101_JADE, 15
+
 	opentext
 	writetext .Text_TakeThisSketchpad
 	waitbutton
