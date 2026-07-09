@@ -342,9 +342,15 @@ endr
 	call .AppendMenuList
 .no_save
 
-	ld a, STARTMENUITEM_OPTION
-	call .AppendMenuList
+	ld hl, wStatusFlags3
+	bit STATUSFLAGS3_RECEIVED_QUESTS_LOG_F, [hl]
+	jr z, .no_quests_log
 	ld a, STARTMENUITEM_QUESTS
+	call .AppendMenuList
+
+.no_quests_log
+
+	ld a, STARTMENUITEM_OPTION
 	call .AppendMenuList
 	ld a, STARTMENUITEM_EXIT
 	call .AppendMenuList

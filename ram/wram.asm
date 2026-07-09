@@ -2980,6 +2980,18 @@ wStatusFlags2::
 ; bit 7: rockets in mahogany
 	db
 
+; see constants/ram_constants.asm
+wStatusFlags3::
+; bit 0: received quest log
+; bit 1: unused
+; bit 2: unused
+; bit 3: unused
+; bit 4: unused
+; bit 5: unused
+; bit 6: unused
+; bit 7: unused
+	db
+
 wMoney:: ds 3
 wMomsMoney:: ds 3
 

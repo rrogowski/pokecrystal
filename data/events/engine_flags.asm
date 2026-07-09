@@ -199,4 +199,6 @@ EngineFlags:
 	engine_flag wSwarmFlags, SWARMFLAGS_DUNSPARCE_SWARM_F
 	engine_flag wSwarmFlags, SWARMFLAGS_YANMA_SWARM_F
 
+	engine_flag wStatusFlags3, STATUSFLAGS3_RECEIVED_QUESTS_LOG_F
+
 	assert_table_length NUM_ENGINE_FLAGS
