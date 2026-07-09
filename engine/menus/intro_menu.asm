@@ -2,10 +2,6 @@ Intro_MainMenu:
 	ld de, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
-	ld de, MUSIC_MAIN_MENU
-	ld a, e
-	ld [wMapMusic], a
-	call PlayMusic
 	farcall MainMenu
 	jp StartTitleScreen
 
@@ -64,9 +60,11 @@ NewGame:
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
 	;call PlayerProfileSetup
-	call InitializePlayerInfo
+	call InitializePlayerNewName
+	; call InitializePlayerDefaultName
 	call InitializeEvents
-	;call OakSpeech
+	; call OakSpeech
+	call IntroProfSpeech
 	call InitializeWorld
 
 	ld a, LANDMARK_NEW_BARK_TOWN
@@ -87,29 +85,6 @@ PlayerProfileSetup:
 .ok
 	ld c, 0
 	farcall InitMobileProfile
-	ret
-
-InitializePlayerInfo:
-	ld hl, .PlayerName
-	ld de, wPlayerName
-	ld bc, NAME_LENGTH
-	call CopyBytes
-	ret
-
-.PlayerName: db "KIT@"
-
-InitializeEvents:
-	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
-	ld [wSpecialPhoneCallID], a
-
 	ret
 
 if DEF(_DEBUG)
@@ -329,7 +304,8 @@ InitializeNPCNames:
 .Mom:    db "MOM@"
 
 InitializeWorld:
-	call ShrinkPlayer
+	; call ShrinkPlayer
+	call FadeInToPlayerInFrontOfTv
 	farcall SpawnPlayer
 	farcall _InitializeStartDay
 	ret
@@ -1366,4 +1342,219 @@ GameInit::
 	ld a, $90
 	ldh [hWY], a
 	call WaitBGMap
-	jp IntroSequence
+	; jp IntroSequence
+	jp Intro_MainMenu
+
+InitializePlayerNewName:
+	ld b, NAME_PLAYER
+	ld de, wPlayerName
+	farcall NamingScreen
+	call ClearTilemap
+	ret
+
+InitializePlayerDefaultName:
+	ld hl, .DefaultName
+	ld de, wPlayerName
+	ld bc, NAME_LENGTH
+	call CopyBytes
+	ret
+
+.DefaultName: db "KIT@"
+
+InitializeEvents:
+	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
+	ld [wSpecialPhoneCallID], a
+
+	ret
+
+IntroProfSpeech:
+	; farcall InitClock
+	; call RotateFourPalettesLeft
+	; call ClearTilemap
+
+	ld de, MUSIC_ECRUTEAK_CITY
+	call PlayMusic
+
+	call RotateFourPalettesRight
+	call RotateThreePalettesRight
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, POKEMON_PROF
+	ld [wTrainerClass], a
+	call Intro_PrepTrainerPic
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, .Text_SpeechPart1
+	call PrintText
+	call RotateThreePalettesRight
+	call ClearTilemap
+
+	ld a, GROWLITHE
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+	call GetBaseData
+
+	hlcoord 6, 4
+	call PrepMonFrontpic
+
+	xor a
+	ld [wTempMonDVs], a
+	ld [wTempMonDVs + 1], a
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_WipeInFrontpic
+
+	ld a, GROWLITHE
+	call PlayMonCry
+	call WaitSFX
+
+	ld hl, .Text_SpeechPart2
+	call PrintText
+
+	call RotateThreePalettesRight
+	call ClearTilemap
+
+	xor a
+	ld [wCurPartySpecies], a
+	ld a, POKEMON_PROF
+	ld [wTrainerClass], a
+	call Intro_PrepTrainerPic
+
+	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
+	call GetSGBLayout
+	call Intro_RotatePalettesLeftFrontpic
+
+	ld hl, .Text_SpeechPart3
+	call PrintText
+
+	call .FadeToBlackAndContinueDialogue	
+	ret
+
+; adapted from InitClock
+.FadeToBlackAndContinueDialogue:
+	ldh a, [hInMenu]
+	push af
+	ld a, $1
+	ldh [hInMenu], a
+
+	ld a, FALSE
+	ld [wSpriteUpdatesEnabled], a
+	ld a, $10
+	ld [wMusicFade], a
+	ld a, LOW(MUSIC_NONE)
+	ld [wMusicFadeID], a
+	ld a, HIGH(MUSIC_NONE)
+	ld [wMusicFadeID + 1], a
+	ld c, 8
+	call DelayFrames
+	call RotateFourPalettesLeft
+	call ClearTilemap
+	call ClearSprites
+	ld b, SCGB_DIPLOMA
+	call GetSGBLayout
+	xor a
+	ldh [hBGMapMode], a
+	call LoadStandardFont
+	ld de, TimeSetBackgroundGFX
+	ld hl, vTiles2 tile $00
+	lb bc, BANK(TimeSetBackgroundGFX), 1
+	call Request1bpp
+	ld de, TimeSetUpArrowGFX
+	ld hl, vTiles2 tile $01
+	lb bc, BANK(TimeSetUpArrowGFX), 1
+	call Request1bpp
+	ld de, TimeSetDownArrowGFX
+	ld hl, vTiles2 tile $02
+	lb bc, BANK(TimeSetDownArrowGFX), 1
+	call Request1bpp
+	call .ClearScreen
+	call WaitBGMap
+	call RotateFourPalettesRight
+	ld hl, .Text_SpeechPart4
+	call PrintText
+	pop af
+	ldh [hInMenu], a
+	ret
+
+.ClearScreen:
+	xor a
+	ldh [hBGMapMode], a
+	hlcoord 0, 0
+	ld bc, SCREEN_AREA
+	xor a
+	call ByteFill
+	ld a, $1
+	ldh [hBGMapMode], a
+	ret
+
+.Text_SpeechPart1:
+	text "Good evening! I'm"
+	line "Prof. Oak."
+
+	para "Thank you all for"
+	line "joining me tonight"
+	cont "as we continue our"
+	cont "guided tour ..."
+
+	prompt
+
+.Text_SpeechPart2:
+	text "As we discussed"
+	line "last time, #MON"
+	cont "and humans have"
+	cont "coexisted ..."
+
+	prompt
+
+.Text_SpeechPart3:
+	text "But, we cannot"
+	line "rest on our"
+	cont "laurels ..."
+	
+	prompt
+
+.Text_SpeechPart4:
+	text "In this episode we"
+	line "will explore<……>"
+	
+	prompt
+
+; adapted from ShrinkPlayer
+FadeInToPlayerInFrontOfTv:
+	ldh a, [hROMBank]
+	push af
+
+	ld a, 32 ; fade time
+	ld [wMusicFade], a
+	ld de, MUSIC_NONE
+	ld a, e
+	ld [wMusicFadeID], a
+	ld a, d
+	ld [wMusicFadeID + 1], a
+
+	pop af
+	rst Bankswitch
+
+	ld c, 8
+	call DelayFrames
+
+	call LoadFontsExtra
+
+	ld c, 50
+	call DelayFrames
+
+	call RotateThreePalettesRight
+	call ClearTilemap
+	ret

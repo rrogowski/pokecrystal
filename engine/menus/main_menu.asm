@@ -24,6 +24,15 @@ MobileMenuGFX:
 INCBIN "gfx/mobile/mobile_menu.2bpp"
 
 MainMenu:
+	ld a, [wSaveFileExists]
+	and a
+	jp z, SkipMainMenuAndStartNewGame
+
+	ld de, MUSIC_MAIN_MENU
+	ld a, e
+	ld [wMapMusic], a
+	call PlayMusic
+
 .loop
 	xor a
 	ld [wDisableTextAcceleration], a
@@ -382,3 +391,9 @@ MainMenu_Continue:
 MainMenu_MysteryGift:
 	farcall MysteryGift
 	ret
+
+SkipMainMenuAndStartNewGame:
+	ld b, SCGB_DIPLOMA
+	call GetSGBLayout
+	call SetDefaultBGPAndOBP
+	jp MainMenu_NewGame
