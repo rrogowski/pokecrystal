@@ -1472,7 +1472,8 @@
 	const EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
 
 	const EVENT_UNOWN_FIRST_ENCOUNTERED
-; Unused: next 41 events
+	const EVENT_RECEIVED_SKETCHPAD
+; Unused: next 40 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

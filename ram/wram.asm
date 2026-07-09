@@ -3130,8 +3130,9 @@ wMobileBattleRoomSceneID::                        db
 wRockSaltTownSceneID::                            db
 wRockSaltPlayersHouseSceneID::                    db
 wRockSaltCave1FSceneID::                          db
+wRoute101SceneID::                                db
 
-	ds 46
+	ds 45
 
 ; fight counts
 wJackFightCount::    db

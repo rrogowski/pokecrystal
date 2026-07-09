@@ -2382,7 +2382,7 @@ Script_unlockquest:
 	end
 
 .Text_UnlockedQuest:
-	text "<PLAYER> unlocked"
+	text "Started New Quest:"
 	line "@"
 	text_ram wStringBuffer3
 	text "!"
