@@ -26,7 +26,10 @@ Route101_JadeGivesSketchpadScene:
 	waitbutton
 	closetext
 
-	pause 10
+	opentext
+	writetext .Text_PlayerScribbles
+	waitbutton
+	closetext
 
 	opentext
 	writetext .Text_LetMeSee
@@ -79,6 +82,11 @@ Route101_JadeGivesSketchpadScene:
 
 .Text_TakeThisSketchpad:
 	text "Draw it!"
+	done
+
+.Text_PlayerScribbles:
+	text "<PLAYER> scribbles"
+	line "..."
 	done
 
 .Text_LetMeSee:
