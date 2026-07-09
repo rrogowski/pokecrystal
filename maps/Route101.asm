@@ -26,16 +26,17 @@ Route101_JadeGivesSketchpadScene:
 	waitbutton
 	closetext
 
-	opentext
-	writetext .Text_PlayerScribbles
-	waitbutton
-	closetext
+	turnobject PLAYER, UP
+	pause 40
+	showemote EMOTE_QUESTION, ROUTE_101_JADE, 30
 
 	opentext
 	writetext .Text_LetMeSee
 	waitbutton
 	closetext
 
+	turnobject PLAYER, DOWN
+	pause 10
 	sketchunown UNOWN_L
 	; opensketchpad
 
@@ -82,11 +83,6 @@ Route101_JadeGivesSketchpadScene:
 
 .Text_TakeThisSketchpad:
 	text "Draw it!"
-	done
-
-.Text_PlayerScribbles:
-	text "<PLAYER> scribbles"
-	line "..."
 	done
 
 .Text_LetMeSee:
