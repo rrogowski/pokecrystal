@@ -1,12 +1,165 @@
 	object_const_def
-    const ROCK_SALT_LAB_PROF_HALITE
+    const ROCK_SALT_LAB_PROF
+    const ROCK_SALT_LAB_AIDE
+    const ROCK_SALT_LAB_JADE
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
-
+    scene_script RockSaltLabNoopScene, SCENE_ROCK_SALT_LAB_NOOP
+    scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
+	
 	def_callbacks
 
-RockSaltProfHaliteScript:
+RockSaltLabNoopScene:
+    end
+
+RockSaltLab_ReceiveDexScene:
+    sdefer RockSaltLab_ReceiveDexScript
+    end
+
+RockSaltLab_ReceiveDexScript:
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    turnobject ROCK_SALT_LAB_JADE, LEFT
+    turnobject PLAYER, LEFT
+
+    opentext
+    writetext .Text_HelpWithProject
+    promptbutton
+
+    turnobject ROCK_SALT_LAB_JADE, DOWN
+    turnobject PLAYER, UP
+
+    writetext .Text_WhatDoYouThink
+    promptbutton
+
+    turnobject ROCK_SALT_LAB_JADE, LEFT
+    turnobject PLAYER, LEFT
+
+    writetext .Text_WeWillDoIt
+    promptbutton
+
+    writetext .Text_ReceiveDex
+    playsound SFX_ITEM
+    waitsfx
+    promptbutton
+    setflag ENGINE_POKEDEX
+
+    turnobject ROCK_SALT_LAB_JADE, DOWN
+    turnobject PLAYER, UP
+
+    writetext .Text_LetsGetStarted
+    waitbutton
+    closetext
+
+    applymovement PLAYER, .Movement_PlayerMovesOutOfWay
+    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeStepsDown
+    follow ROCK_SALT_LAB_JADE, PLAYER
+    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToExit
+    stopfollow
+
+    opentext
+    writetext .Text_AideCallsOut
+    waitbutton
+    closetext
+
+    playsound SFX_ENTER_DOOR
+	waitsfx
+	disappear ROCK_SALT_LAB_JADE
+    pause 10
+
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToYou
+    turnobject PLAYER, LEFT
+
+    opentext
+    writetext .Text_ResearchCensus
+    promptbutton
+    getitemname STRING_BUFFER_4, POKE_BALL
+	scall .Script_ReceiveBalls
+	giveitem POKE_BALL, 5
+    writetext .Text_SomethingToHelp
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksBack
+    ; prevent aide from immediately spinning after walking back
+    pause 15
+
+    setscene SCENE_ROCK_SALT_LAB_NOOP
+    end
+
+.Script_ReceiveBalls:
+    jumpstd ReceiveItemScript
+
+.Text_HelpWithProject:
+    text "Help with project"
+    done
+
+.Text_WhatDoYouThink:
+    text "What say you?"
+    done
+
+.Text_WeWillDoIt:
+    text "We'll do it!"
+    done
+
+.Text_ReceiveDex:
+    text "<PLAYER> received"
+    line "#DEX!"
+    done
+
+.Text_LetsGetStarted:
+    text "Let's get started!"
+    done
+
+.Text_AideCallsOut:
+    text "<PLAYER>, wait!"
+    done
+
+.Text_ResearchCensus:
+    text "Research census..."
+
+    para "Here!"
+    done
+
+.Text_SomethingToHelp:
+    text "Something to help"
+    line "get you started."
+    cont "See ya 'round!"
+    done
+
+.Movement_PlayerMovesOutOfWay:
+    step RIGHT
+    turn_head LEFT
+    step_end
+
+.Movement_JadeStepsDown:
+    step DOWN
+    step_end
+
+.Movement_JadeWalksToExit:
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step_end
+
+.Movement_AideWalksToYou:
+    step DOWN
+    step RIGHT
+    step_end
+
+.Movement_AideWalksBack:
+    step LEFT
+    step UP
+    turn_head DOWN
+    step_end
+
+RockSaltLabJadeScript:
+    end
+
+RockSaltLabProfScript:
     faceplayer
 
     checkevent EVENT_CHOSE_STARTER_MEOWTH
@@ -18,7 +171,7 @@ RockSaltProfHaliteScript:
     checkevent EVENT_CHOSE_STARTER_EEVEE
     iftrue .SoYouChoseEevee
 
-    checkevent EVENT_TALKED_TO_PROF_HALITE
+    checkevent EVENT_TALKED_TO_PROF
     iftrue .YouCanPickOne
 
     opentext
@@ -26,14 +179,14 @@ RockSaltProfHaliteScript:
     waitbutton
     closetext
 
-    turnobject ROCK_SALT_LAB_PROF_HALITE, DOWN
+    turnobject ROCK_SALT_LAB_PROF, DOWN
 
     opentext
     writetext Text_ImJustAnOldMan
     waitbutton
     closetext
 
-    showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF_HALITE, 15
+    showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 15
 
     faceplayer
     opentext
@@ -46,9 +199,9 @@ RockSaltProfHaliteScript:
     writetext Text_YouCanPickOne
     waitbutton
     closetext
-    turnobject ROCK_SALT_LAB_PROF_HALITE, DOWN
+    turnobject ROCK_SALT_LAB_PROF, DOWN
     
-    setevent EVENT_TALKED_TO_PROF_HALITE
+    setevent EVENT_TALKED_TO_PROF
 
     end
 
@@ -154,6 +307,18 @@ Text_IfIHadAPokemon:
     cont "with this machine!"
 	done
 
+RockSaltLabAideScript:
+    faceplayer
+    opentext
+    writetext .Text_Aide
+    waitbutton
+    closetext
+    end
+
+.Text_Aide:
+    text "I am an aide."
+    done
+
 RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
@@ -169,4 +334,6 @@ RockSaltLab_MapEvents:
     bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
 
 	def_object_events
-    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltProfHaliteScript, -1
+    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, -1
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, -1
+    object_event 4, 4, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_RECEIVED_DEX

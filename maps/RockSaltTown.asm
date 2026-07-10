@@ -127,7 +127,7 @@ RockSaltTownMeowthScript:
 	closepokepic
 	closetext
 
-	checkevent EVENT_TALKED_TO_PROF_HALITE
+	checkevent EVENT_TALKED_TO_PROF
 	iffalse CantChooseStarter
 
 	checkevent EVENT_CHOSE_STARTER
@@ -172,7 +172,7 @@ RockSaltTownSentretScript:
 	closepokepic
 	closetext
 
-	checkevent EVENT_TALKED_TO_PROF_HALITE
+	checkevent EVENT_TALKED_TO_PROF
 	iffalse CantChooseStarter
 
 	checkevent EVENT_CHOSE_STARTER
@@ -217,7 +217,7 @@ RockSaltTownEeveeScript:
 	closepokepic
 	closetext
 
-	checkevent EVENT_TALKED_TO_PROF_HALITE
+	checkevent EVENT_TALKED_TO_PROF
 	iffalse CantChooseStarter
 
 	checkevent EVENT_CHOSE_STARTER

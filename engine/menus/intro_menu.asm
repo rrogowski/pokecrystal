@@ -63,6 +63,7 @@ NewGame:
 	call InitializePlayerNewName
 	; call InitializePlayerDefaultName
 	call InitializeEvents
+	call ScheduleFirstPhoneCallWithJade
 	; call OakSpeech
 	call IntroProfSpeech
 	call InitializeWorld
@@ -1370,9 +1371,19 @@ InitializeEvents:
 	ld b, SET_FLAG
 	call EventFlagAction
 
+	ld de, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_RECEIVED_DEX
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ret
+
+ScheduleFirstPhoneCallWithJade:
 	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
 	ld [wSpecialPhoneCallID], a
-
 	ret
 
 IntroProfSpeech:

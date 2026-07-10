@@ -84,8 +84,9 @@ MapScenes::
 	scene_var MOUNT_MOON_SQUARE,                           wMountMoonSquareSceneID
 	scene_var MOBILE_TRADE_ROOM,                           wMobileTradeRoomSceneID
 	scene_var MOBILE_BATTLE_ROOM,                          wMobileBattleRoomSceneID
-	scene_var ROCK_SALT_TOWN,                              wRockSaltTownSceneID
 	scene_var ROCK_SALT_PLAYERS_HOUSE,                     wRockSaltPlayersHouseSceneID
+	scene_var ROCK_SALT_TOWN,                              wRockSaltTownSceneID
+	scene_var ROCK_SALT_LAB,                               wRockSaltLabSceneID
 	scene_var ROCK_SALT_CAVE_1F,                           wRockSaltCave1FSceneID
 	scene_var ROUTE_101,                                   wRoute101SceneID
 	db -1 ; end

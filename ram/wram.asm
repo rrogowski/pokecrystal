@@ -3127,12 +3127,14 @@ wFastShipB1FSceneID::                             db
 wMountMoonSquareSceneID::                         db
 wMobileTradeRoomSceneID::                         db
 wMobileBattleRoomSceneID::                        db
-wRockSaltTownSceneID::                            db
+
 wRockSaltPlayersHouseSceneID::                    db
+wRockSaltTownSceneID::                            db
+wRockSaltLabSceneID::                             db
 wRockSaltCave1FSceneID::                          db
 wRoute101SceneID::                                db
 
-	ds 45
+	ds 44
 
 ; fight counts
 wJackFightCount::    db
