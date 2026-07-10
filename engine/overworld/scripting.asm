@@ -239,6 +239,7 @@ ScriptCommandTable:
 	dw Script_advancequest
 	dw Script_turninquest
 	dw Script_sketchunown
+	dw Script_opensketchpad
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2412,4 +2413,12 @@ Script_sketchunown:
 	call GetScriptByte
 	ld [wUnownLetter], a
 	farcall _SketchUnown
+	ret
+
+Script_opensketchpad:
+	call ReanchorMap
+	call FadeToMenu
+	farcall Sketchpad
+	call CloseSubmenu
+	call CloseText
 	ret

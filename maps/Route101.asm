@@ -38,7 +38,7 @@ Route101_JadeGivesSketchpadScene:
 	turnobject PLAYER, DOWN
 	pause 10
 	sketchunown UNOWN_L
-	; opensketchpad
+	opensketchpad
 
 	opentext
 	writetext .Text_IveNeverSeenThis

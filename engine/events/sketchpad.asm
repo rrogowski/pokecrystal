@@ -1,4 +1,4 @@
-Sketchpad:
+Sketchpad::
 	call ClearBGPalettes
 	call ClearTilemap
 

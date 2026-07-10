@@ -476,10 +476,7 @@ UseItem:
 	ret
 
 .Graphic:
-	; call FadeToMenu
 	call DoItemEffect
-	; xor a
-	; ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	call Pack_InitColors
