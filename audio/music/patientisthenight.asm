@@ -25,12 +25,11 @@ Music_PatientIsTheNight_Ch1:
 	octave 3
 	note A_, 6
 	rest 1
+	note A#, 1
 	octave 4
 	note A#, 1
-	octave 5
-	note A#, 2
-	rest 1
 	octave 3
+	rest 2
 	note A#, 2
 	note A_, 4
 	note F_, 2
@@ -78,10 +77,10 @@ Music_PatientIsTheNight_Ch1:
 	octave 3
 	note A_, 4
 	rest 2
-	octave 4
 	note A#, 1
-	octave 5
-	note G_, 2
+	octave 4
+	note G_, 1
+	rest 1
 	octave 3
 	note A#, 1
 	note A_, 2
@@ -118,8 +117,8 @@ Music_PatientIsTheNight_Ch1:
 	note C_, 1
 	note C_, 1
 	rest 1
-	note C_, 7
-	rest 6
+	note C_, 12
+	rest 1
 	octave 8
 	sound_loop 0, .mainLoop
 
@@ -184,7 +183,8 @@ Music_PatientIsTheNight_Ch2:
 	octave 3
 	note D_, 3
 	octave 2
-	note B_, 9
+	note B_, 8
+	note G_, 1
 	octave 1
 	note G_, 3
 	octave 2
