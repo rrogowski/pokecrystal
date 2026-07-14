@@ -165,3 +165,8 @@ SECTION "Cries", ROMX
 INCLUDE "data/pokemon/cries.asm"
 
 INCLUDE "audio/cries.asm"
+
+
+SECTION "New Songs", ROMX
+
+INCLUDE "audio/music/patientisthenight.asm"
