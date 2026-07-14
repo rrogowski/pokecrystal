@@ -10,7 +10,7 @@ Route101_MapScripts:
 
 Route101_JadeGivesSketchpadScene:
 	; wait for landmark name to disappear
-	wait 20
+	pause 20
 
 	applymovement ROUTE_101_JADE, .Movement_JadeRunsUpToYou
 
@@ -53,6 +53,7 @@ Route101_JadeGivesSketchpadScene:
 	disappear ROUTE_101_JADE
 	unlockquest QUEST_INTO_THE_UNOWN
 	setquestgoal QUEST_INTO_THE_UNOWN, 26
+	advancequest QUEST_INTO_THE_UNOWN
 
 	setscene SCENE_ROUTE_101_NOOP
 
