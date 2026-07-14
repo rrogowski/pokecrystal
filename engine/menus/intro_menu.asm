@@ -1387,10 +1387,6 @@ ScheduleFirstPhoneCallWithJade:
 	ret
 
 IntroProfSpeech:
-	; farcall InitClock
-	; call RotateFourPalettesLeft
-	; call ClearTilemap
-
 	ld de, MUSIC_ECRUTEAK_CITY
 	call PlayMusic
 
@@ -1511,28 +1507,49 @@ IntroProfSpeech:
 	ret
 
 .Text_SpeechPart1:
-	text "Good evening! I'm"
-	line "Prof. Oak."
+	text "Welcome back to"
+	line "A Brief History of"
+	cont "#MON! I'm Prof."
+	cont "Oak, from Kanto."
 
-	para "Thank you all for"
-	line "joining me tonight"
-	cont "as we continue our"
-	cont "guided tour ..."
+	para "Today we'll"
+	line "continue our look"
+	cont "at the bond"
+	cont "between people and"
+	cont "#MON."
 
 	prompt
 
 .Text_SpeechPart2:
-	text "As we discussed"
-	line "last time, #MON"
-	cont "and humans have"
-	cont "coexisted ..."
+	text "Last time, we"
+	line "learned that"
+	cont "people and #MON"
+	cont "have lived"
+	cont "together for ages."
+
+	para "But this wasn't"
+	line "always the case!"
+
+	para "Long ago, people"
+	line "and #MON feared"
+	cont "one another."
+
+	para "Look how far"
+	line "we've come!"
 
 	prompt
 
 .Text_SpeechPart3:
-	text "But, we cannot"
-	line "rest on our"
-	cont "laurels ..."
+	text "Today, people and"
+	line "#MON are"
+	cont "inseparable."
+	cont "We've learned so"
+	cont "much together."
+
+	para "Come join me as we"
+	line "explore the"
+	cont "wonderful world of"
+	cont "#MON!"
 	
 	prompt
 
