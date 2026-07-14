@@ -31,5 +31,9 @@ QuestDescriptions:
   prompt
 
 .CoverToCoverDescription:
-  text "..."
+  text "Read all books in"
+  line "Bookworm's house."
+  cont "Turn in to"
+  cont "Bookworm in Rock"
+  cont "Salt Town."
   prompt

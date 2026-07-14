@@ -3662,6 +3662,17 @@ wCurQuest:: db
 wQuestsMenuPage:: db ; zero-indexed
 wQuestsMenuCursor:: db
 
+; see constants/ram_constants.asm
+wBookwormBooksRead::
+; bit 0: read book 1?
+; bit 1: read book 2?
+; bit 2: read book 3?
+; bit 3: read book 4?
+; bit 4: read book 5?
+; bit 5: read book 6?
+; bit 6: read book 7?
+; bit 7: read book 8?
+
 SECTION "Scratch RAM", WRAMX
 
 UNION

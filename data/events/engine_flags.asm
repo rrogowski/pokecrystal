@@ -201,4 +201,13 @@ EngineFlags:
 
 	engine_flag wStatusFlags3, STATUSFLAGS3_RECEIVED_QUESTS_LOG_F
 
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_1_F, 0
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_2_F, 1
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_3_F, 2
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_4_F, 3
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_5_F, 4
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_6_F, 5
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_7_F, 6
+	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_8_F, 7
+
 	assert_table_length NUM_ENGINE_FLAGS
