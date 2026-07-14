@@ -686,10 +686,12 @@ INCLUDE "engine/events/odd_egg.asm"
 
 SECTION "Quests", ROMX
 
+INCLUDE "data/quests/descriptions.asm"
 INCLUDE "data/quests/names.asm"
 INCLUDE "engine/menus/quests_menu.asm"
 INCLUDE "engine/quests/advance_quest.asm"
 INCLUDE "engine/quests/can_turn_in_quest.asm"
+INCLUDE "engine/quests/get_quest_description.asm"
 INCLUDE "engine/quests/get_quest_goal.asm"
 INCLUDE "engine/quests/get_quest_name.asm"
 INCLUDE "engine/quests/get_quest_progress.asm"

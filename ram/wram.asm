@@ -3660,6 +3660,7 @@ wQuestsEnd::
 wCurQuest:: db
 
 wQuestsMenuPage:: db ; zero-indexed
+wQuestsMenuCursor:: db
 
 SECTION "Scratch RAM", WRAMX
 

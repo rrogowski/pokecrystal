@@ -1,7 +1,7 @@
 QuestsMenu:
 	call ClearBGPalettes
 	farcall LoadStatsScreenPageTilesGFX
-	
+
 .JoypadLoop
 
 	hlcoord 0, 0
@@ -51,6 +51,7 @@ endr
 	jr c, .PrintQuestLoop
 
 .render
+	call .PrintCursor
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
@@ -59,8 +60,12 @@ endr
 .wait_for_joypad
 	call GetJoypad
 	ldh a, [hJoyPressed]
-	and PAD_A | PAD_B
+	and PAD_B
 	jr nz, .exit
+
+	ldh a, [hJoyPressed]
+	and PAD_A
+	jr nz, .print_quest_description
 
 	ldh a, [hJoyPressed]
 	and PAD_LEFT
@@ -69,6 +74,14 @@ endr
 	ldh a, [hJoyPressed]
 	and PAD_RIGHT
 	jr nz, .next_page
+
+	ldh a, [hJoyPressed]
+	and PAD_UP
+	jr nz, .prev_cursor
+
+	ldh a, [hJoyPressed]
+	and PAD_DOWN
+	jr nz, .next_cursor
 
 	jr .wait_for_joypad
 
@@ -88,8 +101,53 @@ endr
 
 	jp .JoypadLoop
 
+.prev_cursor
+	call .DecrementCursor
+	jp .JoypadLoop
+
+.next_cursor
+	call .IncrementCursor
+	jp .JoypadLoop
+
+.print_quest_description	
+	ld a, [wQuestsMenuPage]
+	ld c, a
+	ld a, [wQuestsMenuCursor]
+
+rept NUM_QUESTS_PER_PAGE
+	add c
+endr
+
+	; cursor may not point to a valid quest
+	cp NUM_QUESTS
+	jp nc, .JoypadLoop
+
+	; quest may not be unlocked yet
+	ld c, a
+	push bc
+	call IsQuestUnlocked
+	pop bc
+	and a
+	jr z, .print_locked_quest_description
+
+	call GetQuestDescription
+	call PrintText
+
+	jp .JoypadLoop
+
+.print_locked_quest_description
+	ld hl, .Text_LockedQuestDescription
+	call PrintText
+
+	jp .JoypadLoop
+
 .exit
 	ret
+
+.Text_LockedQuestDescription:
+	text "Quest has not been"
+	line "unlocked yet!"
+	prompt
 
 ; INPUTS
 ;   [wCurQuest] = QUEST_* (see constants/quest_constants.asm)
@@ -172,6 +230,58 @@ endr
 	pop de
 	call .PrintNumber
 
+	ret
+
+; INPUTS
+;   [wQuestsMenuCursor] = cursor position
+; ASSUMPTIONS
+;   0 <= wQuestsMenuCursor < NUM_QUESTS_PER_PAGE
+.PrintCursor:
+	ld a, [wQuestsMenuCursor]
+	ld d, 0
+	ld e, a
+	ld hl, .CursorCoords
+rept 2
+	add hl, de
+endr
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, '▶'
+	ld [hl], a
+
+	ret
+
+; INPUTS
+;   [wQuestsMenuCursor] = cursor position
+; OUTPUTS
+;   [wQuestsMenuCursor] = ([wQuestsMenuCursor] + 1) % NUM_QUESTS_PER_PAGE
+.IncrementCursor:
+	ld a, [wQuestsMenuCursor]
+	inc a
+	cp NUM_QUESTS_PER_PAGE
+	jr nz, .set_incremented_value
+.wrap_to_zero
+	ld a, 0
+.set_incremented_value
+	ld [wQuestsMenuCursor], a
+	ret
+
+; INPUTS
+;   [wQuestsMenuCursor] = cursor position
+; OUTPUTS
+;   [wQuestsMenuCursor] = ([wQuestsMenuCursor] - 1) % NUM_QUESTS_PER_PAGE
+.DecrementCursor:
+	ld a, [wQuestsMenuCursor]
+	dec a
+	cp $ff
+	jr nz, .set_decremented_value
+.wrap_to_last_position
+	ld a, NUM_QUESTS_PER_PAGE - 1
+.set_decremented_value
+	ld [wQuestsMenuCursor], a
 	ret
 
 ; INPUTS
@@ -279,6 +389,13 @@ endr
 	dwcoord 7, 9
 	dwcoord 7, 12
 	dwcoord 7, 15
+
+.CursorCoords:
+	dwcoord 0, 2
+	dwcoord 0, 5
+	dwcoord 0, 8
+	dwcoord 0, 11
+	dwcoord 0, 14
 
 .Text_LockedQuest:
 	db "???<LF>"
