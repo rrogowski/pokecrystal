@@ -35,7 +35,7 @@ Landmarks:
 	landmark  52,  44, Route38Name
 	landmark  36,  48, Route39Name
 	landmark  36,  60, OlivineCityName
-	landmark  38,  62, LighthouseName
+	; landmark  38,  62, LighthouseName
 	landmark  28,  56, BattleTowerName
 	landmark  28,  64, Route40Name
 	landmark  28,  92, WhirlIslandsName
@@ -135,7 +135,7 @@ RadioTowerName:      db "RADIO TOWER@"
 PowerPlantName:      db "POWER PLANT@"
 NationalParkName:    db "NATIONAL<BSP>PARK@"
 TinTowerName:        db "TIN TOWER@"
-LighthouseName:      db "LIGHTHOUSE@"
+; LighthouseName:      db "LIGHTHOUSE@"
 WhirlIslandsName:    db "WHIRL<BSP>ISLANDS@"
 MtMortarName:        db "MT.MORTAR@"
 DragonsDenName:      db "DRAGON'S<BSP>DEN@"

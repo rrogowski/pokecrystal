@@ -642,23 +642,23 @@ BlackthornGym1F_Blocks:
 BlackthornGym2F_Blocks:
 	INCBIN "maps/BlackthornGym2F.blk"
 
-OlivineLighthouse1F_Blocks:
-	INCBIN "maps/OlivineLighthouse1F.blk"
+; OlivineLighthouse1F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse1F.blk"
 
-OlivineLighthouse2F_Blocks:
-	INCBIN "maps/OlivineLighthouse2F.blk"
+; OlivineLighthouse2F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse2F.blk"
 
-OlivineLighthouse3F_Blocks:
-	INCBIN "maps/OlivineLighthouse3F.blk"
+; OlivineLighthouse3F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse3F.blk"
 
-OlivineLighthouse4F_Blocks:
-	INCBIN "maps/OlivineLighthouse4F.blk"
+; OlivineLighthouse4F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse4F.blk"
 
-OlivineLighthouse5F_Blocks:
-	INCBIN "maps/OlivineLighthouse5F.blk"
+; OlivineLighthouse5F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse5F.blk"
 
-OlivineLighthouse6F_Blocks:
-	INCBIN "maps/OlivineLighthouse6F.blk"
+; OlivineLighthouse6F_Blocks:
+; 	INCBIN "maps/OlivineLighthouse6F.blk"
 
 
 SECTION "Map Blocks 3", ROMX

@@ -2,6 +2,8 @@
 ;   c = QUEST_* (see constants/quests_constants.asm)
 ; OUTPUTS
 ;   a = 1 if quest is turned in, 0 otherwise
+; FARCALL
+;   [wScriptVar] = 1 if quest is turned in, 0 otherwise
 IsQuestTurnedIn::
   ld b, 0
   ld hl, wQuests
@@ -15,4 +17,5 @@ endr
   add hl, de
 
   ld a, [hl]
+  ld [wScriptVar], a
   ret

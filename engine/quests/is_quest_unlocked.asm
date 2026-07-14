@@ -2,7 +2,9 @@
 ;   c = QUEST_* (see constants/quests_constants.asm)
 ; OUTPUTS
 ;   a = 1 if quest is unlocked, 0 otherwise
-IsQuestUnlocked:
+; FARCALL
+;   [wScriptVar] = 1 if quest is unlocked, 0 otherwise
+IsQuestUnlocked::
   ld b, 0
   ld hl, wQuests
 
@@ -15,4 +17,5 @@ endr
   add hl, de
 
   ld a, [hl]
+  ld [wScriptVar], a
   ret

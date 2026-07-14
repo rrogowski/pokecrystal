@@ -1071,6 +1071,12 @@ MACRO unlockquest
 	db \1 ; QUEST_* (see constants/quest_constants.asm)
 ENDM
 
+	const isquestunlocked_command
+MACRO isquestunlocked
+	db isquestunlocked_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
 	const setquestgoal_command
 MACRO setquestgoal
 	db setquestgoal_command
@@ -1084,9 +1090,21 @@ MACRO advancequest
 	db \1 ; QUEST_* (see constants/quest_constants.asm)
 ENDM
 
+	const canturninquest_command
+MACRO canturninquest
+	db canturninquest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
 	const turninquest_command
 MACRO turninquest
 	db turninquest_command
+	db \1 ; QUEST_* (see constants/quest_constants.asm)
+ENDM
+
+	const isquestturnedin_command
+MACRO isquestturnedin
+	db isquestturnedin_command
 	db \1 ; QUEST_* (see constants/quest_constants.asm)
 ENDM
 

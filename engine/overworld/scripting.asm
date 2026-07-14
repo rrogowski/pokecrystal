@@ -235,9 +235,12 @@ ScriptCommandTable:
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
 	dw Script_unlockquest
+	dw Script_isquestunlocked
 	dw Script_setquestgoal
 	dw Script_advancequest
+	dw Script_canturninquest
 	dw Script_turninquest
+	dw Script_isquestturnedin
 	dw Script_sketchunown
 	dw Script_opensketchpad
 	assert_table_length NUM_EVENT_COMMANDS
@@ -2389,6 +2392,12 @@ Script_unlockquest:
 	text "!"
 	done
 
+Script_isquestunlocked:
+	call GetScriptByte
+	ld c, a
+	farcall IsQuestUnlocked
+	ret
+
 Script_setquestgoal:
 	call GetScriptByte
 	ld c, a
@@ -2403,10 +2412,22 @@ Script_advancequest:
 	farcall AdvanceQuest
 	ret
 
+Script_canturninquest:
+	call GetScriptByte
+	ld c, a
+	farcall CanTurnInQuest
+	ret
+
 Script_turninquest:
 	call GetScriptByte
 	ld c, a
 	farcall TurnInQuest
+	ret
+
+Script_isquestturnedin:
+	call GetScriptByte
+	ld c, a
+	farcall IsQuestTurnedIn
 	ret
 
 Script_sketchunown:

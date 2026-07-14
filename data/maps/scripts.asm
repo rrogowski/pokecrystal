@@ -41,10 +41,10 @@ INCLUDE "maps/UnionCaveB1F.asm"
 INCLUDE "maps/UnionCaveB2F.asm"
 INCLUDE "maps/SlowpokeWellB1F.asm"
 INCLUDE "maps/SlowpokeWellB2F.asm"
-INCLUDE "maps/OlivineLighthouse1F.asm"
-INCLUDE "maps/OlivineLighthouse2F.asm"
-INCLUDE "maps/OlivineLighthouse3F.asm"
-INCLUDE "maps/OlivineLighthouse4F.asm"
+; INCLUDE "maps/OlivineLighthouse1F.asm"
+; INCLUDE "maps/OlivineLighthouse2F.asm"
+; INCLUDE "maps/OlivineLighthouse3F.asm"
+; INCLUDE "maps/OlivineLighthouse4F.asm"
 
 
 SECTION "Map Scripts 3", ROMX
@@ -60,8 +60,8 @@ INCLUDE "maps/RadioTower4F.asm"
 SECTION "Map Scripts 4", ROMX
 
 INCLUDE "maps/RadioTower5F.asm"
-INCLUDE "maps/OlivineLighthouse5F.asm"
-INCLUDE "maps/OlivineLighthouse6F.asm"
+; INCLUDE "maps/OlivineLighthouse5F.asm"
+; INCLUDE "maps/OlivineLighthouse6F.asm"
 INCLUDE "maps/GoldenrodPokecenter1F.asm"
 INCLUDE "maps/PokecomCenterAdminOfficeMobile.asm"
 INCLUDE "maps/IlexForestAzaleaGate.asm"
