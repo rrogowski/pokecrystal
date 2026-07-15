@@ -10,8 +10,8 @@ RockSaltBookwormsHouse_MapScripts:
 RockSaltBookwormScript:
   faceplayer
 
-  checkitem QUEST_LOG
-  iffalse .Script_NoQuestsLog
+  isquestturnedin QUEST_TROUBLE_WITH_TAUROS
+  iffalse .Script_DontOfferQuest
 
   isquestunlocked QUEST_COVER_TO_COVER
   iffalse .Script_OfferQuest
@@ -42,7 +42,7 @@ RockSaltBookwormScript:
   
   prompt
 
-.Script_NoQuestsLog:
+.Script_DontOfferQuest:
   jumptext .Text_AGoodBook
 
 .Text_AGoodBook:
