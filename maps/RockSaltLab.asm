@@ -478,7 +478,7 @@ RockSaltLab_MapEvents:
     warp_event 4, 11,ROCK_SALT_TOWN, 3
     warp_event 5, 11, ROCK_SALT_TOWN, 3
     warp_event 4, 0, ROCK_SALT_TOWN, 6
-    warp_event 5, 0, ROCK_SALT_TOWN, 6
+    warp_event 5, 0, ROCK_SALT_TOWN, 7
 
 	def_coord_events
 	coord_event  4,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab

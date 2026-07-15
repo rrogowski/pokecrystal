@@ -485,7 +485,7 @@ RockSaltTown_MapEvents:
 	warp_event 35, 17, ROCK_SALT_BOOKWORMS_HOUSE, 1
 	warp_event 17, 17, ROCK_SALT_OLD_MANS_HOUSE, 1
 	warp_event 28,  9, ROCK_SALT_LAB, 3
-	warp_event 29,  9, ROCK_SALT_LAB, 3
+	warp_event 29,  9, ROCK_SALT_LAB, 4
 	warp_event 12, 11, ROCK_SALT_CAVE_1F, 6
 
 	def_coord_events
