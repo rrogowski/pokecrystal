@@ -1463,7 +1463,6 @@
 	; story events
 	const EVENT_MET_JADE
 	const EVENT_VISITED_JADES_HOUSE
-	const EVENT_MET_PROF
 
 	const EVENT_TALKED_TO_PROF
 	const EVENT_CHOSE_STARTER
@@ -1480,10 +1479,15 @@
 	const EVENT_UNOWN_FIRST_ENCOUNTERED
 	const EVENT_RECEIVED_SKETCHPAD
 
+	; sprite visibility flags
+	const EVENT_PROF_IN_LAB
+	const EVENT_AIDE_IN_LAB
+	const EVENT_JADE_IN_LAB
+
 	; hidden items
 	const EVENT_ROCK_SALT_CAVE_CAVERN_HIDDEN_SUPER_REPEL
 
-; Unused: next 35 events
+; Unused: next 30 events
 
 	const_next 2048
 DEF NUM_EVENTS EQU const_value ; 800

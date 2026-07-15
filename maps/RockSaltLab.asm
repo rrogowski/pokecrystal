@@ -5,9 +5,9 @@
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
-    scene_script SceneSetup_RockSaltLabDefault, SCENE_ROCK_SALT_LAB_DEFAULT
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
-    scene_script SceneSetup_RockSaltLabDefault, SCENE_CANT_LEAVE_LAB
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_CANT_LEAVE_LAB
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
     def_callbacks
@@ -16,26 +16,19 @@ RockSaltLab_MapScripts:
 Callback_MoveObjects:
     checkscene
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
-
-.Callback_Default
-    disappear ROCK_SALT_LAB_JADE
     endcallback
 
 .Callback_MeetProf:
+    appear ROCK_SALT_LAB_PROF
     appear ROCK_SALT_LAB_JADE
 
     moveobject ROCK_SALT_LAB_AIDE, 4, 0
     turnobject ROCK_SALT_LAB_AIDE, DOWN
+    disappear ROCK_SALT_LAB_AIDE
 
     endcallback
 
-SceneSetup_RockSaltLabDefault:
-    checkevent EVENT_VISITED_JADES_HOUSE
-    iffalse .SceneSetup_RemoveProf
-    end
-
-.SceneSetup_RemoveProf
-    disappear ROCK_SALT_LAB_PROF
+SceneSetup_RockSaltLabNoop:
     end
 
 SceneSetup_MeetProf:
@@ -96,7 +89,6 @@ Script_MeetProf:
 	waitsfx
     disappear ROCK_SALT_LAB_JADE
 
-    setevent EVENT_MET_PROF
     setscene SCENE_CANT_LEAVE_LAB
     end
 
@@ -244,7 +236,7 @@ RockSaltLab_ReceiveDexScript:
     ; prevent aide from immediately spinning after walking back
     pause 15
 
-    setscene SCENE_ROCK_SALT_LAB_DEFAULT
+    setscene SCENE_ROCK_SALT_LAB_NOOP
     end
 
 .Script_ReceiveBalls:
@@ -496,6 +488,6 @@ RockSaltLab_MapEvents:
     bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
 
 	def_object_events
-    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, -1
-    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, -1
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_MET_PROF
+    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_LAB
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, EVENT_AIDE_IN_LAB
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_LAB

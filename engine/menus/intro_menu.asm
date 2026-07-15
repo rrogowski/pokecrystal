@@ -1362,6 +1362,14 @@ InitializePlayerDefaultName:
 .DefaultName: db "KIT@"
 
 InitializeEvents:
+	ld de, EVENT_PROF_IN_LAB
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_JADE_IN_LAB
+	ld b, SET_FLAG
+	call EventFlagAction
+
 	ld de, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
 	ld b, SET_FLAG
 	call EventFlagAction
