@@ -6,22 +6,176 @@
 RockSaltLab_MapScripts:
 	def_scene_scripts
     scene_script SceneSetup_RockSaltLabDefault, SCENE_ROCK_SALT_LAB_DEFAULT
+    scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
+    scene_script SceneSetup_RockSaltLabDefault, SCENE_CANT_LEAVE_LAB
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
-	
-	def_callbacks
+
+    def_callbacks
+    callback MAPCALLBACK_OBJECTS, Callback_MoveObjects
+
+Callback_MoveObjects:
+    checkscene
+    ifequal SCENE_MEET_PROF, .Callback_MeetProf
+
+.Callback_Default
+    disappear ROCK_SALT_LAB_JADE
+    endcallback
+
+.Callback_MeetProf:
+    appear ROCK_SALT_LAB_JADE
+
+    moveobject ROCK_SALT_LAB_AIDE, 4, 0
+    turnobject ROCK_SALT_LAB_AIDE, DOWN
+
+    endcallback
 
 SceneSetup_RockSaltLabDefault:
     checkevent EVENT_VISITED_JADES_HOUSE
-    iffalse .Script_HideProf
+    iffalse .SceneSetup_RemoveProf
     end
 
-.Script_HideProf:
+.SceneSetup_RemoveProf
     disappear ROCK_SALT_LAB_PROF
+    end
+
+SceneSetup_MeetProf:
+    sdefer Script_MeetProf
     end
 
 RockSaltLab_ReceiveDexScene:
     sdefer RockSaltLab_ReceiveDexScript
     end
+
+Script_MeetProf:
+    disappear ROCK_SALT_LAB_AIDE
+    turnobject PLAYER, RIGHT
+    turnobject ROCK_SALT_LAB_JADE, LEFT
+    pause 20
+    follow PLAYER, ROCK_SALT_LAB_JADE
+    applymovement PLAYER, .Movement_WalkToProf
+    stopfollow
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+
+    opentext
+    writetext .Text_Introductions
+    waitbutton
+    closetext
+
+    playsound SFX_ENTER_DOOR
+	waitsfx
+    appear ROCK_SALT_LAB_AIDE
+
+    opentext
+    writetext .Text_AideExclaims
+    waitbutton
+    closetext
+
+    turnobject PLAYER, UP
+    turnobject ROCK_SALT_LAB_PROF, UP
+    showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToProf
+
+    opentext
+    writetext .Text_TheresTrouble
+    promptbutton
+    writetext .Text_AreTheyHurt
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    turnobject PLAYER, LEFT
+    writetext .Text_WeNeedYourHelp
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToBackExit
+    playsound SFX_ENTER_DOOR
+	waitsfx
+    disappear ROCK_SALT_LAB_AIDE
+
+    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToBackExit
+    playsound SFX_ENTER_DOOR
+	waitsfx
+    disappear ROCK_SALT_LAB_JADE
+
+    setevent EVENT_MET_PROF
+    setscene SCENE_CANT_LEAVE_LAB
+    end
+
+.Movement_WalkToProf:
+    step UP
+    step UP
+    step UP
+    step UP
+    step UP
+    step UP
+    step UP
+    turn_head LEFT
+    step_end
+
+.Movement_AideWalksToProf:
+    step DOWN
+    step DOWN
+    step LEFT
+    step DOWN
+    step_end
+
+.Movement_AideWalksToBackExit:
+    step UP
+    step RIGHT
+    step UP
+    step UP
+    step_end
+
+.Movement_JadeWalksToBackExit:
+    step RIGHT
+    step UP
+    step UP
+    step UP
+    step UP
+    step UP
+    step_end
+
+.Text_Introductions:
+    text "Ah!"
+
+    para "You must be"
+    line "<PLAYER>!"
+
+    done
+
+.Text_AideExclaims:
+    text "Professor!"
+    done
+
+.Text_TheresTrouble:
+    text "There's trouble!"
+    done
+
+.Text_AreTheyHurt:
+    text "Are they hurt?"
+    done
+
+.Text_WeNeedYourHelp:
+    text "We need your help!"
+    done
+
+Script_CantLeaveLab:
+    opentext
+    writetext .Text_YouCantLeave
+    waitbutton
+    closetext
+    applymovement PLAYER, .Movement_StepUp
+    end
+
+.Movement_StepUp:
+    step UP
+    step_end
+
+.Text_YouCantLeave
+    text "<PLAYER>! Wait!"
+
+    para "You can't leave"
+    line "right now!"
+    done
 
 RockSaltLab_ReceiveDexScript:
     turnobject ROCK_SALT_LAB_PROF, RIGHT
@@ -335,6 +489,8 @@ RockSaltLab_MapEvents:
     warp_event 5, 0, ROCK_SALT_TOWN, 6
 
 	def_coord_events
+	coord_event  4,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab
+	coord_event  5,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab
 
 	def_bg_events
     bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
@@ -342,4 +498,4 @@ RockSaltLab_MapEvents:
 	def_object_events
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, -1
     object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, -1
-    object_event 4, 4, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_RECEIVED_DEX
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_MET_PROF

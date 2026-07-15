@@ -42,6 +42,7 @@ Script_VisitJadesHouse:
 
 	setevent EVENT_VISITED_JADES_HOUSE
 	setscene SCENE_ROCK_SALT_JADES_HOUSE_DEFAULT
+	setmapscene ROCK_SALT_LAB, SCENE_MEET_PROF
 	end
 
 .Movement_WalkUpToJade:
