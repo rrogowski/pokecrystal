@@ -584,11 +584,6 @@ DoPlayerMovement::
 	ld [wWalkingDirection], a
 	ld a, [hli]
 	ld [wFacingDirection], a
-	cp FACE_CURRENT
-	jr z, .skip_last_direction
-	ld [wLastFacingDirection], a
-
-.skip_last_direction:
 	ld a, [hli]
 	ld [wWalkingX], a
 	ld a, [hli]
