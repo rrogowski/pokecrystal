@@ -11,7 +11,7 @@ RockSaltPlayersHouseTvFinishDialogueScene:
 	turnobject PLAYER, UP
 
 	opentext
-	writetext .Text_FinishTVDialogue
+	writetext Text_ThatsEnoughTv
 	waitbutton
 	closetext
 
@@ -54,9 +54,9 @@ Text_LooksComfy:
 	done
 
 RockSaltPlayersHouseTvScript:
-	jumptext .Text_ThatsEnoughTv
+	jumptext Text_ThatsEnoughTv
 
-.Text_ThatsEnoughTv:
+Text_ThatsEnoughTv:
 	text "That's enough TV"
 	line "for now!"
 	done
