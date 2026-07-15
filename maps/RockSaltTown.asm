@@ -1,28 +1,29 @@
 	object_const_def
-    const ROCK_SALT_TOWN_OLD_MAN
-    const ROCK_SALT_TOWN_JADE
-    const ROCK_SALT_TOWN_MEOWTH
+	const ROCK_SALT_TOWN_OLD_MAN
+	const ROCK_SALT_TOWN_JADE_FIRST_ENCOUNTER
+	const ROCK_SALT_TOWN_JADE
+	const ROCK_SALT_TOWN_MEOWTH
 	const ROCK_SALT_TOWN_SENTRET
-    const ROCK_SALT_TOWN_EEVEE
-    const ROCK_SALT_TOWN_TAUROS_1
-    const ROCK_SALT_TOWN_TAUROS_2
-    const ROCK_SALT_TOWN_TAUROS_3
-    const ROCK_SALT_TOWN_TAUROS_4
-    const ROCK_SALT_TOWN_TAUROS_5
-    const ROCK_SALT_TOWN_TAUROS_6
-    const ROCK_SALT_TOWN_FRUIT_TREE
-    const ROCK_SALT_TOWN_YOUNGSTER
+	const ROCK_SALT_TOWN_EEVEE
+	const ROCK_SALT_TOWN_TAUROS_1
+	const ROCK_SALT_TOWN_TAUROS_2
+	const ROCK_SALT_TOWN_TAUROS_3
+	const ROCK_SALT_TOWN_TAUROS_4
+	const ROCK_SALT_TOWN_TAUROS_5
+	const ROCK_SALT_TOWN_TAUROS_6
+	const ROCK_SALT_TOWN_FRUIT_TREE
+	const ROCK_SALT_TOWN_YOUNGSTER
 	const ROCK_SALT_TOWN_GARDENER
-
 
 RockSaltTown_MapScripts:
 	def_scene_scripts
-	scene_script RockSaltTownNoopScene, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
-	scene_script RockSaltTownNoopScene, SCENE_ROCK_SALT_TOWN_NOOP
+	scene_script SceneSetup_RockSaltTownDefault, SCENE_MEET_JADE
+	scene_script SceneSetup_RockSaltTownDefault, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
+	scene_script SceneSetup_RockSaltTownDefault, SCENE_ROCK_SALT_TOWN_NOOP
 
 	def_callbacks
 
-RockSaltTownNoopScene:
+SceneSetup_RockSaltTownDefault:
 	end
 
 RockSaltTown_OldManStopsYouScene:
@@ -430,6 +431,50 @@ Movement_JadeEntersCave:
 	step UP
 	step_end
 
+Script_MeetJade:
+	opentext
+	writetext .Text_JadeCallsOut
+	waitbutton
+	closetext
+
+	applymovement ROCK_SALT_TOWN_JADE_FIRST_ENCOUNTER, .Movement_JadeApproachesYou
+	turnobject PLAYER, LEFT
+
+	opentext
+	writetext .Text_JadeIntro
+	waitbutton
+	closetext
+
+	applymovement ROCK_SALT_TOWN_JADE_FIRST_ENCOUNTER, .Movement_JadeGoesHome
+	disappear ROCK_SALT_TOWN_JADE_FIRST_ENCOUNTER
+	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
+	end
+
+.Movement_JadeApproachesYou:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+.Movement_JadeGoesHome:
+	step LEFT
+	step LEFT
+	step LEFT
+	step UP
+	step UP
+	step UP
+	step LEFT
+	step_end
+
+.Text_JadeCallsOut:
+	text "<PLAYER>!"
+	done
+
+.Text_JadeIntro:
+	text "TODO"
+	done
+
 RockSaltTown_MapEvents:
 	db 0, 0 ; filler
 
@@ -444,6 +489,7 @@ RockSaltTown_MapEvents:
 	warp_event 12, 11, ROCK_SALT_CAVE_1F, 6
 
 	def_coord_events
+	coord_event 29, 20, SCENE_MEET_JADE, Script_MeetJade
 	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
 
 	def_bg_events
@@ -453,6 +499,7 @@ RockSaltTown_MapEvents:
 
 	def_object_events
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
+	object_event 24, 20, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, 0, EVENT_MET_JADE
 	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, RockSaltTownJadeScript, EVENT_BEAT_JADE_IN_ROCK_SALT_TOWN
 	object_event 24,  7, SPRITE_MONSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 2, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownMeowthScript, EVENT_CHOSE_STARTER_MEOWTH
 	object_event 35,  8, SPRITE_MONSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownSentretScript, EVENT_CHOSE_STARTER_SENTRET
@@ -464,5 +511,5 @@ RockSaltTown_MapEvents:
 	object_event 32,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
-	object_event 24, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
+	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
 	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1

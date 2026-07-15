@@ -5,12 +5,18 @@
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
-    scene_script RockSaltLabNoopScene, SCENE_ROCK_SALT_LAB_NOOP
+    scene_script SceneSetup_RockSaltLabDefault, SCENE_ROCK_SALT_LAB_DEFAULT
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 	
 	def_callbacks
 
-RockSaltLabNoopScene:
+SceneSetup_RockSaltLabDefault:
+    checkevent EVENT_VISITED_JADES_HOUSE
+    iffalse .Script_HideProf
+    end
+
+.Script_HideProf:
+    disappear ROCK_SALT_LAB_PROF
     end
 
 RockSaltLab_ReceiveDexScene:
@@ -84,7 +90,7 @@ RockSaltLab_ReceiveDexScript:
     ; prevent aide from immediately spinning after walking back
     pause 15
 
-    setscene SCENE_ROCK_SALT_LAB_NOOP
+    setscene SCENE_ROCK_SALT_LAB_DEFAULT
     end
 
 .Script_ReceiveBalls:

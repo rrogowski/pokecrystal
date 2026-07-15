@@ -10,7 +10,7 @@ RockSaltBookwormsHouse_MapScripts:
 RockSaltBookwormScript:
   faceplayer
 
-  checkflag ENGINE_RECEIVED_QUESTS_LOG
+  checkitem QUEST_LOG
   iffalse .Script_NoQuestsLog
 
   isquestunlocked QUEST_COVER_TO_COVER

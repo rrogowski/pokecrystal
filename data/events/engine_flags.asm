@@ -199,8 +199,6 @@ EngineFlags:
 	engine_flag wSwarmFlags, SWARMFLAGS_DUNSPARCE_SWARM_F
 	engine_flag wSwarmFlags, SWARMFLAGS_YANMA_SWARM_F
 
-	engine_flag wStatusFlags3, STATUSFLAGS3_RECEIVED_QUESTS_LOG_F
-
 	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_1_F, 0
 	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_2_F, 1
 	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_3_F, 2

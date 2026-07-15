@@ -1,4 +1,4 @@
-QuestsMenu:
+QuestsMenu::
 	call ClearBGPalettes
 	farcall LoadStatsScreenPageTilesGFX
 

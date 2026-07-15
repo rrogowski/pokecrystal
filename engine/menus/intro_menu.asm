@@ -63,7 +63,6 @@ NewGame:
 	call InitializePlayerNewName
 	; call InitializePlayerDefaultName
 	call InitializeEvents
-	call ScheduleFirstPhoneCallWithJade
 	; call OakSpeech
 	call IntroProfSpeech
 	call InitializeWorld
@@ -299,7 +298,7 @@ InitializeNPCNames:
 	call CopyBytes
 	ret
 
-.Rival:  db "Bramble@"
+.Rival:  db "???@"
 .Red:    db "RED@"
 .Green:  db "GREEN@"
 .Mom:    db "MOM@"
@@ -1379,11 +1378,6 @@ InitializeEvents:
 	ld b, SET_FLAG
 	call EventFlagAction
 
-	ret
-
-ScheduleFirstPhoneCallWithJade:
-	ld a, SPECIALCALL_JADE_CALL_TO_ACTION
-	ld [wSpecialPhoneCallID], a
 	ret
 
 IntroProfSpeech:

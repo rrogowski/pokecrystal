@@ -63,7 +63,7 @@ ItemEffects:
 	dw RestoreHPEffect     ; SODA_POP
 	dw RestoreHPEffect     ; LEMONADE
 	dw XItemEffect         ; X_ATTACK
-	dw NoEffect            ; ITEM_32
+	dw QuestLogEffect      ; QUEST_LOG
 	dw XItemEffect         ; X_DEFEND
 	dw XItemEffect         ; X_SPEED
 	dw XItemEffect         ; X_SPECIAL
@@ -2924,4 +2924,8 @@ GetMthMoveOfCurrentMon:
 
 SketchpadEffect:
 	farcall Sketchpad
+	ret
+
+QuestLogEffect:
+	farcall QuestsMenu
 	ret
