@@ -11,9 +11,9 @@ RockSaltLab_MapScripts:
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
     def_callbacks
-    callback MAPCALLBACK_OBJECTS, Callback_MoveObjects
+    callback MAPCALLBACK_OBJECTS, Callback_RockSaltLabMoveObjects
 
-Callback_MoveObjects:
+Callback_RockSaltLabMoveObjects:
     checkscene
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
     endcallback
@@ -90,6 +90,7 @@ Script_MeetProf:
     disappear ROCK_SALT_LAB_JADE
 
     setscene SCENE_CANT_LEAVE_LAB
+    setmapscene ROCK_SALT_TOWN, SCENE_MEET_AIDE_OUT_BACK
     end
 
 .Movement_WalkToProf:
@@ -314,13 +315,13 @@ RockSaltLabJadeScript:
 RockSaltLabProfScript:
     faceplayer
 
-    checkevent EVENT_CHOSE_STARTER_MEOWTH
+    checkevent EVENT_CHOSE_STARTER_CYNDAQUIL
     iftrue .SoYouChoseMeowth
 
-    checkevent EVENT_CHOSE_STARTER_SENTRET
+    checkevent EVENT_CHOSE_STARTER_TOTODILE
     iftrue .SoYouChoseSentret
 
-    checkevent EVENT_CHOSE_STARTER_EEVEE
+    checkevent EVENT_CHOSE_STARTER_CHIKORITA
     iftrue .SoYouChoseEevee
 
     checkevent EVENT_TALKED_TO_PROF
@@ -488,6 +489,6 @@ RockSaltLab_MapEvents:
     bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
 
 	def_object_events
-    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_LAB
-    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, EVENT_AIDE_IN_LAB
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_LAB
+    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_ROCK_SALT_LAB
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, EVENT_AIDE_IN_ROCK_SALT_LAB
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_ROCK_SALT_LAB
