@@ -1362,14 +1362,6 @@ InitializePlayerDefaultName:
 .DefaultName: db "KIT@"
 
 InitializeEvents:
-	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_LEFT
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_ROCK_SALT_JADES_HOUSE_PLAYER_FACING_UP
-	ld b, SET_FLAG
-	call EventFlagAction
-
 	ld de, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
 	ld b, SET_FLAG
 	call EventFlagAction
