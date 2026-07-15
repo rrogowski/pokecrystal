@@ -71,7 +71,10 @@ Script_RockSaltTown\1:
 	waitsfx
 	disappear ROCK_SALT_TOWN_JADE
 
-	setscene SCENE_ROCK_SALT_TOWN_NOOP
+	unlockquest QUEST_TROUBLE_WITH_TAUROS
+	setquestgoal QUEST_TROUBLE_WITH_TAUROS, 3
+
+	setscene SCENE_TAUROS_LOOSE
 	setmapscene ROCK_SALT_LAB, SCENE_ROCK_SALT_LAB_NOOP
 	end
 ENDM

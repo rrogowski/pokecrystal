@@ -22,6 +22,7 @@ RockSaltTown_MapScripts:
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
 	scene_script SceneSetup_MeetAideOutBack, SCENE_MEET_AIDE_OUT_BACK
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_CHOOSE_STARTER
+	scene_script SceneSetup_TaurosLoose, SCENE_TAUROS_LOOSE
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Callback_RockSaltTownMoveObjects
@@ -30,13 +31,16 @@ Callback_RockSaltTownMoveObjects:
     checkscene
     ifequal SCENE_MEET_AIDE_OUT_BACK, .Callback_MeetAideOutBack
 		ifequal SCENE_CHOOSE_STARTER, .Callback_ChooseStarter
+		ifequal SCENE_TAUROS_LOOSE, .Callback_TaurosLoose
     endcallback
 
 .Callback_MeetAideOutBack:
-    appear ROCK_SALT_TOWN_AIDE
+		appear ROCK_SALT_TOWN_AIDE
 
     moveobject ROCK_SALT_TOWN_JADE, 29, 6
 		appear ROCK_SALT_TOWN_JADE
+
+		scall .Callback_TaurosLoose
 
     endcallback
 
@@ -45,6 +49,33 @@ Callback_RockSaltTownMoveObjects:
 		moveobject ROCK_SALT_TOWN_JADE, 28, 6
 
 		endcallback
+
+.Callback_TaurosLoose:
+.check_tauros_1
+	checkflag ENGINE_DEFEATED_TAUROS_1
+	iftrue .check_tauros_2
+	; near flowers in front of oak's lab
+	moveobject ROCK_SALT_TOWN_TAUROS_1, 32, 15
+.check_tauros_2
+	checkflag ENGINE_DEFEATED_TAUROS_2
+	iftrue .check_tauros_3
+	; in front of player's house
+	moveobject ROCK_SALT_TOWN_TAUROS_2, 29, 20	
+.check_tauros_3
+	checkflag ENGINE_DEFEATED_TAUROS_3
+	iftrue .add_other_tauros
+	; drinking water south of old man's house
+	moveobject ROCK_SALT_TOWN_TAUROS_3, 22, 19
+.add_other_tauros
+	; in front of jade's house
+	moveobject ROCK_SALT_TOWN_TAUROS_4, 21, 14
+	moveobject ROCK_SALT_TOWN_JADE, 21, 15
+	; in front of old man's house
+	moveobject ROCK_SALT_TOWN_TAUROS_5, 17, 18
+	; in front of bookworm's house
+	moveobject ROCK_SALT_TOWN_TAUROS_6, 35, 18
+	moveobject ROCK_SALT_TOWN_AIDE, 35, 19
+	endcallback
 
 SceneSetup_RockSaltTownNoop:
 	end
@@ -57,6 +88,11 @@ SceneSetup_MeetAideOutBack:
 	end
 .position2
 	sdefer Script_MeetAideOutBack2
+	end
+
+SceneSetup_TaurosLoose:
+	turnobject ROCK_SALT_TOWN_JADE, UP
+	turnobject ROCK_SALT_TOWN_AIDE, UP
 	end
 
 RockSaltTown_OldManStopsYouScene:
@@ -286,8 +322,71 @@ Script_RockSaltTownJade:
 RockSaltTownFruitTree:
    fruittree FRUITTREE_ROCK_SALT_TOWN
 
+RockSaltTownTauros1Script:
+	scall RockSaltTownTaurosScript
+	checkflag ENGINE_DEFEATED_TAUROS_1
+	iftrue .already_defeated
+
+	loadwildmon TAUROS, 2
+	startbattle
+	setflag ENGINE_DEFEATED_TAUROS_1
+	advancequest QUEST_TROUBLE_WITH_TAUROS
+	reloadmapafterbattle
+	special FadeOutToBlack
+	disappear ROCK_SALT_TOWN_TAUROS_1
+	moveobject ROCK_SALT_TOWN_TAUROS_1, 23, 10
+	appear ROCK_SALT_TOWN_TAUROS_1
+	canturninquest QUEST_TROUBLE_WITH_TAUROS
+	iftrue Script_WarpPlayerBackToLab
+	special FadeInFromBlack
+
+.already_defeated
+	end
+
+RockSaltTownTauros2Script:
+	scall RockSaltTownTaurosScript
+	checkflag ENGINE_DEFEATED_TAUROS_2
+	iftrue .already_defeated
+
+	loadwildmon TAUROS, 2
+	startbattle
+	setflag ENGINE_DEFEATED_TAUROS_2
+	advancequest QUEST_TROUBLE_WITH_TAUROS
+	reloadmapafterbattle
+	special FadeOutToBlack
+	disappear ROCK_SALT_TOWN_TAUROS_2
+	moveobject ROCK_SALT_TOWN_TAUROS_2, 32, 9
+	appear ROCK_SALT_TOWN_TAUROS_2
+	canturninquest QUEST_TROUBLE_WITH_TAUROS
+	iftrue Script_WarpPlayerBackToLab
+	special FadeInFromBlack
+
+.already_defeated
+	end
+
+RockSaltTownTauros3Script:
+	scall RockSaltTownTaurosScript
+	checkflag ENGINE_DEFEATED_TAUROS_3
+	iftrue .already_defeated
+
+	loadwildmon TAUROS, 2
+	startbattle
+	setflag ENGINE_DEFEATED_TAUROS_3
+	advancequest QUEST_TROUBLE_WITH_TAUROS
+	reloadmapafterbattle
+	special FadeOutToBlack
+	disappear ROCK_SALT_TOWN_TAUROS_3
+	moveobject ROCK_SALT_TOWN_TAUROS_3, 37, 11
+	appear ROCK_SALT_TOWN_TAUROS_3
+	canturninquest QUEST_TROUBLE_WITH_TAUROS
+	iftrue Script_WarpPlayerBackToLab
+	special FadeInFromBlack
+
+.already_defeated
+	end
+
 RockSaltTownTaurosScript:
-    opentext
+	opentext
 	writetext RockSaltTownTaurosText
 	cry TAUROS
 	waitbutton
@@ -297,6 +396,13 @@ RockSaltTownTaurosScript:
 RockSaltTownTaurosText:
     text "TAUROS: Moo!"
     done
+
+Script_WarpPlayerBackToLab:
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
+	setmapscene ROCK_SALT_LAB, SCENE_TROUBLE_WITH_TAUROS_REWARD
+	warp ROCK_SALT_LAB, 4, 4
+	turnobject PLAYER, LEFT
+	end
 
 starter_script CYNDAQUIL, TOTODILE
 
@@ -663,12 +769,12 @@ RockSaltTown_MapEvents:
 	object_event 27,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCYNDAQUIL, EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
 	object_event 28,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownTOTODILE, EVENT_TOTODILE_IN_ROCK_SALT_TOWN
 	object_event 29,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCHIKORITA, EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
-	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTauros1Script, -1
+	object_event 32,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTauros2Script, -1
+	object_event 37, 11, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTauros3Script, -1
 	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 37, 11, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
-	object_event 32,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
+	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
 	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
 	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1

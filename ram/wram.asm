@@ -3652,14 +3652,25 @@ wQuestsMenuCursor:: db
 
 ; see constants/ram_constants.asm
 wBookwormBooksRead::
-; bit 0: read book 1?
-; bit 1: read book 2?
-; bit 2: read book 3?
-; bit 3: read book 4?
-; bit 4: read book 5?
-; bit 5: read book 6?
-; bit 6: read book 7?
-; bit 7: read book 8?
+; bit 0: book 1
+; bit 1: book 2
+; bit 2: book 3
+; bit 3: book 4
+; bit 4: book 5
+; bit 5: book 6
+; bit 6: book 7
+; bit 7: book 8
+
+; see constants/ram_constants.asm
+wDefeatedTauros::
+; bit 0: tauros 1
+; bit 1: tauros 2
+; bit 2: tauros 3
+; bit 3: unused
+; bit 4: unused
+; bit 5: unused
+; bit 6: unused
+; bit 7: unused
 
 SECTION "Scratch RAM", WRAMX
 

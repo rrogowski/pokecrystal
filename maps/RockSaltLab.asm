@@ -8,6 +8,7 @@ RockSaltLab_MapScripts:
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
     scene_script SceneSetup_RockSaltLabNoop, SCENE_CANT_LEAVE_LAB
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
     def_callbacks
