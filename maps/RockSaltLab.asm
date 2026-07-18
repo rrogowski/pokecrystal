@@ -80,6 +80,13 @@ Script_MeetProf:
     waitbutton
     closetext
 
+    showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
+
+    opentext
+    writetext .Text_WaitNoPokemon
+    waitbutton
+    closetext
+
     applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToBackExit
     playsound SFX_ENTER_DOOR
 	waitsfx
@@ -132,24 +139,115 @@ Script_MeetProf:
     text "Ah!"
 
     para "You must be"
-    line "<PLAYER>!"
+    line "JADE and"
+    cont "<PLAYER>!"
+
+    para "I'm PROF. CARAWAY."
+
+    para "I'm glad you both"
+    line "made it safely."
+
+    para "Jade told me you"
+    line "would be arriving."
+
+    para "I was looking"
+    line "forward to meeting"
+    cont "my new assistants."
+
+    para "There's much to"
+    line "discuss about your"
+    cont "research..."
 
     done
 
 .Text_AideExclaims:
-    text "Professor!"
+    text "AIDE: PROF."
+    line "CARAWAY!"
     done
 
 .Text_TheresTrouble:
     text "There's trouble!"
+
+    para "The gate near town"
+    line "has broken!"
+
+    para "Several Tauros"
+    line "have escaped!"
     done
 
 .Text_AreTheyHurt:
-    text "Are they hurt?"
+    text "CARAWAY: What?!"
+    
+    para "Are they hurt?"
+
+    para "We need to act"
+    line "quickly!"
+
     done
 
 .Text_WeNeedYourHelp:
-    text "We need your help!"
+    text "I'll explain later."
+
+    para "Right now we need"
+    line "your help!"
+
+    done
+
+.Text_WaitNoPokemon:
+    text "Wait..."
+
+    para "You don't have"
+    line "any #MON?"
+
+    para "Of course..."
+
+    para "You've spent your"
+    line "time studying them."
+
+    para "Not training them."
+
+    para "JADE: Sorry..."
+    
+    para "I've read plenty"
+    line "about #MON."
+
+    para "But I've never"
+    line "owned one."
+
+    para "CARAWAY: There's"
+    line "no need to"
+    cont "apologize!"
+
+    para "Research takes"
+    line "many forms."
+
+    para "However..."
+
+    para "You'll need a"
+    line "partner in the"
+    cont "field."
+
+    para "Go behind the lab."
+
+    para "There are some"
+    line "#MON there."
+
+    para "You may each"
+    line "borrow one"
+    cont "for now."
+
+    para "They'll help you"
+    line "with the Tauros."
+
+    para "JADE, <PLAYER>..."
+
+    para "I'll explain more"
+    line "after this is over."
+
+    para "For now..."
+
+    para "We need your help!"
+
     done
 
 Script_CantLeaveLab:

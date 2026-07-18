@@ -62,17 +62,46 @@ Script_VisitJadesHouse:
 	step_end
 
 .Text_Welcome:
-	text "Oh, <PLAYER>!"
-	line "Come on in!"
+	text "<PLAYER>!"
+	
+	para "You made it!"
+
+	para "Come on in!"
+
 	done
 
 .Text_ThisIsMyNewHouse:
-	text "What do you think"
-	line "of my new digs?"
+	text "I was looking at"
+	line "my #MON"
+	cont "sketches."
+
+	para "There's so much"
+	line "left to discover!"
+
+	para "Prof. Caraway"
+	line "gave me these."
+
+	para "It's a Quest Log!"
+
+	para "It helps us keep"
+	line "track of our work."
+
+	para "You should have"
+	line "one, too!"
+
+	para "Here you go!"
+
 	done
 
 .Text_IGrabbedTwo:
-	text "I grabbed two!"
+	text "Oops!"
+
+	para "We should hurry"
+	line "to the lab!"
+
+	para "We don't want to"
+	line "be late!"
+
 	done
 
 RockSaltJadesHouse_MapEvents:

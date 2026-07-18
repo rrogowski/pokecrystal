@@ -21,10 +21,7 @@ RockSaltPlayersHouseTvFinishDialogueScene:
 	end
 
 .Text_FinishTVDialogue:
-	text "In this episode we"
-	line "will explore<……>"
-	
-	para "That's enough TV"
+	text "That's enough TV"
 	line "for now!"
 	
 	done
