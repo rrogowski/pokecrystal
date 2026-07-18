@@ -116,6 +116,10 @@ RockSaltBookwormScript:
   line "something new"
   cont "to learn!"
 
+  para "Every adventure"
+  line "starts with"
+  cont "turning a page."
+
   done
 
 .Script_DeclineQuest:
