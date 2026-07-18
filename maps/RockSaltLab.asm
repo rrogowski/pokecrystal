@@ -443,13 +443,31 @@ Text_IfIHadAPokemon:
     cont "with this machine!"
 	done
 
-RockSaltLabAideScript:
+Script_AideInLab:
+    checkevent EVENT_JADE_IN_ROCK_SALT_JADES_HOUSE
+    iffalse .Script_ProfNotHere
+
     faceplayer
     opentext
     writetext .Text_Aide
     waitbutton
     closetext
     end
+
+.Script_ProfNotHere:
+    jumptextfaceplayer .Text_ProfNotHere
+
+.Text_ProfNotHere:
+    text "PROF. CARAWAY?"
+    line "Here's not here."
+
+    para "He's always busy"
+    line "with research."
+
+    para "He should return"
+    line "shortly."
+
+    done    
 
 .Text_Aide:
     text "I am an aide."
@@ -473,5 +491,5 @@ RockSaltLab_MapEvents:
 
 	def_object_events
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_ROCK_SALT_LAB
-    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, EVENT_AIDE_IN_ROCK_SALT_LAB
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_AIDE_IN_ROCK_SALT_LAB
     object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_ROCK_SALT_LAB
