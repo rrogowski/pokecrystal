@@ -70,12 +70,13 @@ Text_Cabbage:
 	cont "here!"
 	done
 
-RockSaltPlayersHouseN64Script:
-	jumptext Text_N64
+Script_PlayersN64:
+	jumptext .Text_N64
 
-Text_N64:
+.Text_N64:
 	text "<PLAYER> played"
-	line "the N64 for a bit."
+	line "The Legend of"
+	cont "Zelda for a bit."
 	
 	para "Okay, time to go!"
 	
@@ -97,6 +98,6 @@ RockSaltPlayersHouse_MapEvents:
 	bg_event  1,  1, BGEVENT_READ, RockSaltPlayersHouseDresserScript
   bg_event  2,  1, BGEVENT_UP, RockSaltPlayersHousePCScript
 	bg_event  8,  1, BGEVENT_READ, RockSaltPlayersHouseFridgeScript
-	bg_event  9,  5, BGEVENT_READ, RockSaltPlayersHouseN64Script
+	bg_event  9,  5, BGEVENT_READ, Script_PlayersN64
 
 	def_object_events

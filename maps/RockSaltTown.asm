@@ -538,35 +538,48 @@ Script_AideFinishesFixingFence:
 Script_AlreadyChoseStarter:
 	end
 	
-RockSaltTownYoungsterScript:
+Script_Youngster:
     faceplayer
     opentext
-    writetext RockSaltTownYoungsterText
+    writetext .Text_YoureNewHereRight
     waitbutton
     closetext
     end
 
-RockSaltTownYoungsterText:
-    text "My dad said a"
-    line "really strong"
+.Text_YoureNewHereRight:
+    text "You're new here,"
+    line "right?"
     
-    para "#mon lives in"
-    line "the cave just"
-    cont "outside of town!"
+    para "Have you seen the"
+    line "cave at the edge"
+    cont "of town?"
+
+		para "They say a really"
+		line "strong #MON"
+		cont "lives inside!"
+
+		para "I wanna see it"
+		line "someday!"
+		
     done
 
-RockSaltTownGardenerScript:
+Script_Gardener:
 	faceplayer
 	opentext
-	writetext RockSaltTownGardenerText
+	writetext .Text_ILoveWatchingThingsGrow
 	waitbutton
 	closetext
 	end
 
-RockSaltTownGardenerText:
-	text "I feel most at"
-	line "peace when I'm"
-	cont "gardening."
+.Text_ILoveWatchingThingsGrow:
+	text "I love watching"
+	line "things grow!"
+
+	para "Plants, #MON..."
+
+	para "Everything needs"
+	line "care and time."
+
 	done
 
 RockSaltTownLabSign:
@@ -802,5 +815,5 @@ RockSaltTown_MapEvents:
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownTaurosScript, -1
 	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
-	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, RockSaltTownYoungsterScript, -1
-	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, RockSaltTownGardenerScript, -1
+	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_Youngster, -1
+	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_Gardener, -1
