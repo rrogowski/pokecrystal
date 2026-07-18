@@ -104,6 +104,16 @@ Script_VisitJadesHouse:
 
 	done
 
+Script_JadesN64:
+	jumptext .Text_N64
+
+.Text_N64:
+	text "Looks like JADE"
+	line "was playing"
+	cont "#MON Snap."
+	
+	done
+
 RockSaltJadesHouse_MapEvents:
 	db 0, 0 ; filler
 
@@ -114,6 +124,7 @@ RockSaltJadesHouse_MapEvents:
 	def_coord_events
 
 	def_bg_events
+	bg_event  9,  5, BGEVENT_READ, Script_JadesN64
 
 	def_object_events
 	object_event 9, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, 0, EVENT_JADE_IN_ROCK_SALT_JADES_HOUSE
