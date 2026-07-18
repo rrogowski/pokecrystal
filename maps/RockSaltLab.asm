@@ -202,7 +202,8 @@ Script_MeetProf:
     para "Of course..."
 
     para "You've spent your"
-    line "time studying them."
+    line "time studying"
+    cont "them."
 
     para "Not training them."
 
@@ -242,7 +243,8 @@ Script_MeetProf:
     para "JADE, <PLAYER>..."
 
     para "I'll explain more"
-    line "after this is over."
+    line "after this is"
+    cont "over."
 
     para "For now..."
 
