@@ -1552,8 +1552,10 @@ IntroProfSpeech:
 	prompt
 
 .Text_SpeechPart4:
-	text "In this episode we"
-	line "will explore<……>"
+	text "And remember..."
+	line "Every journy"
+	cont "begins with a"
+	cont "single step!"
 	
 	prompt
 
