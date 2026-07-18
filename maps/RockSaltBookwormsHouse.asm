@@ -48,6 +48,10 @@ RockSaltBookwormScript:
 .Text_AGoodBook:
   text "A good book can"
   line "take you anywhere!"
+
+  para "Even if you never"
+  line "leave home!"
+
   done
 
 .Script_OfferQuest:
