@@ -79,11 +79,27 @@ Route101_JadeGivesSketchpadScene:
 	step_end
 
 .Text_DidYouSeeThat:
-	text "Did you see that?"
+	text "<PLAYER>!"
+
+	para "Did you see it?"
+
+	para "That strange"
+	line "#MON from the"
+	cont "cave!"
+
+	para "You did?"
+
+	para "I knew I wasn't"
+	line "imagining it!"
+
 	done
 
 .Text_TakeThisSketchpad:
-	text "Draw it!"
+	text "Please..."
+
+	para "Can you draw it"
+	line "for me?"
+
 	done
 
 .Text_LetMeSee:
@@ -91,7 +107,31 @@ Route101_JadeGivesSketchpadScene:
 	done
 
 .Text_IveNeverSeenThis:
-	text "I've never seen..."
+	text "Wait..."
+
+	para "I've seen"
+	line "something like"
+	cont "this before."
+
+	para "But..."
+
+	para "This isn't quite"
+	line "the same."
+
+	para "The shape was"
+	line "different."
+
+	para "Could there be"
+	line "more of them?"
+
+	para "I have to find"
+	line "out what they are."
+
+	para "I'll uncover"
+	line "their secrets!"
+
+	para "You'll see!"
+
 	done
 
 Route101NoopScene:
