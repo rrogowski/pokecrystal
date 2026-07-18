@@ -95,44 +95,52 @@ SceneSetup_TaurosLoose:
 	turnobject ROCK_SALT_TOWN_AIDE, UP
 	end
 
-RockSaltTown_OldManStopsYouScene:
+Script_OldManStopsYouFromLeaving:
 	faceplayer
 	opentext
-	writetext Text_Wait
+	writetext .Text_StopRightThere
+	waitbutton
 	closetext
 
 	follow PLAYER, ROCK_SALT_TOWN_OLD_MAN
-	applymovement PLAYER, RockSaltTown_OldManWalksYouBack
+	applymovement PLAYER, .Movement_OldManWalksYouBack
 	stopfollow
 	turnobject ROCK_SALT_TOWN_OLD_MAN, RIGHT
 
 	opentext
-	writetext Text_ItsDangerous
+	writetext Text_ItsDangerousAhead
+	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_OLD_MAN, RockSaltTown_OldManReturnsToStartingLocation
+	applymovement ROCK_SALT_TOWN_OLD_MAN, .Movement_OldManReturnsToStartingLocation
 
 	end
 
-RockSaltTown_OldManWalksYouBack:
+.Movement_OldManWalksYouBack:
 	step RIGHT
 	turn_head LEFT
 	step_end
 
-RockSaltTown_OldManReturnsToStartingLocation:
+.Movement_OldManReturnsToStartingLocation:
 	step UP
 	turn_head DOWN
 	step_end
 
-Text_Wait:
-	text "Wait! <PLAYER>!"
-	prompt
+.Text_StopRightThere:
+	text "Stop right there!"
+	done
 
-Text_ItsDangerous:
-	text "It's dangerous to"
-	line "go out without a"
-	cont "#MON!"
-	prompt
+Text_ItsDangerousAhead:
+	text "The grass ahead is"
+	line "dangerous."
+
+	para "Wild #MON"
+	line "won't hold back."
+
+	para "Get yourself a"
+	line "#MON first!"
+	
+	done
 
 RockSaltTownOldManScript:
 	faceplayer
@@ -145,10 +153,10 @@ RockSaltTownOldManScript:
 	waitbutton
 	closetext
 	end
-    
+
 .NoStarter:
 	opentext 
-	writetext Text_RockSaltTownOldManNoStarter
+	writetext Text_ItsDangerousAhead
 	waitbutton
 	closetext
 	end
@@ -161,12 +169,6 @@ Text_RockSaltTownOldManHasStarter:
     para "NOW you're ready"
     line "to take on the"
     cont "tall grass!"
-    done
-
-Text_RockSaltTownOldManNoStarter:
-    text "You need a #MON"
-    line "to be safe out"
-    cont "there!"
     done
 
 Script_MeetAideOutBack1:
@@ -737,7 +739,31 @@ Script_MeetJade:
 	done
 
 .Text_JadeIntro:
-	text "TODO"
+	text "You're <PLAYER>,"
+	line "right?"
+
+	para "I'm Jade!"
+
+	para "Prof. Caraway"
+	line "hired me as a"
+	cont "researcher!"
+
+	para "Looks like we'll"
+	line "be working"
+	cont "together!"
+
+	para "I was sketching"
+	line "#MON nearby."
+
+	para "I almost forgot"
+	line "the time!"
+
+	para "I'm heading home"
+	line "now."
+
+	para "Stop by before you"
+	line "go to the lab!"
+
 	done
 
 RockSaltTown_MapEvents:
@@ -755,7 +781,7 @@ RockSaltTown_MapEvents:
 
 	def_coord_events
 	coord_event 29, 20, SCENE_MEET_JADE, Script_MeetJade
-	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, RockSaltTown_OldManStopsYouScene
+	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, Script_OldManStopsYouFromLeaving
 
 	def_bg_events
 	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
