@@ -79,7 +79,7 @@ Script_JadesN64:
 	jumptext .Text_N64
 
 .Text_N64:
-	text "Looks like Jade"
+	text "Looks like JADE"
 	line "was playing"
 	cont "#MON Snap."
 	

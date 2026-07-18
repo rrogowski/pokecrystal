@@ -755,9 +755,9 @@ Script_MeetJade:
 	text "You're <PLAYER>,"
 	line "right?"
 
-	para "I'm Jade!"
+	para "I'm JADE!"
 
-	para "Prof. Caraway"
+	para "PROF. CARAWAY"
 	line "hired me as a"
 	cont "researcher!"
 
