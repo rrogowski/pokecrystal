@@ -96,6 +96,7 @@ Script_MeetProf:
     playsound SFX_ENTER_DOOR
 	waitsfx
     disappear ROCK_SALT_LAB_JADE
+    clearevent EVENT_JADE_IN_ROCK_SALT_TOWN
 
     setscene SCENE_CANT_LEAVE_LAB
     setmapscene ROCK_SALT_TOWN, SCENE_MEET_AIDE_OUT_BACK
