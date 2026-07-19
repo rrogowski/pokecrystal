@@ -91,12 +91,17 @@ Script_MeetProf:
     playsound SFX_ENTER_DOOR
 	waitsfx
     disappear ROCK_SALT_LAB_AIDE
+    clearevent EVENT_AIDE_IN_ROCK_SALT_TOWN
 
     applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToBackExit
     playsound SFX_ENTER_DOOR
 	waitsfx
     disappear ROCK_SALT_LAB_JADE
     clearevent EVENT_JADE_IN_ROCK_SALT_TOWN
+
+    clearevent EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
+    clearevent EVENT_TOTODILE_IN_ROCK_SALT_TOWN
+    clearevent EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
 
     setscene SCENE_CANT_LEAVE_LAB
     setmapscene ROCK_SALT_TOWN, SCENE_MEET_AIDE_OUT_BACK

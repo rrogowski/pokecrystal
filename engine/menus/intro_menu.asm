@@ -1366,6 +1366,18 @@ InitializeEvents:
 	ld b, SET_FLAG
 	call EventFlagAction
 
+	ld de, EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_TOTODILE_IN_ROCK_SALT_TOWN
+	ld b, SET_FLAG
+	call EventFlagAction
+
+	ld de, EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
+	ld b, SET_FLAG
+	call EventFlagAction
+
 	ld de, EVENT_PROF_IN_ROCK_SALT_LAB
 	ld b, SET_FLAG
 	call EventFlagAction

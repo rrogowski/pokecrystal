@@ -539,6 +539,8 @@ Script_AideFinishesFixingFence:
 	moveobject ROCK_SALT_TOWN_AIDE, 32, 10
 	appear ROCK_SALT_TOWN_AIDE
 	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideReturns
+	turnobject PLAYER, DOWN
+	turnobject ROCK_SALT_TOWN_JADE, DOWN
 	opentext
 	writetext .Text_TheFenceIsFixed
 	waitbutton
