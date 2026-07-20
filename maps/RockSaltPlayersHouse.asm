@@ -9,22 +9,9 @@ RockSaltPlayersHouse_MapScripts:
 
 RockSaltPlayersHouseTvFinishDialogueScene:
 	turnobject PLAYER, UP
-
-	opentext
-	writetext Text_ThatsEnoughTv
-	waitbutton
-	closetext
-
-	turnobject PLAYER, RIGHT
+	sdefer RockSaltPlayersHouseTvScript
 	setscene SCENE_ROCK_SALT_PLAYERS_HOUSE_NOOP
-
 	end
-
-.Text_FinishTVDialogue:
-	text "That's enough TV"
-	line "for now!"
-	
-	done
 
 RockSaltPlayersHouseNoopScene:
 	end
