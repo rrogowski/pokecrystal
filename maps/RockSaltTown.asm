@@ -456,6 +456,9 @@ starter_script CYNDAQUIL, TOTODILE
 	step DOWN
 	step_end
 
+.String_DefaultNickname:
+	db "CYNDAQUIL@"
+
 starter_script TOTODILE, CHIKORITA
 
 .Movement_JadeWalksToCHIKORITA:
@@ -470,6 +473,9 @@ starter_script TOTODILE, CHIKORITA
 	step DOWN
 	step DOWN
 	step_end
+
+.String_DefaultNickname:
+	db "TOTODILE@"
 
 starter_script CHIKORITA, CYNDAQUIL
 
@@ -488,6 +494,9 @@ starter_script CHIKORITA, CYNDAQUIL
 	step DOWN
 	step DOWN
 	step_end
+
+.String_DefaultNickname:
+	db "CHIKORITA@"
 
 Text_ConfirmStarterChoice:
 	text "Do you want the"

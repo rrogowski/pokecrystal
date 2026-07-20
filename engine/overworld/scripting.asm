@@ -1947,6 +1947,17 @@ Script_givepoke:
 	call GetScriptByte
 	call GetScriptByte
 	call GetScriptByte
+	; support gift pokemon OT ID
+	push hl
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	ld a, [hli]
+	ld [wOTPlayerID], a
+	ld a, [hl]
+	ld [wOTPlayerID + 1], a
+	pop hl
 .ok
 	farcall GivePoke
 	ld a, b

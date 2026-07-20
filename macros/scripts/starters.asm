@@ -32,7 +32,7 @@ Script_RockSaltTown\1:
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke \1, 5, BERRY
+	givepoke \1, 5, BERRY, .String_DefaultNickname, wPlayerName, wPlayerID
 	closetext
 	disappear ROCK_SALT_TOWN_\1
 	setevent EVENT_CHOSE_STARTER
