@@ -67,7 +67,7 @@ SceneSetup_RockSaltTownNoop:
 	end
 
 SceneSetup_MeetAideOutBack:
-	readmem wPlayerMapX
+	readmem wXCoord
 	ifequal 29, .position2
 .position1
 	sdefer Script_MeetAideOutBack1

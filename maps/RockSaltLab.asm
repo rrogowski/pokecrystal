@@ -8,6 +8,7 @@ RockSaltLab_MapScripts:
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
     scene_script SceneSetup_RockSaltLabNoop, SCENE_CANT_LEAVE_LAB
+    scene_script SceneSetup_HealingMachineTutorial, SCENE_HEALING_MACHINE_TUTORIAL
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
@@ -35,6 +36,16 @@ SceneSetup_RockSaltLabNoop:
 SceneSetup_MeetProf:
     sdefer Script_MeetProf
     end
+
+SceneSetup_HealingMachineTutorial:
+    readmem wXCoord
+	ifequal 5, .position2
+.position1
+	sdefer Script_HealingMachineTutorial1
+	end
+.position2
+	sdefer Script_HealingMachineTutorial2
+	end
 
 RockSaltLab_ReceiveDexScene:
     sdefer RockSaltLab_ReceiveDexScript
@@ -280,6 +291,68 @@ Script_CantLeaveLab:
 
     para "You can't leave"
     line "right now!"
+    done
+
+Script_HealingMachineTutorial1:
+    disappear ROCK_SALT_LAB_AIDE
+    moveobject ROCK_SALT_LAB_AIDE, 4, 5
+    appear ROCK_SALT_LAB_AIDE
+    sjump Script_HealingMachineTutorial
+
+Script_HealingMachineTutorial2:
+    disappear ROCK_SALT_LAB_AIDE
+    moveobject ROCK_SALT_LAB_AIDE, 5, 5
+    appear ROCK_SALT_LAB_AIDE
+    sjump Script_HealingMachineTutorial
+
+Script_HealingMachineTutorial:
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToYou
+    opentext
+    writetext .Text_NeedToHeal
+    promptbutton
+    turnobject ROCK_SALT_LAB_AIDE, LEFT
+    writetext .Text_UseThatMachine
+    promptbutton
+    turnobject ROCK_SALT_LAB_AIDE, UP
+    writetext .Text_ItWillRestoreYourMon
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideLeavesLab
+    disappear ROCK_SALT_LAB_AIDE
+    
+    setscene SCENE_ROCK_SALT_LAB_NOOP
+    end
+
+.Movement_AideWalksToYou:
+    step UP
+    step UP
+    step UP
+    step UP
+    step_end
+
+.Movement_AideLeavesLab:
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step_end
+
+.Text_NeedToHeal:
+    text "Need to heal?"
+    done
+
+.Text_UseThatMachine:
+    text "Use the machine"
+    line "over there."
+    done
+
+.Text_ItWillRestoreYourMon:
+    text "It'll restore"
+    line "your #MON."
+
+    para "Don't forget it!"
+
     done
 
 RockSaltLab_ReceiveDexScript:
