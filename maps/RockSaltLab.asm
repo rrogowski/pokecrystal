@@ -18,6 +18,7 @@ RockSaltLab_MapScripts:
 Callback_RockSaltLabMoveObjects:
     checkscene
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
+    ifequal SCENE_HEALING_MACHINE_TUTORIAL, .Callback_HealingMachineTutorial
     endcallback
 
 .Callback_MeetProf:
@@ -28,6 +29,10 @@ Callback_RockSaltLabMoveObjects:
     turnobject ROCK_SALT_LAB_AIDE, DOWN
     disappear ROCK_SALT_LAB_AIDE
 
+    endcallback
+
+.Callback_HealingMachineTutorial:
+    disappear ROCK_SALT_LAB_PROF
     endcallback
 
 SceneSetup_RockSaltLabNoop:
