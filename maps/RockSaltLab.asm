@@ -502,17 +502,25 @@ RockSaltLab_ReceiveDexScript:
 RockSaltLabProfScript:
     jumptextfaceplayer Text_IllExplainMoreLater
 
-RockSaltLabHealingMachineScript:
-	checkevent EVENT_CHOSE_STARTER
+Script_HealingMachine:
+    checkevent EVENT_CHOSE_STARTER
 	iffalse .CantHeal
 
     special StubbedTrainerRankings_Healings
 	special HealParty
 	playmusic MUSIC_NONE
+
+    opentext
+    writetext .Text_TheMachineHums
+    promptbutton
 	setval HEALMACHINE_ELMS_LAB
 	special HealMachineAnim
 	pause 30
 	special RestartMapMusic
+    writetext .Text_FullyHealed
+    waitbutton
+    closetext
+
 	end
 
 .CantHeal:
@@ -527,6 +535,15 @@ RockSaltLabHealingMachineScript:
     line "I could heal them"
     cont "with this machine!"
 	done
+
+.Text_TheMachineHums:
+    text "The machine hums."
+    done
+
+.Text_FullyHealed:
+    text "Your #MON are"
+    line "fully healed!"
+    done
 
 Script_AideInLab:
     checkevent EVENT_JADE_IN_ROCK_SALT_JADES_HOUSE
@@ -572,7 +589,7 @@ RockSaltLab_MapEvents:
 	coord_event  5,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab
 
 	def_bg_events
-    bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
+    bg_event  2,  1, BGEVENT_READ, Script_HealingMachine
 
 	def_object_events
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_ROCK_SALT_LAB
