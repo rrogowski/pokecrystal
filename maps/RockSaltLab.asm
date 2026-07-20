@@ -84,6 +84,8 @@ Script_MeetProf:
 
     opentext
     writetext .Text_WaitNoPokemon
+    promptbutton
+    writetext Text_IllExplainMoreLater
     waitbutton
     closetext
 
@@ -248,7 +250,10 @@ Script_MeetProf:
 
     para "JADE, <PLAYER>..."
 
-    para "I'll explain more"
+    done
+
+Text_IllExplainMoreLater:
+    text "I'll explain more"
     line "after this is"
     cont "over."
 
@@ -416,12 +421,8 @@ RockSaltLab_ReceiveDexScript:
     turn_head DOWN
     step_end
 
-RockSaltLabJadeScript:
-    end
-
 RockSaltLabProfScript:
-    faceplayer
-    end
+    jumptextfaceplayer Text_IllExplainMoreLater
 
 RockSaltLabHealingMachineScript:
 	checkevent EVENT_CHOSE_STARTER
@@ -438,12 +439,12 @@ RockSaltLabHealingMachineScript:
 
 .CantHeal:
 	opentext
-    writetext Text_IfIHadAPokemon
+    writetext .Text_IfIHadAPokemon
     waitbutton
 	closetext
 	end
 
-Text_IfIHadAPokemon:
+.Text_IfIHadAPokemon:
 	text "If I had a #MON"
     line "I could heal them"
     cont "with this machine!"
