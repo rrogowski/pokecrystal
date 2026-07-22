@@ -136,6 +136,7 @@ MACRO object_event
 	; the dummy PlayerObjectTemplate object_event has no def_object_events
 	if DEF(_NUM_OBJECT_EVENTS)
 		DEF {_NUM_OBJECT_EVENTS} += 1
+		assert {_NUM_OBJECT_EVENTS} < NUM_OBJECTS, "map exceeds max number of objects (including player)"
 	endc
 ENDM
 

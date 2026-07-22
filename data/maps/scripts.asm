@@ -478,12 +478,12 @@ INCLUDE "maps/Route10South.asm"
 INCLUDE "maps/Route23.asm"
 INCLUDE "maps/SilverCavePokecenter1F.asm"
 INCLUDE "maps/Route28SteelWingHouse.asm"
+INCLUDE "maps/SilverCaveOutside.asm"
+INCLUDE "maps/Route10North.asm"
 
 
 SECTION "Map Scripts 25", ROMX
 
-INCLUDE "maps/SilverCaveOutside.asm"
-INCLUDE "maps/Route10North.asm"
 ;   Rock Salt Town  ;   1
 INCLUDE "maps/RockSaltTown.asm"
 INCLUDE "maps/RockSaltPlayersHouse.asm"
@@ -499,4 +499,6 @@ INCLUDE "maps/RockSaltCaveCavern.asm"
 ;   Peppercorn Village  ;   3
 INCLUDE "maps/Route101.asm"
 INCLUDE "maps/PeppercornVillage.asm"
+
+
 ENDSECTION

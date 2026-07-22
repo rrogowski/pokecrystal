@@ -51,16 +51,18 @@ Callback_RockSaltTownMoveObjects:
 	moveobject ROCK_SALT_TOWN_TAUROS_2, 29, 20	
 .check_tauros_3
 	checkflag ENGINE_DEFEATED_TAUROS_3
-	iftrue .add_other_tauros
+	iftrue .add_other_tauros_and_trainers
 	; drinking water south of old man's house
-	moveobject ROCK_SALT_TOWN_TAUROS_3, 22, 19
-.add_other_tauros
+	moveobject ROCK_SALT_TOWN_TAUROS_3, 23, 19
+.add_other_tauros_and_trainers
 	; in front of jade's house
 	moveobject ROCK_SALT_TOWN_TAUROS_4, 21, 14
+	; turnobject ROCK_SALT_TOWN_JADE, UP
 	; in front of old man's house
-	moveobject ROCK_SALT_TOWN_TAUROS_5, 17, 18
-	; in front of bookworm's house
+	moveobject ROCK_SALT_TOWN_TAUROS_5, 20, 17
+; in front of bookworm's house
 	moveobject ROCK_SALT_TOWN_TAUROS_6, 35, 18
+	; turnobject ROCK_SALT_TOWN_AIDE, UP
 	endcallback
 
 SceneSetup_RockSaltTownNoop:
@@ -75,11 +77,6 @@ SceneSetup_MeetAideOutBack:
 .position2
 	sdefer Script_MeetAideOutBack2
 .done
-	end
-
-SceneSetup_TaurosLoose:
-	turnobject ROCK_SALT_TOWN_JADE, UP
-	turnobject ROCK_SALT_TOWN_AIDE, UP
 	end
 
 Script_OldManStopsYouFromLeaving:
@@ -284,7 +281,15 @@ Script_MeetAideOutBack:
 	done
 
 Script_RockSaltTownAide:
-	end
+	jumptextfaceplayer .Text_IveGotThis
+
+.Text_IveGotThis:
+	text "I've got this!"
+
+	para "You help the"
+	line "others!"
+
+	done
 
 Script_RockSaltTownJade:
 	checkscene
