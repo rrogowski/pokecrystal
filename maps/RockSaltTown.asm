@@ -148,6 +148,7 @@ Script_PlayersRampagingTauros:
 	waitbutton
 	closetext
 	loadwildmon TAUROS, 2
+	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
 	startbattle
 	setevent EVENT_CALMED_RAMPAGING_TAUROS
 	advancequest QUEST_TROUBLE_WITH_TAUROS
