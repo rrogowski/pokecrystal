@@ -300,8 +300,8 @@ MACRO givepoke
 		givepoke \1, \2, NO_ITEM, FALSE
 	elif _NARG == 3
 		givepoke \1, \2, \3, FALSE
-	elif _NARG == 5
-		givepoke \1, \2, \3, TRUE, \4, \5
+	elif _NARG == 6
+		givepoke \1, \2, \3, TRUE, \4, \5, \6
 	else
 		db givepoke_command
 		db \1 ; pokemon
@@ -311,6 +311,7 @@ MACRO givepoke
 		if \4
 			dw \5 ; nickname_pointer
 			dw \6 ; ot_name_pointer
+			dw \7 ; ot_id_pointer
 		endc
 	endc
 ENDM

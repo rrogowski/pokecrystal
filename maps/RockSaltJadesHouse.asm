@@ -4,15 +4,25 @@
 RockSaltJadesHouse_MapScripts:
 	def_scene_scripts
 	scene_script SceneSetup_VisitJadesHouse, SCENE_VISIT_JADES_HOUSE
-	scene_script SceneSetup_RockSaltJadesHouseDefault, SCENE_ROCK_SALT_JADES_HOUSE_DEFAULT
+	scene_script SceneSetup_RockSaltJadesHouseNoop, SCENE_ROCK_SALT_JADES_HOUSE_NOOP
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, Callback_RockSaltJadesHouseMoveObjects
+
+Callback_RockSaltJadesHouseMoveObjects:
+	checkscene
+	ifequal SCENE_VISIT_JADES_HOUSE, .Callback_VisitJadesHouse
+	endcallback
+
+.Callback_VisitJadesHouse:
+	appear ROCK_SALT_JADES_HOUSE_JADE
+	endcallback
 
 SceneSetup_VisitJadesHouse:
 	sdefer Script_VisitJadesHouse
 	end
 
-SceneSetup_RockSaltJadesHouseDefault:
+SceneSetup_RockSaltJadesHouseNoop:
 	end
 
 Script_VisitJadesHouse:
@@ -40,7 +50,7 @@ Script_VisitJadesHouse:
 	waitsfx
 	disappear ROCK_SALT_JADES_HOUSE_JADE
 
-	setscene SCENE_ROCK_SALT_JADES_HOUSE_DEFAULT
+	setscene SCENE_ROCK_SALT_JADES_HOUSE_NOOP
 	setmapscene ROCK_SALT_LAB, SCENE_MEET_PROF
 	end
 
@@ -127,4 +137,4 @@ RockSaltJadesHouse_MapEvents:
 	bg_event  9,  5, BGEVENT_READ, Script_JadesN64
 
 	def_object_events
-	object_event 9, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, 0, EVENT_JADE_IN_ROCK_SALT_JADES_HOUSE
+	object_event 9, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, 0, EVENT_ROCK_SALT_JADES_HOUSE_JADE

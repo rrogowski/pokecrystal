@@ -208,8 +208,4 @@ EngineFlags:
 	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_7_F, 6
 	engine_flag wBookwormBooksRead, BOOKWORM_BOOKS_READ_8_F, 7
 
-	engine_flag wDefeatedTauros, DEFEATED_TAUROS_1_F, 0
-	engine_flag wDefeatedTauros, DEFEATED_TAUROS_2_F, 1
-	engine_flag wDefeatedTauros, DEFEATED_TAUROS_3_F, 2
-
 	assert_table_length NUM_ENGINE_FLAGS

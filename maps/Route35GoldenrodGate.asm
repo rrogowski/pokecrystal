@@ -28,7 +28,7 @@ RandyScript:
 	writetext Route35GoldenrodGatePlayerReceivedAMonWithMailText
 	playsound SFX_KEY_ITEM
 	waitsfx
-	givepoke SPEAROW, 10, NO_ITEM, GiftSpearowName, GiftSpearowOTName
+	givepoke SPEAROW, 10, NO_ITEM, GiftSpearowName, GiftSpearowOTName, GiftSpearowOTID
 	givepokemail GiftSpearowMail
 	setevent EVENT_GOT_KENYA
 .alreadyhavekenya
@@ -74,6 +74,9 @@ GiftSpearowOTName:
 	db "RANDY@"
 
 	db 0 ; unused
+
+GiftSpearowOTID:
+	dw 01001
 
 Route35GoldenrodGatePokefanFScript:
 	faceplayer

@@ -50,7 +50,6 @@ RockSaltCaveCavernJadeAndProfEnterScript:
 	disappear ROCK_SALT_CAVE_CAVERN_YOUNGSTER
 	disappear ROCK_SALT_CAVE_CAVERN_PROF
 	disappear ROCK_SALT_CAVE_CAVERN_JADE
-	clearevent EVENT_RECEIVED_DEX
 	setmapscene ROCK_SALT_LAB, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 	warp ROCK_SALT_LAB, 4, 5
 

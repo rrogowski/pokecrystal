@@ -1,8 +1,10 @@
 MACRO starter_script
   ; \1 =  your choice (see constants/pokemon_constants.asm)
   ; \2 = jade's choice (see constants/pokemon_constants.asm)
-Script_RockSaltTown\1:
-  faceplayer
+Script_ChooseStarter_\1:
+	readvar VAR_FACING
+	ifnotequal UP, Script_CantGetAGoodLookAtStarter
+
 	reanchormap
 	pokepic \1
 	waitbutton
@@ -10,7 +12,7 @@ Script_RockSaltTown\1:
 	closetext
 
 	checkevent EVENT_CHOSE_STARTER
-	iftrue .Script_AlreadyChoseStarter
+	iftrue .done
 
 	getmonname STRING_BUFFER_3, \1
 	opentext
@@ -19,7 +21,7 @@ Script_RockSaltTown\1:
 	closetext
 	iftrue .Script_ChooseStarter
 
-.Script_AlreadyChoseStarter
+.done
   end
 
 .Script_ChooseStarter:
@@ -32,20 +34,20 @@ Script_RockSaltTown\1:
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke \1, 5, BERRY
+	givepoke \1, 5, BERRY, .String_DefaultNickname, wPlayerName, wPlayerID
 	closetext
-	disappear ROCK_SALT_TOWN_\1
+	disappear ROCK_SALT_LAB_\1
 	setevent EVENT_CHOSE_STARTER
 	setevent EVENT_CHOSE_STARTER_\1
 
 	pause 15
-	turnobject ROCK_SALT_TOWN_JADE, UP
+	turnobject ROCK_SALT_LAB_JADE, RIGHT
 	opentext
 	writetext Text_ItChoseYou
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_JADE, .Movement_JadeWalksTo\2
+	applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksTo\2
 	opentext
 	writetext Text_IllChoseThisOne
 	promptbutton
@@ -55,26 +57,53 @@ Script_RockSaltTown\1:
 	waitsfx
 	waitbutton
 	closetext
-	disappear ROCK_SALT_TOWN_\2
+	disappear ROCK_SALT_LAB_\2
 
-	scall Script_AideFinishesFixingFence
-
-	faceobject ROCK_SALT_TOWN_JADE, PLAYER
-	faceobject PLAYER, ROCK_SALT_TOWN_JADE
+	faceobject ROCK_SALT_LAB_JADE, PLAYER
+	faceobject PLAYER, ROCK_SALT_LAB_JADE
 	opentext
 	writetext Text_Hurry
 	waitbutton
 	closetext
-	
-	applymovement ROCK_SALT_TOWN_JADE, .Movement_JadeWalksToLabFrom\2
+
+	applymovement ROCK_SALT_LAB_JADE, .Movement_JadeExitsLabFrom\2
 	playsound SFX_ENTER_DOOR
 	waitsfx
-	disappear ROCK_SALT_TOWN_JADE
+	disappear ROCK_SALT_LAB_JADE
 
 	unlockquest QUEST_TROUBLE_WITH_TAUROS
-	setquestgoal QUEST_TROUBLE_WITH_TAUROS, 3
+	setquestgoal QUEST_TROUBLE_WITH_TAUROS, 1
 
-	setscene SCENE_TAUROS_LOOSE
-	setmapscene ROCK_SALT_LAB, SCENE_ROCK_SALT_LAB_NOOP
+	applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToYou\1
+	faceobject PLAYER, LEFT
+
+	opentext
+	writetext Text_FollowMe
+	waitbutton
+	closetext
+
+	follow ROCK_SALT_LAB_PROF, PLAYER
+	applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToHealingMachine\1
+	stopfollow
+
+	turnobject ROCK_SALT_LAB_PROF, RIGHT
+	opentext
+	writetext Text_NeedToHeal
+	promptbutton
+	turnobject PLAYER, UP
+	turnobject ROCK_SALT_LAB_PROF, UP
+	writetext Text_UseThatMachine
+	promptbutton
+	turnobject PLAYER, LEFT
+	turnobject ROCK_SALT_LAB_PROF, RIGHT
+	writetext Text_ItWillRestoreYourMon
+	waitbutton
+	closetext
+
+	applymovement ROCK_SALT_LAB_PROF, Movement_ProfLeavesLab
+	disappear ROCK_SALT_LAB_PROF
+
+	setscene SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
+	setmapscene ROCK_SALT_TOWN, SCENE_TAUROS_LOOSE
 	end
 ENDM

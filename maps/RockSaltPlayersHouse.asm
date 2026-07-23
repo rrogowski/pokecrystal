@@ -2,31 +2,18 @@
 
 RockSaltPlayersHouse_MapScripts:
 	def_scene_scripts
-	scene_script RockSaltPlayersHouseTvFinishDialogueScene, SCENE_ROCK_SALT_PLAYERS_HOUSE_TV_FINISH_DIALOGUE
-	scene_script RockSaltPlayersHouseNoopScene, SCENE_ROCK_SALT_PLAYERS_HOUSE_NOOP
+	scene_script SceneSetup_WatchingTv, SCENE_WATCHING_TV
+	scene_script SceneSetup_RockSaltPlayersHouseNoop, SCENE_ROCK_SALT_PLAYERS_HOUSE_NOOP
 
 	def_callbacks
 
-RockSaltPlayersHouseTvFinishDialogueScene:
+SceneSetup_WatchingTv:
 	turnobject PLAYER, UP
-
-	opentext
-	writetext Text_ThatsEnoughTv
-	waitbutton
-	closetext
-
-	turnobject PLAYER, RIGHT
+	sdefer Script_PlayersTv
 	setscene SCENE_ROCK_SALT_PLAYERS_HOUSE_NOOP
-
 	end
 
-.Text_FinishTVDialogue:
-	text "That's enough TV"
-	line "for now!"
-	
-	done
-
-RockSaltPlayersHouseNoopScene:
+SceneSetup_RockSaltPlayersHouseNoop:
 	end
 
 RockSaltPlayersHousePCScript:
@@ -50,7 +37,7 @@ Text_LooksComfy:
 	text "Looks comfy!"
 	done
 
-RockSaltPlayersHouseTvScript:
+Script_PlayersTv:
 	jumptext Text_ThatsEnoughTv
 
 Text_ThatsEnoughTv:
@@ -89,7 +76,7 @@ RockSaltPlayersHouse_MapEvents:
 	def_coord_events
 
 	def_bg_events
-  bg_event  0,  1, BGEVENT_READ, RockSaltPlayersHouseTvScript
+  bg_event  0,  1, BGEVENT_READ, Script_PlayersTv
   bg_event  0,  2, BGEVENT_READ, RockSaltPlayersHouseBedScript
   bg_event  0,  3, BGEVENT_READ, RockSaltPlayersHouseBedScript
 	bg_event  1,  1, BGEVENT_READ, RockSaltPlayersHouseDresserScript

@@ -1,5 +1,3 @@
-DEF RANDY_OT_ID EQU 01001
-
 TryAddMonToParty:
 ; Check if to copy wild mon or generate a new one
 	; Whose is it?
@@ -1727,9 +1725,11 @@ GivePoke::
 	ld hl, wPartyMon1ID
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld a, HIGH(RANDY_OT_ID)
+	; support gift pokemon OT ID
+	ld a, [wOTPlayerID]
 	ld [hli], a
-	ld [hl], LOW(RANDY_OT_ID)
+	ld a, [wOTPlayerID + 1]
+	ld [hl], a
 	pop bc
 	farcall SetGiftPartyMonCaughtData
 	jr .skip_nickname

@@ -1,13 +1,22 @@
 	object_const_def
     const ROCK_SALT_LAB_PROF
-    const ROCK_SALT_LAB_AIDE
+    const ROCK_SALT_LAB_AIDE_IN_FRONT
+    const ROCK_SALT_LAB_AIDE_IN_BACK
     const ROCK_SALT_LAB_JADE
+    const ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    const ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    const ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    const ROCK_SALT_LAB_CYNDAQUIL
+    const ROCK_SALT_LAB_TOTODILE
+    const ROCK_SALT_LAB_CHIKORITA
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
-    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_GONE
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
-    scene_script SceneSetup_RockSaltLabNoop, SCENE_CANT_LEAVE_LAB
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_CHOOSE_STARTER
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
@@ -16,17 +25,39 @@ RockSaltLab_MapScripts:
 
 Callback_RockSaltLabMoveObjects:
     checkscene
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Callback_ProfGone
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
+    ifequal SCENE_CHOOSE_STARTER, .Callback_ChooseStarter
+    ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .Callback_ProfAndAideGone
+    sjump .Callback_Noop
+
+.Callback_ProfGone:
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
+    endcallback
+
+.Callback_ProfAndAideGone:
     endcallback
 
 .Callback_MeetProf:
     appear ROCK_SALT_LAB_PROF
     appear ROCK_SALT_LAB_JADE
+    appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    endcallback
 
-    moveobject ROCK_SALT_LAB_AIDE, 4, 0
-    turnobject ROCK_SALT_LAB_AIDE, DOWN
-    disappear ROCK_SALT_LAB_AIDE
+.Callback_ChooseStarter:
+    moveobject ROCK_SALT_LAB_JADE, 4, 5
+    appear ROCK_SALT_LAB_JADE
+    appear ROCK_SALT_LAB_PROF
+    appear ROCK_SALT_LAB_CYNDAQUIL
+    appear ROCK_SALT_LAB_TOTODILE
+    appear ROCK_SALT_LAB_CHIKORITA
+    endcallback
 
+.Callback_Noop:
+    appear ROCK_SALT_LAB_PROF
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
     endcallback
 
 SceneSetup_RockSaltLabNoop:
@@ -41,7 +72,6 @@ RockSaltLab_ReceiveDexScene:
     end
 
 Script_MeetProf:
-    disappear ROCK_SALT_LAB_AIDE
     turnobject PLAYER, RIGHT
     turnobject ROCK_SALT_LAB_JADE, LEFT
     pause 20
@@ -57,7 +87,7 @@ Script_MeetProf:
 
     playsound SFX_ENTER_DOOR
 	waitsfx
-    appear ROCK_SALT_LAB_AIDE
+    appear ROCK_SALT_LAB_AIDE_IN_BACK
 
     opentext
     writetext .Text_AideExclaims
@@ -67,39 +97,81 @@ Script_MeetProf:
     turnobject PLAYER, UP
     turnobject ROCK_SALT_LAB_PROF, UP
     showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToProf
+    applymovement ROCK_SALT_LAB_AIDE_IN_BACK, .Movement_AideWalksToProf
 
     opentext
     writetext .Text_TheresTrouble
     promptbutton
-    writetext .Text_AreTheyHurt
-    promptbutton
-    turnobject ROCK_SALT_LAB_PROF, RIGHT
-    turnobject PLAYER, LEFT
-    writetext .Text_WeNeedYourHelp
+    writetext .Text_YouGoAhead
     waitbutton
     closetext
 
+    applymovement ROCK_SALT_LAB_AIDE_IN_BACK, .Movement_AideLeavesLab
+    disappear ROCK_SALT_LAB_AIDE_IN_BACK
+
+    opentext
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    turnobject PLAYER, LEFT
+    writetext .Text_LetsPause
+    waitbutton
+    closetext
+
+    turnobject PLAYER, DOWN
+    pause 20
+    turnobject PLAYER, LEFT
     showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
 
     opentext
     writetext .Text_WaitNoPokemon
+    promptbutton
+    writetext Text_WeWillContinueLater
     waitbutton
     closetext
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToBackExit
-    playsound SFX_ENTER_DOOR
-	waitsfx
-    disappear ROCK_SALT_LAB_AIDE
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToCyndaquil
+    disappear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    cry CYNDAQUIL
+    waitsfx
+    pause 15
 
-    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToBackExit
-    playsound SFX_ENTER_DOOR
-	waitsfx
-    disappear ROCK_SALT_LAB_JADE
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToTotodile
+    disappear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    cry TOTODILE
+    waitsfx
+    pause 15
 
-    setscene SCENE_CANT_LEAVE_LAB
-    setmapscene ROCK_SALT_TOWN, SCENE_MEET_AIDE_OUT_BACK
-    end
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToChikorita
+    disappear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    cry CHIKORITA
+    waitsfx
+    pause 15
+
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfReturnsToDesk
+
+    turnobject PLAYER, RIGHT
+    turnobject ROCK_SALT_LAB_JADE, RIGHT
+    pause 15
+
+    opentext
+	writetext .Text_JadeInAwe
+	waitbutton
+	closetext
+	pause 15
+
+    turnobject PLAYER, DOWN
+    turnobject ROCK_SALT_LAB_JADE, UP
+    opentext
+	writetext .Text_IveStudiedForYears
+	waitbutton
+	closetext
+
+    turnobject PLAYER, RIGHT
+    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeLooksAtEachStarter
+
+    turnobject PLAYER, DOWN
+    turnobject ROCK_SALT_LAB_JADE, UP
+    setscene SCENE_CHOOSE_STARTER
+    jumptext Text_CanYouChooseFirst
 
 .Movement_WalkToProf:
     step UP
@@ -119,28 +191,74 @@ Script_MeetProf:
     step DOWN
     step_end
 
-.Movement_AideWalksToBackExit:
-    step UP
+.Movement_AideLeavesLab:
     step RIGHT
-    step UP
-    step UP
+    step RIGHT
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
     step_end
 
-.Movement_JadeWalksToBackExit:
+.Movement_ProfWalksToCyndaquil:
+    step UP
+    step UP
+    step RIGHT
+    step RIGHT
+    step RIGHT
+    turn_head DOWN
+    step_end
+
+.Movement_ProfWalksToTotodile:
+    step RIGHT
+    turn_head DOWN
+    step_end
+
+.Movement_ProfWalksToChikorita:
+    step RIGHT
+    turn_head DOWN
+    step_end
+
+.Movement_ProfReturnsToDesk:
+    step LEFT
+    step LEFT
+    step LEFT
+    step LEFT
+    step LEFT
+    step DOWN
+    step DOWN
+    step_end
+
+.Movement_JadeLooksAtEachStarter:
+    step RIGHT
     step RIGHT
     step UP
-    step UP
-    step UP
-    step UP
-    step UP
-    step_end
+	step_sleep 25
+
+	step RIGHT
+	turn_head UP
+	step_sleep 25
+
+	step RIGHT
+	turn_head UP
+	step_sleep 25
+
+    step DOWN
+    step LEFT
+    step LEFT
+    step LEFT
+    step LEFT
+
+	step_end
 
 .Text_Introductions:
     text "Ah!"
 
     para "You must be"
-    line "JADE and"
-    cont "<PLAYER>!"
+    line "<PLAYER>!"
 
     para "I'm PROF. CARAWAY."
 
@@ -161,35 +279,33 @@ Script_MeetProf:
     done
 
 .Text_AideExclaims:
-    text "AIDE: PROF."
-    line "CARAWAY!"
+    text "AIDE: Professor!"
     done
 
 .Text_TheresTrouble:
     text "There's trouble!"
 
-    para "The gate near town"
-    line "has broken!"
-
-    para "Several Tauros"
+    para "Several TAUROS"
     line "have escaped!"
     done
 
-.Text_AreTheyHurt:
+.Text_YouGoAhead:
     text "CARAWAY: What?!"
-    
-    para "Are they hurt?"
 
-    para "We need to act"
-    line "quickly!"
+    para "You go ahead!"
+
+    para "I will join you"
+    line "in a moment."
 
     done
 
-.Text_WeNeedYourHelp:
-    text "I'll explain later."
+.Text_LetsPause:
+    text "Let's pause"
+    line "for now."
 
-    para "Right now we need"
-    line "your help!"
+    para "I'd like for you"
+    line "two to help herd"
+    cont "those TAUROS home."
 
     done
 
@@ -202,59 +318,84 @@ Script_MeetProf:
     para "Of course..."
 
     para "You've spent your"
-    line "time studying them."
+    line "time studying"
+    cont "them."
 
     para "Not training them."
 
     para "JADE: Sorry..."
-    
+
     para "I've read plenty"
     line "about #MON."
 
     para "But I've never"
     line "owned one."
 
-    para "CARAWAY: There's"
-    line "no need to"
-    cont "apologize!"
+    para "CARAWAY: No need"
+    line "to apologize!"
 
-    para "Research takes"
-    line "many forms."
-
-    para "However..."
-
-    para "You'll need a"
-    line "partner in the"
-    cont "field."
-
-    para "Go behind the lab."
+    para "Look at the table."
 
     para "There are some"
     line "#MON there."
 
-    para "You may each"
-    line "borrow one"
-    cont "for now."
+    para "You can borrow one"
+    line "for now."
 
     para "They'll help you"
     line "with the Tauros."
 
     para "JADE, <PLAYER>..."
 
-    para "I'll explain more"
-    line "after this is over."
+    done
+
+.Text_JadeInAwe:
+	text "Wow..."
+
+	para "They're amazing."
+
+	done
+
+.Text_IveStudiedForYears:
+	text "I've studied"
+	line "#MON for"
+	cont "years..."
+
+	para "But I've never"
+	line "worked with one."
+
+	done
+
+Text_WeWillContinueLater:
+    text "We'll continue our"
+    line "conversation when"
+    cont "we're done."
 
     para "For now..."
 
-    para "We need your help!"
+    para "Let's get to work!"
 
     done
 
-Script_CantLeaveLab:
+Script_JadeAsksYouToChooseFirst:
+    jumptextfaceplayer Text_CanYouChooseFirst
+
+Text_CanYouChooseFirst:
+	text "Can you choose"
+	line "first?"
+
+	para "I think I'm a"
+	line "little nervous..."
+
+	done
+
+Script_CantLeaveLab1:
+    turnobject ROCK_SALT_LAB_JADE, DOWN
     opentext
-    writetext .Text_YouCantLeave
+    writetext Text_YouCantLeave
     waitbutton
     closetext
+    turnobject ROCK_SALT_LAB_JADE, RIGHT
     applymovement PLAYER, .Movement_StepUp
     end
 
@@ -262,11 +403,229 @@ Script_CantLeaveLab:
     step UP
     step_end
 
-.Text_YouCantLeave
-    text "<PLAYER>! Wait!"
+Script_CantLeaveLab2:
+    turnobject ROCK_SALT_LAB_JADE, UP
+    opentext
+    writetext Text_YouCantLeave
+    waitbutton
+    closetext
+    applymovement PLAYER, .Movement_StepDown
+    end
 
-    para "You can't leave"
-    line "right now!"
+.Movement_StepDown:
+    step DOWN
+    step_end
+
+Text_YouCantLeave:
+    text "Wait!"
+
+    para "We need a #MON"
+    line "to help!"
+
+    para "Choose one soon!"
+
+    para "The TAUROS won't"
+    line "wait!"
+
+    done
+
+starter_script CYNDAQUIL, TOTODILE
+
+.Movement_JadeWalksToTOTODILE:
+	step RIGHT
+    step RIGHT
+    step RIGHT
+	step UP
+	step_end
+
+.Movement_JadeExitsLabFromTOTODILE:
+    step LEFT
+    step LEFT
+	step DOWN
+	step DOWN
+    step DOWN
+    step DOWN
+	step DOWN
+	step DOWN
+	step_end
+
+.Movement_ProfWalksToYouCYNDAQUIL:
+    step RIGHT
+    step RIGHT
+    step_end
+
+.Movement_ProfWalksToHealingMachineCYNDAQUIL:
+    step LEFT
+    step UP
+    step LEFT
+    step LEFT
+    step_end
+
+.String_DefaultNickname:
+	db "CYNDAQUIL@"
+
+starter_script TOTODILE, CHIKORITA
+
+.Movement_JadeWalksToCHIKORITA:
+	step RIGHT
+    step RIGHT
+    step RIGHT
+    step RIGHT
+	step UP
+	step_end
+
+.Movement_JadeExitsLabFromCHIKORITA:
+    step DOWN
+	step LEFT
+    step LEFT
+    step LEFT
+	step DOWN
+    step DOWN
+    step DOWN
+	step DOWN
+	step DOWN
+	step_end
+
+.Movement_ProfWalksToYouTOTODILE:
+    step RIGHT
+    step RIGHT
+    step RIGHT
+    step_end
+
+.Movement_ProfWalksToHealingMachineTOTODILE:
+    step LEFT
+    step LEFT
+    step UP
+    step LEFT
+    step LEFT
+    step_end
+
+.String_DefaultNickname:
+	db "TOTODILE@"
+
+starter_script CHIKORITA, CYNDAQUIL
+
+.Movement_JadeWalksToCYNDAQUIL:
+	step RIGHT
+    step RIGHT
+	step UP
+	step_end
+
+.Movement_JadeExitsLabFromCYNDAQUIL:
+	step LEFT
+	step DOWN
+	step DOWN
+    step DOWN
+    step DOWN
+	step DOWN
+	step DOWN
+	step_end
+
+.Movement_ProfWalksToYouCHIKORITA:
+    step RIGHT
+    step RIGHT
+    step RIGHT
+    step RIGHT
+    step_end
+
+.Movement_ProfWalksToHealingMachineCHIKORITA:
+    step LEFT
+    step LEFT
+    step LEFT
+    step UP
+    step LEFT
+    step LEFT
+    step_end
+
+.String_DefaultNickname:
+	db "CHIKORITA@"
+
+Script_CantGetAGoodLookAtStarter:
+    jumptext .Text_CantGetAGoodLook
+
+.Text_CantGetAGoodLook:
+    text "You can't get a"
+    line "good look at it"
+    cont "from this angle!"
+    done
+
+Movement_ProfLeavesLab:
+    step DOWN
+    step RIGHT
+    step RIGHT
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step_end
+
+Text_ConfirmStarterChoice:
+	text "Do you want the"
+	line "@"
+	text_ram wStringBuffer3
+	text "?"
+	done
+
+Text_ItSeemsToLikeYou:
+	text "It seems to like"
+	line "you!"
+	done
+
+Text_ItChoseYou:
+	text "It chose you!"
+
+	para "That's amazing..."
+
+	done
+
+Text_IllChoseThisOne:
+	text "I'll choose this"
+	line "one."
+
+	para "We should work"
+	line "well together!"
+
+	done
+
+Text_PlayerReceivedStarter:
+	text "<PLAYER> received"
+	line "the @"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+Text_JadeReceivedStarter:
+	text "JADE received"
+	line "the @"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
+Text_Hurry:
+    text "Hurry <PLAYER>!"
+    done
+
+Text_NeedToHeal:
+    text "Need to heal?"
+    done
+
+Text_UseThatMachine:
+    text "Use the machine"
+    line "over there."
+    done
+
+Text_ItWillRestoreYourMon:
+    text "It'll restore"
+    line "your #MON."
+
+    para "Don't forget it!"
+
+    done
+
+Text_FollowMe:
+    text "<PLAYER>, please"
+    line "follow me."
     done
 
 RockSaltLab_ReceiveDexScript:
@@ -319,7 +678,7 @@ RockSaltLab_ReceiveDexScript:
 	disappear ROCK_SALT_LAB_JADE
     pause 10
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToYou
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
     turnobject PLAYER, LEFT
 
     opentext
@@ -332,7 +691,7 @@ RockSaltLab_ReceiveDexScript:
     waitbutton
     closetext
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksBack
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
     ; prevent aide from immediately spinning after walking back
     pause 15
 
@@ -408,46 +767,76 @@ RockSaltLab_ReceiveDexScript:
     turn_head DOWN
     step_end
 
-RockSaltLabJadeScript:
-    end
+Script_Prof:
+    jumptextfaceplayer Text_WeWillContinueLater
 
-RockSaltLabProfScript:
-    faceplayer
-    end
-
-RockSaltLabHealingMachineScript:
-	checkevent EVENT_CHOSE_STARTER
+Script_HealingMachine:
+    checkevent EVENT_CHOSE_STARTER
 	iffalse .CantHeal
 
-    special StubbedTrainerRankings_Healings
 	special HealParty
 	playmusic MUSIC_NONE
+
+    opentext
+    writetext .Text_TheMachineHums
+    promptbutton
 	setval HEALMACHINE_ELMS_LAB
 	special HealMachineAnim
 	pause 30
 	special RestartMapMusic
+    writetext .Text_FullyHealed
+    waitbutton
+    closetext
+
 	end
 
 .CantHeal:
 	opentext
-    writetext Text_IfIHadAPokemon
+    writetext .Text_IfIHadAPokemon
     waitbutton
 	closetext
 	end
 
-Text_IfIHadAPokemon:
+.Text_IfIHadAPokemon:
 	text "If I had a #MON"
     line "I could heal them"
     cont "with this machine!"
 	done
 
-RockSaltLabAideScript:
+.Text_TheMachineHums:
+    text "The machine hums."
+    done
+
+.Text_FullyHealed:
+    text "Your #MON are"
+    line "fully healed!"
+    done
+
+Script_AideInLab:
+    checkscene
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Script_ProfNotHere
+
     faceplayer
     opentext
     writetext .Text_Aide
     waitbutton
     closetext
     end
+
+.Script_ProfNotHere:
+    jumptextfaceplayer .Text_ProfNotHere
+
+.Text_ProfNotHere:
+    text "PROF. CARAWAY?"
+    line "Here's not here."
+
+    para "He's always busy"
+    line "with research."
+
+    para "He should return"
+    line "shortly."
+
+    done
 
 .Text_Aide:
     text "I am an aide."
@@ -457,19 +846,28 @@ RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-    warp_event 4, 11,ROCK_SALT_TOWN, 3
+    warp_event 4, 11, ROCK_SALT_TOWN, 3
     warp_event 5, 11, ROCK_SALT_TOWN, 3
     warp_event 4, 0, ROCK_SALT_TOWN, 6
     warp_event 5, 0, ROCK_SALT_TOWN, 7
 
 	def_coord_events
-	coord_event  4,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab
-	coord_event  5,  6, SCENE_CANT_LEAVE_LAB, Script_CantLeaveLab
+	coord_event  4,  6, SCENE_CHOOSE_STARTER, Script_CantLeaveLab1
+	coord_event  5,  6, SCENE_CHOOSE_STARTER, Script_CantLeaveLab1
+    coord_event  4,  0, SCENE_CHOOSE_STARTER, Script_CantLeaveLab2
+	coord_event  5,  0, SCENE_CHOOSE_STARTER, Script_CantLeaveLab2
 
 	def_bg_events
-    bg_event  2,  1, BGEVENT_READ, RockSaltLabHealingMachineScript
+    bg_event  2,  1, BGEVENT_READ, Script_HealingMachine
 
 	def_object_events
-    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_ROCK_SALT_LAB
-    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabAideScript, EVENT_AIDE_IN_ROCK_SALT_LAB
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_ROCK_SALT_LAB
+    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Prof, EVENT_ROCK_SALT_LAB_PROF
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
+    object_event 4, 0, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE
+    object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    object_event  6,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CYNDAQUIL, EVENT_ROCK_SALT_LAB_CYNDAQUIL
+	object_event  7,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_TOTODILE, EVENT_ROCK_SALT_LAB_TOTODILE
+	object_event  8,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CHIKORITA, EVENT_ROCK_SALT_LAB_CHIKORITA
