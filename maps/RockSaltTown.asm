@@ -45,7 +45,7 @@ Callback_RockSaltTownMoveObjects:
 	moveobject ROCK_SALT_TOWN_TAUROS_2, 23, 19
 .add_jades_tauros_and_jade
 	; in front of old man's house
-	moveobject ROCK_SALT_TOWN_TAUROS_4, 20, 17
+	moveobject ROCK_SALT_TOWN_TAUROS_3, 20, 17
 	endcallback
 
 SceneSetup_RockSaltTownNoop:
@@ -306,12 +306,8 @@ Script_PlayersRampagingTauros:
 	startbattle
 	setevent EVENT_CALMED_RAMPAGING_TAUROS
 	advancequest QUEST_TROUBLE_WITH_TAUROS
+	disappear ROCK_SALT_TOWN_TAUROS_2
 	reloadmapafterbattle
-	special FadeOutToBlack
-	disappear ROCK_SALT_TOWN_TAUROS_1
-	moveobject ROCK_SALT_TOWN_TAUROS_1, 23, 10
-	appear ROCK_SALT_TOWN_TAUROS_1
-	special FadeInFromBlack
 	opentext
 	writetext Text_TaurosCalmedDown
 	waitbutton
@@ -736,7 +732,7 @@ Script_MeetJade:
 	closetext
 
 	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeApproachesYou
-	faceobject ROCK_SALT_TOWN_JADE_INTRO, PLAYER
+	faceplayer
 
 	opentext
 	writetext .Text_JadeIntro
