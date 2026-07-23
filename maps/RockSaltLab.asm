@@ -2,7 +2,8 @@
     const ROCK_SALT_LAB_PROF
     const ROCK_SALT_LAB_AIDE_IN_FRONT
     const ROCK_SALT_LAB_AIDE_IN_BACK
-    const ROCK_SALT_LAB_JADE
+    const ROCK_SALT_LAB_JADE_IN_FRONT
+    const ROCK_SALT_LAB_JADE_IN_BACK
     const ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
     const ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
     const ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
@@ -40,15 +41,14 @@ Callback_RockSaltLabMoveObjects:
 
 .Callback_MeetProf:
     appear ROCK_SALT_LAB_PROF
-    appear ROCK_SALT_LAB_JADE
+    appear ROCK_SALT_LAB_JADE_IN_FRONT
     appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
     appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
     appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
     endcallback
 
 .Callback_ChooseStarter:
-    moveobject ROCK_SALT_LAB_JADE, 4, 5
-    appear ROCK_SALT_LAB_JADE
+    appear ROCK_SALT_LAB_JADE_IN_BACK
     appear ROCK_SALT_LAB_PROF
     appear ROCK_SALT_LAB_CYNDAQUIL
     appear ROCK_SALT_LAB_TOTODILE
@@ -73,17 +73,23 @@ RockSaltLab_ReceiveDexScene:
 
 Script_MeetProf:
     turnobject PLAYER, RIGHT
-    turnobject ROCK_SALT_LAB_JADE, LEFT
+    turnobject ROCK_SALT_LAB_JADE_IN_FRONT, LEFT
     pause 20
-    follow PLAYER, ROCK_SALT_LAB_JADE
+    follow PLAYER, ROCK_SALT_LAB_JADE_IN_FRONT
     applymovement PLAYER, .Movement_WalkToProf
     stopfollow
-    turnobject ROCK_SALT_LAB_PROF, RIGHT
 
+    ; avoid object synchronization issues after scene
+    appear ROCK_SALT_LAB_JADE_IN_BACK
+
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
     opentext
     writetext .Text_Introductions
     waitbutton
     closetext
+
+    ; avoid object synchronization issues after scene
+    disappear ROCK_SALT_LAB_JADE_IN_FRONT
 
     playsound SFX_ENTER_DOOR
 	waitsfx
@@ -130,18 +136,21 @@ Script_MeetProf:
 
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToCyndaquil
     disappear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    appear ROCK_SALT_LAB_CYNDAQUIL
     cry CYNDAQUIL
     waitsfx
     pause 15
 
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToTotodile
     disappear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    appear ROCK_SALT_LAB_TOTODILE
     cry TOTODILE
     waitsfx
     pause 15
 
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToChikorita
     disappear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    appear ROCK_SALT_LAB_CHIKORITA
     cry CHIKORITA
     waitsfx
     pause 15
@@ -149,7 +158,7 @@ Script_MeetProf:
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfReturnsToDesk
 
     turnobject PLAYER, RIGHT
-    turnobject ROCK_SALT_LAB_JADE, RIGHT
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, RIGHT
     pause 15
 
     opentext
@@ -159,17 +168,17 @@ Script_MeetProf:
 	pause 15
 
     turnobject PLAYER, DOWN
-    turnobject ROCK_SALT_LAB_JADE, UP
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, UP
     opentext
 	writetext .Text_IveStudiedForYears
 	waitbutton
 	closetext
 
     turnobject PLAYER, RIGHT
-    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeLooksAtEachStarter
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeLooksAtEachStarter
 
     turnobject PLAYER, DOWN
-    turnobject ROCK_SALT_LAB_JADE, UP
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, UP
     setscene SCENE_CHOOSE_STARTER
     jumptext Text_CanYouChooseFirst
 
@@ -390,12 +399,12 @@ Text_CanYouChooseFirst:
 	done
 
 Script_CantLeaveLab1:
-    turnobject ROCK_SALT_LAB_JADE, DOWN
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
     opentext
     writetext Text_YouCantLeave
     waitbutton
     closetext
-    turnobject ROCK_SALT_LAB_JADE, RIGHT
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, RIGHT
     applymovement PLAYER, .Movement_StepUp
     end
 
@@ -404,7 +413,7 @@ Script_CantLeaveLab1:
     step_end
 
 Script_CantLeaveLab2:
-    turnobject ROCK_SALT_LAB_JADE, UP
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, UP
     opentext
     writetext Text_YouCantLeave
     waitbutton
@@ -439,13 +448,13 @@ starter_script CYNDAQUIL, TOTODILE
 	step_end
 
 .Movement_JadeExitsLabFromTOTODILE:
+    step DOWN
     step LEFT
     step LEFT
 	step DOWN
 	step DOWN
     step DOWN
     step DOWN
-	step DOWN
 	step DOWN
 	step_end
 
@@ -630,20 +639,20 @@ Text_FollowMe:
 
 RockSaltLab_ReceiveDexScript:
     turnobject ROCK_SALT_LAB_PROF, RIGHT
-    turnobject ROCK_SALT_LAB_JADE, LEFT
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
     turnobject PLAYER, LEFT
 
     opentext
     writetext .Text_HelpWithProject
     promptbutton
 
-    turnobject ROCK_SALT_LAB_JADE, DOWN
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
     turnobject PLAYER, UP
 
     writetext .Text_WhatDoYouThink
     promptbutton
 
-    turnobject ROCK_SALT_LAB_JADE, LEFT
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
     turnobject PLAYER, LEFT
 
     writetext .Text_WeWillDoIt
@@ -655,7 +664,7 @@ RockSaltLab_ReceiveDexScript:
     promptbutton
     setflag ENGINE_POKEDEX
 
-    turnobject ROCK_SALT_LAB_JADE, DOWN
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
     turnobject PLAYER, UP
 
     writetext .Text_LetsGetStarted
@@ -663,9 +672,9 @@ RockSaltLab_ReceiveDexScript:
     closetext
 
     applymovement PLAYER, .Movement_PlayerMovesOutOfWay
-    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeStepsDown
-    follow ROCK_SALT_LAB_JADE, PLAYER
-    applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToExit
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeStepsDown
+    follow ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToExit
     stopfollow
 
     opentext
@@ -675,7 +684,7 @@ RockSaltLab_ReceiveDexScript:
 
     playsound SFX_ENTER_DOOR
 	waitsfx
-	disappear ROCK_SALT_LAB_JADE
+	disappear ROCK_SALT_LAB_JADE_IN_BACK
     pause 10
 
     applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
@@ -864,7 +873,8 @@ RockSaltLab_MapEvents:
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Prof, EVENT_ROCK_SALT_LAB_PROF
     object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
     object_event 4, 0, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE_IN_FRONT
+    object_event 4, 5, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE_IN_BACK
     object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
 	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL

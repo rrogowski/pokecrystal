@@ -52,6 +52,7 @@ Script_VisitJadesHouse:
 
 	setscene SCENE_ROCK_SALT_JADES_HOUSE_NOOP
 	setmapscene ROCK_SALT_LAB, SCENE_MEET_PROF
+	setevent EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
 	end
 
 .Movement_WalkUpToJade:
@@ -73,7 +74,7 @@ Script_VisitJadesHouse:
 
 .Text_Welcome:
 	text "<PLAYER>!"
-	
+
 	para "You made it!"
 
 	para "Come on in!"
@@ -121,7 +122,7 @@ Script_JadesN64:
 	text "Looks like JADE"
 	line "was playing"
 	cont "#MON Snap."
-	
+
 	done
 
 RockSaltJadesHouse_MapEvents:

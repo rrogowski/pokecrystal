@@ -78,7 +78,6 @@ NewGame:
 	jp FinishContinueFunction
 
 PlayerProfileSetup:
-	farcall CheckMobileAdapterStatus
 	jr c, .ok
 	farcall InitGender
 	ret
@@ -1364,11 +1363,14 @@ InitializePlayerDefaultName:
 InitializeEvents:
 	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	setinitialevent EVENT_ROCK_SALT_TOWN_TAUROS
+	setinitialevent EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
 
 	setinitialevent EVENT_ROCK_SALT_LAB_PROF
 	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
 	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
-	setinitialevent EVENT_ROCK_SALT_LAB_JADE
+	setinitialevent EVENT_ROCK_SALT_LAB_JADE_IN_FRONT
+	setinitialevent EVENT_ROCK_SALT_LAB_JADE_IN_BACK
 	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
 	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
 	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL

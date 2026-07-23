@@ -1,12 +1,13 @@
 	object_const_def
 	const ROCK_SALT_TOWN_OLD_MAN
 	const ROCK_SALT_TOWN_JADE_INTRO
-	const ROCK_SALT_TOWN_JADE_BEHIND_LAB
 	const ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 	const ROCK_SALT_TOWN_TAUROS_1
 	const ROCK_SALT_TOWN_TAUROS_2
 	const ROCK_SALT_TOWN_TAUROS_3
 	const ROCK_SALT_TOWN_TAUROS_4
+	const ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
+	const ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
 	const ROCK_SALT_TOWN_FRUIT_TREE
 	const ROCK_SALT_TOWN_YOUNGSTER
 	const ROCK_SALT_TOWN_GARDENER
@@ -15,8 +16,7 @@ RockSaltTown_MapScripts:
 	def_scene_scripts
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_MEET_JADE
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_NOOP
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_TAUROS_LOOSE
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_RAMPAGING_TAUROS
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Callback_RockSaltTownMoveObjects
@@ -24,22 +24,22 @@ RockSaltTown_MapScripts:
 Callback_RockSaltTownMoveObjects:
 	checkscene
 	ifequal SCENE_MEET_JADE, .Callback_MeetJade
-	ifequal SCENE_TAUROS_LOOSE, .Callback_TaurosLoose
-	endcallback
+	ifequal SCENE_RAMPAGING_TAUROS, .Callback_RampagingTauros
+	sjump .Callback_Noop
 
 .Callback_MeetJade:
 	appear ROCK_SALT_TOWN_JADE_INTRO
+	appear ROCK_SALT_TOWN_TAUROS_1
 	endcallback
 
-.Callback_TaurosLoose:
-.add_players_tauros
-	checkevent EVENT_CALMED_RAMPAGING_TAUROS
-	iftrue .add_jades_tauros_and_jade
-	; drinking water south of old man's house
-	moveobject ROCK_SALT_TOWN_TAUROS_2, 23, 19
-.add_jades_tauros_and_jade
-	; in front of old man's house
-	moveobject ROCK_SALT_TOWN_TAUROS_3, 20, 17
+.Callback_RampagingTauros:
+	appear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
+	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
+	endcallback
+
+.Callback_Noop
+	appear ROCK_SALT_TOWN_TAUROS_1
 	endcallback
 
 SceneSetup_RockSaltTownNoop:
@@ -142,18 +142,22 @@ RockSaltTownFruitTree:
    fruittree FRUITTREE_ROCK_SALT_TOWN
 
 Script_PlayersRampagingTauros:
-	checkscene
-	ifnotequal SCENE_TAUROS_LOOSE, Script_TaurosMoo
-
 	opentext
 	writetext Text_TaurosAttacked
+	cry TAUROS
 	waitbutton
 	closetext
 	loadwildmon TAUROS, 2
 	startbattle
 	setevent EVENT_CALMED_RAMPAGING_TAUROS
 	advancequest QUEST_TROUBLE_WITH_TAUROS
-	disappear ROCK_SALT_TOWN_TAUROS_2
+	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
+	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
+	disappear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	appear ROCK_SALT_TOWN_TAUROS_1
+	appear ROCK_SALT_TOWN_TAUROS_2
+	appear ROCK_SALT_TOWN_TAUROS_3
+	appear ROCK_SALT_TOWN_TAUROS_4
 	reloadmapafterbattle
 	opentext
 	writetext Text_TaurosCalmedDown
@@ -179,9 +183,12 @@ Text_TaurosCalmedDown:
 	done
 
 Script_JadesRampagingTauros:
-	checkscene
-	ifnotequal SCENE_TAUROS_LOOSE, Script_TaurosMoo
-	jumptext .Text_Rampaging
+	opentext
+	writetext .Text_Rampaging
+	cry TAUROS
+	waitbutton
+	closetext
+	end
 
 .Text_Rampaging:
 	text "The TAUROS is"
@@ -189,7 +196,6 @@ Script_JadesRampagingTauros:
 	done
 
 Script_Tauros:
-	faceplayer
 	sjump Script_TaurosMoo
 
 Script_TaurosMoo:
@@ -276,110 +282,6 @@ RockSaltTownJadesHouseSign:
 RockSaltTownJadesHouseSigntText:
     text "JADE'S HOUSE"
     done
-
-RockSaltTownJadeScript:
-	faceplayer
-
-	opentext
-	writetext Text_CantEnterCave
-	yesorno
-	closetext
-
-	iftrue .TooDangerous
-
-	showemote EMOTE_QUESTION, ROCK_SALT_TOWN_JADE_BEHIND_LAB, 15
-	opentext
-	writetext Text_AreYouSure
-	yesorno
-	closetext
-
-	iftrue .TooDangerous
-
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, UP
-	pause 40
-	showemote EMOTE_SHOCK, ROCK_SALT_TOWN_JADE_BEHIND_LAB, 15
-	faceplayer
-
-	opentext
-	writetext Text_JadeBattle
-	waitbutton
-	closetext
-
-	winlosstext Text_JadeBeaten, 0
-	loadtrainer JADE, JADE1
-	startbattle
-	reloadmapafterbattle
-
-	opentext
-	writetext Text_FollowMe
-	waitbutton
-	closetext
-
-	playsound SFX_ENTER_DOOR
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, Movement_JadeEntersCave
-	waitsfx
-	disappear ROCK_SALT_TOWN_JADE_BEHIND_LAB
-
-	end
-
-.TooDangerous:
-	opentext
-	writetext Text_TooDangerous
-	waitbutton
-	closetext
-
-	end
-
-Text_JadeBeaten:
-	text "You... beat me."
-	done
-
-Text_CantEnterCave:
-	text "What? You want to"
-	line "enter this cave?"
-
-	para "I'm sorry, but I"
-	line "can't allow you"
-	cont "inside."
-
-	para "Why? ... Because"
-	line "there's a terrible"
-	cont "creature inside."
-
-	para "Spooky, huh?"
-
-	done
-
-Text_AreYouSure:
-	text "You're really not"
-	line "scared? Not even"
-	cont "a little?"
-
-	done
-
-Text_TooDangerous:
-	text "That's what I"
-	line "thought! It's too"
-	cont "dangerous!"
-
-	done
-
-Text_JadeBattle:
-	text "Hmm..."
-
-	para "You're ready to"
-	line "face what's inside,"
-	cont "are you?"
-
-	para "Okay! But you're"
-	line "gonna have to get"
-	cont "through me first!"
-
-	done
-
-Movement_JadeEntersCave:
-	step UP
-	step_end
 
 Script_MeetJade:
 	opentext
@@ -478,12 +380,13 @@ RockSaltTown_MapEvents:
 	def_object_events
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
-	object_event 28, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_JADE_BEHIND_LAB_IN_ROCK_SALT_TOWN
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, -1
-	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_PlayersRampagingTauros, -1
-	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_JadesRampagingTauros, -1
-	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, -1
+	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
+	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
+	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
+	object_event 25,  9, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
+	object_event 20, 18, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_JadesRampagingTauros, EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
+	object_event 23, 19, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_PlayersRampagingTauros, EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
 	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
 	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_Youngster, -1
 	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_Gardener, -1

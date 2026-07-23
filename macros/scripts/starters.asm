@@ -41,13 +41,13 @@ Script_ChooseStarter_\1:
 	setevent EVENT_CHOSE_STARTER_\1
 
 	pause 15
-	turnobject ROCK_SALT_LAB_JADE, RIGHT
+	turnobject ROCK_SALT_LAB_JADE_IN_BACK, RIGHT
 	opentext
 	writetext Text_ItChoseYou
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksTo\2
+	applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksTo\2
 	opentext
 	writetext Text_IllChoseThisOne
 	promptbutton
@@ -59,17 +59,15 @@ Script_ChooseStarter_\1:
 	closetext
 	disappear ROCK_SALT_LAB_\2
 
-	faceobject ROCK_SALT_LAB_JADE, PLAYER
-	faceobject PLAYER, ROCK_SALT_LAB_JADE
+	faceobject ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
+	faceobject PLAYER, ROCK_SALT_LAB_JADE_IN_BACK
 	opentext
 	writetext Text_Hurry
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_LAB_JADE, .Movement_JadeExitsLabFrom\2
-	playsound SFX_ENTER_DOOR
-	waitsfx
-	disappear ROCK_SALT_LAB_JADE
+	applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeExitsLabFrom\2
+	disappear ROCK_SALT_LAB_JADE_IN_BACK
 
 	unlockquest QUEST_TROUBLE_WITH_TAUROS
 	setquestgoal QUEST_TROUBLE_WITH_TAUROS, 1
@@ -104,6 +102,7 @@ Script_ChooseStarter_\1:
 	disappear ROCK_SALT_LAB_PROF
 
 	setscene SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
-	setmapscene ROCK_SALT_TOWN, SCENE_TAUROS_LOOSE
+	setmapscene ROCK_SALT_TOWN, SCENE_RAMPAGING_TAUROS
+	disappear ROCK_SALT_TOWN_TAUROS_1
 	end
 ENDM
