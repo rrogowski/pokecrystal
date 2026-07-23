@@ -3661,16 +3661,6 @@ wBookwormBooksRead::
 ; bit 6: book 7
 ; bit 7: book 8
 
-; see constants/ram_constants.asm
-wDefeatedTauros::
-; bit 0: tauros 1
-; bit 1: tauros 2
-; bit 2: tauros 3
-; bit 3: unused
-; bit 4: unused
-; bit 5: unused
-; bit 6: unused
-; bit 7: unused
 
 SECTION "Scratch RAM", WRAMX
 

@@ -115,7 +115,6 @@ Script_MeetProf:
     playsound SFX_ENTER_DOOR
 	waitsfx
     disappear ROCK_SALT_LAB_JADE
-    clearevent EVENT_JADE_IN_ROCK_SALT_TOWN
 
     clearevent EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
     clearevent EVENT_TOTODILE_IN_ROCK_SALT_TOWN

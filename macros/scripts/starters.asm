@@ -39,13 +39,13 @@ Script_RockSaltTown\1:
 	setevent EVENT_CHOSE_STARTER_\1
 
 	pause 15
-	turnobject ROCK_SALT_TOWN_JADE, UP
+	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, UP
 	opentext
 	writetext Text_ItChoseYou
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_JADE, .Movement_JadeWalksTo\2
+	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeWalksTo\2
 	opentext
 	writetext Text_IllChoseThisOne
 	promptbutton
@@ -59,17 +59,17 @@ Script_RockSaltTown\1:
 
 	scall Script_AideFinishesFixingFence
 
-	faceobject ROCK_SALT_TOWN_JADE, PLAYER
-	faceobject PLAYER, ROCK_SALT_TOWN_JADE
+	faceobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, PLAYER
+	faceobject PLAYER, ROCK_SALT_TOWN_JADE_BEHIND_LAB
 	opentext
 	writetext Text_Hurry
 	waitbutton
 	closetext
 	
-	applymovement ROCK_SALT_TOWN_JADE, .Movement_JadeWalksToLabFrom\2
+	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeWalksToLabFrom\2
 	playsound SFX_ENTER_DOOR
 	waitsfx
-	disappear ROCK_SALT_TOWN_JADE
+	disappear ROCK_SALT_TOWN_JADE_BEHIND_LAB
 
 	unlockquest QUEST_TROUBLE_WITH_TAUROS
 	setquestgoal QUEST_TROUBLE_WITH_TAUROS, 3
