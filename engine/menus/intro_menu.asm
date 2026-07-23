@@ -1372,6 +1372,9 @@ InitializeEvents:
 	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
 	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
 	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL
+	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE
+	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA
 
 	setinitialevent EVENT_ROCK_SALT_JADES_HOUSE_JADE
 
@@ -1437,7 +1440,7 @@ IntroProfSpeech:
 	ld hl, .Text_SpeechPart3
 	call PrintText
 
-	call .FadeToBlackAndContinueDialogue	
+	call .FadeToBlackAndContinueDialogue
 	ret
 
 ; adapted from InitClock
@@ -1541,7 +1544,7 @@ IntroProfSpeech:
 	line "explore the"
 	cont "wonderful world of"
 	cont "#MON!"
-	
+
 	prompt
 
 .Text_SpeechPart4:
@@ -1549,7 +1552,7 @@ IntroProfSpeech:
 	line "Every journy"
 	cont "begins with a"
 	cont "single step!"
-	
+
 	prompt
 
 ; adapted from ShrinkPlayer

@@ -3,9 +3,6 @@
 	const ROCK_SALT_TOWN_JADE_INTRO
 	const ROCK_SALT_TOWN_JADE_BEHIND_LAB
 	const ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	const ROCK_SALT_TOWN_CYNDAQUIL
-	const ROCK_SALT_TOWN_TOTODILE
-	const ROCK_SALT_TOWN_CHIKORITA
 	const ROCK_SALT_TOWN_TAUROS_1
 	const ROCK_SALT_TOWN_TAUROS_2
 	const ROCK_SALT_TOWN_TAUROS_3
@@ -17,10 +14,8 @@
 RockSaltTown_MapScripts:
 	def_scene_scripts
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_MEET_JADE
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_NOOP
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
-	scene_script SceneSetup_MeetAideOutBack, SCENE_MEET_AIDE_OUT_BACK
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_CHOOSE_STARTER
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_NOOP
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_TAUROS_LOOSE
 
 	def_callbacks
@@ -29,16 +24,11 @@ RockSaltTown_MapScripts:
 Callback_RockSaltTownMoveObjects:
 	checkscene
 	ifequal SCENE_MEET_JADE, .Callback_MeetJade
-	ifequal SCENE_MEET_AIDE_OUT_BACK, .Callback_MeetAideOutBack
 	ifequal SCENE_TAUROS_LOOSE, .Callback_TaurosLoose
 	endcallback
 
 .Callback_MeetJade:
 	appear ROCK_SALT_TOWN_JADE_INTRO
-	endcallback
-
-.Callback_MeetAideOutBack:
-	scall .Callback_TaurosLoose
 	endcallback
 
 .Callback_TaurosLoose:
@@ -53,17 +43,6 @@ Callback_RockSaltTownMoveObjects:
 	endcallback
 
 SceneSetup_RockSaltTownNoop:
-	end
-
-SceneSetup_MeetAideOutBack:
-	readmem wXCoord
-	ifequal 29, .position2
-.position1
-	sdefer Script_MeetAideOutBack1
-	end
-.position2
-	sdefer Script_MeetAideOutBack2
-.done
 	end
 
 Script_OldManStopsYouFromLeaving:
@@ -110,7 +89,7 @@ Text_ItsDangerousAhead:
 
 	para "Get yourself a"
 	line "#MON first!"
-	
+
 	done
 
 RockSaltTownOldManScript:
@@ -126,7 +105,7 @@ RockSaltTownOldManScript:
 	end
 
 .NoStarter:
-	opentext 
+	opentext
 	writetext Text_ItsDangerousAhead
 	waitbutton
 	closetext
@@ -141,140 +120,6 @@ Text_RockSaltTownOldManHasStarter:
     line "to take on the"
     cont "tall grass!"
     done
-
-Script_MeetAideOutBack1:
-	scall Script_AideCallsToPlayer
-	applymovement PLAYER, .Movement_WalkToAide1
-	sjump Script_MeetAideOutBack
-
-.Movement_WalkToAide1:
-	step UP
-	step RIGHT
-	step UP
-	step_end
-
-Script_MeetAideOutBack2:
-	scall Script_AideCallsToPlayer
-	applymovement PLAYER, .Movement_WalkToAide2
-	sjump Script_MeetAideOutBack
-
-.Movement_WalkToAide2:
-	step UP
-	step UP
-	step_end
-
-Script_AideCallsToPlayer:
-	opentext
-	writetext .Text_OverHere
-	waitbutton
-	closetext
-	end
-
-.Text_OverHere:
-	text "Over here!"
-	done
-
-Script_MeetAideOutBack:
-	opentext
-	writetext .Text_ReferToPokemon
-	waitbutton
-	closetext
-
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, UP
-	pause 15
-
-	opentext
-	writetext .Text_JadeInAwe
-	waitbutton
-	closetext
-	pause 10
-
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeWalksToYou1
-	turnobject PLAYER, LEFT
-	opentext
-	writetext .Text_IveStudiedForYears
-	waitbutton
-	closetext
-
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeStepsUp
-	turnobject PLAYER, UP
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeLooksAtEachStarter
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeWalksToYou2
-
-	setscene SCENE_CHOOSE_STARTER
-	sjump Script_RockSaltTownJade
-
-.Movement_AideWalksToFence:
-	step RIGHT
-	step RIGHT
-	step DOWN
-	step DOWN
-	step RIGHT
-	step RIGHT
-	step DOWN
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-.Movement_JadeWalksToYou1:
-	step DOWN
-	turn_head RIGHT
-	step_end
-
-.Movement_JadeStepsUp:
-	step UP
-	step_end
-
-.Movement_JadeLooksAtEachStarter
-	step UP	
-	step_sleep 25
-	step LEFT
-	step LEFT
-	turn_head UP
-	step_sleep 25
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	turn_head UP
-	step_sleep 25
-	step_end
-
-.Movement_JadeWalksToYou2:
-	step LEFT
-	step DOWN
-	step_end
-
-.Text_ReferToPokemon:
-	text "These #MON are"
-	line "here to help."
-	done
-
-.Text_JadeInAwe:
-	text "Wow..."
-
-	para "They're amazing."
-
-	done
-
-.Text_IveStudiedForYears:
-	text "I've studied"
-	line "#MON for"
-	cont "years..."
-
-	done
-
-Script_RockSaltTownAide:
-	jumptextfaceplayer .Text_IveGotThis
-
-.Text_IveGotThis:
-	text "I've got this!"
-
-	para "You help the"
-	line "others!"
-
-	done
 
 Script_RockSaltTownJade:
 	checkscene
@@ -314,7 +159,7 @@ Script_PlayersRampagingTauros:
 	writetext Text_TaurosCalmedDown
 	waitbutton
 	closetext
-	
+
 	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
 	setmapscene ROCK_SALT_LAB, SCENE_TROUBLE_WITH_TAUROS_REWARD
 	end
@@ -337,7 +182,7 @@ Script_JadesRampagingTauros:
 	checkscene
 	ifnotequal SCENE_TAUROS_LOOSE, Script_TaurosMoo
 	jumptext .Text_Rampaging
-	
+
 .Text_Rampaging:
 	text "The TAUROS is"
 	line "rampaging!"
@@ -359,185 +204,6 @@ Script_TaurosMoo:
     text "TAUROS: Moo!"
     done
 
-starter_script CYNDAQUIL, TOTODILE
-
-.Movement_JadeWalksToTOTODILE:
-	step LEFT
-	step UP
-	step_end
-
-.Movement_JadeWalksToLabFromTOTODILE:
-	step DOWN
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-.String_DefaultNickname:
-	db "CYNDAQUIL@"
-
-starter_script TOTODILE, CHIKORITA
-
-.Movement_JadeWalksToCHIKORITA:
-	step RIGHT
-	step UP
-	step_end
-
-.Movement_JadeWalksToLabFromCHIKORITA:
-	step DOWN
-	step LEFT
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-.String_DefaultNickname:
-	db "TOTODILE@"
-
-starter_script CHIKORITA, CYNDAQUIL
-
-.Movement_JadeWalksToCYNDAQUIL:
-	step LEFT
-	step LEFT
-	step LEFT
-	step UP
-	step_end
-
-.Movement_JadeWalksToLabFromCYNDAQUIL:
-	step DOWN
-	step RIGHT
-	step RIGHT
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-.String_DefaultNickname:
-	db "CHIKORITA@"
-
-Text_ConfirmStarterChoice:
-	text "Do you want the"
-	line "@"
-	text_ram wStringBuffer3
-	text "?"
-	done
-
-Text_ItSeemsToLikeYou:
-	text "It seems to like"
-	line "you!"
-	done
-
-Text_ItChoseYou:
-	text "It chose you!"
-
-	para "That's amazing..."
-
-	done
-
-Text_IllChoseThisOne:
-	text "I'll choose this"
-	line "one."
-
-	para "We should work"
-	line "well together!"
-
-	done
-
-Text_PlayerReceivedStarter:
-	text "<PLAYER> received"
-	line "the @"
-	text_ram wStringBuffer3
-	text "!"
-	done
-
-Text_JadeReceivedStarter:
-	text "JADE received"
-	line "the @"
-	text_ram wStringBuffer3
-	text "!"
-	done
-
-Text_Hurry:
-	text "<PLAYER>, hurry!"
-	done
-
-Script_AideFinishesFixingFence:
-	turnobject PLAYER, DOWN
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, DOWN
-	opentext
-	writetext .Text_TheFenceIsFixed
-	waitbutton
-	closetext
-	end
-
-.Movement_AideReturns:
-	step UP
-	step UP
-	step LEFT
-	step LEFT
-	step LEFT
-	step UP
-	step UP
-	step_end
-
-.Movement_AideWalksToLab:
-	step DOWN
-	step DOWN
-	step DOWN
-	step_end
-
-.Text_TheFenceIsFixed:
-	text "The fence is"
-	line "fixed!"
-
-	done
-
-Script_JadeStopsYouFromLeaving1:
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, LEFT
-	scall Script_JadeCallsYouBack
-	applymovement PLAYER, .Movement_WalkRight
-	end
-
-.Movement_WalkRight:
-	step RIGHT
-	step_end
-
-Script_JadeStopsYouFromLeaving2:
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, DOWN
-	scall Script_JadeCallsYouBack
-	applymovement PLAYER, .Movement_WalkUp
-	end
-
-.Movement_WalkUp:
-	step UP
-	step_end
-
-Script_JadeStopsYouFromLeaving3:
-	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, RIGHT
-	scall Script_JadeCallsYouBack
-	applymovement PLAYER, .Movement_WalkLeft
-	end
-
-.Movement_WalkLeft:
-	step LEFT
-	step_end
-
-Script_JadeCallsYouBack:
-	jumptext .Text_JadeCallsYouBack
-
-.Text_JadeCallsYouBack:
-	text "Wait!"
-
-	para "We need a Pokemon"
-	line "to help!"
-
-	para "Choose one soon!"
-
-	para "The Tauros won't"
-	line "wait!"
-
-	done
-
 Script_JadeBattlingTauros:
 	jumptextfaceplayer .Text_ICanHandleThisOne
 
@@ -557,7 +223,7 @@ Script_Youngster:
 .Text_YoureNewHereRight:
     text "You're new here,"
     line "right?"
-    
+
     para "Have you seen the"
     line "cave at the edge"
     cont "of town?"
@@ -568,7 +234,7 @@ Script_Youngster:
 
 		para "I wanna see it"
 		line "someday!"
-		
+
     done
 
 Script_Gardener:
@@ -618,7 +284,7 @@ RockSaltTownJadeScript:
 	writetext Text_CantEnterCave
 	yesorno
 	closetext
-	
+
 	iftrue .TooDangerous
 
 	showemote EMOTE_QUESTION, ROCK_SALT_TOWN_JADE_BEHIND_LAB, 15
@@ -633,7 +299,7 @@ RockSaltTownJadeScript:
 	pause 40
 	showemote EMOTE_SHOCK, ROCK_SALT_TOWN_JADE_BEHIND_LAB, 15
 	faceplayer
-	
+
 	opentext
 	writetext Text_JadeBattle
 	waitbutton
@@ -653,7 +319,7 @@ RockSaltTownJadeScript:
 	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, Movement_JadeEntersCave
 	waitsfx
 	disappear ROCK_SALT_TOWN_JADE_BEHIND_LAB
-	
+
 	end
 
 .TooDangerous:
@@ -671,7 +337,7 @@ Text_JadeBeaten:
 Text_CantEnterCave:
 	text "What? You want to"
 	line "enter this cave?"
-	
+
 	para "I'm sorry, but I"
 	line "can't allow you"
 	cont "inside."
@@ -709,10 +375,6 @@ Text_JadeBattle:
 	line "gonna have to get"
 	cont "through me first!"
 
-	done
-
-Text_FollowMe:
-	text "Ugh. Follow me."
 	done
 
 Movement_JadeEntersCave:
@@ -808,15 +470,6 @@ RockSaltTown_MapEvents:
 	def_coord_events
 	coord_event 29, 20, SCENE_MEET_JADE, Script_MeetJade
 	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, Script_OldManStopsYouFromLeaving
-	coord_event 25, 5, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving1
-	coord_event 25, 6, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving1
-	coord_event 25, 7, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving1
-	coord_event 28, 8, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving2
-	coord_event 29, 8, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving2
-	coord_event 30, 8, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving2
-	coord_event 31, 6, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving3
-	coord_event 31, 7, SCENE_CHOOSE_STARTER, Script_JadeStopsYouFromLeaving3
-
 	def_bg_events
 	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
 	bg_event 27, 19, BGEVENT_READ, RockSaltTownPlayersHouseSign
@@ -827,9 +480,6 @@ RockSaltTown_MapEvents:
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 28, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_JADE_BEHIND_LAB_IN_ROCK_SALT_TOWN
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	object_event 26,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCYNDAQUIL, EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
-	object_event 28,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownTOTODILE, EVENT_TOTODILE_IN_ROCK_SALT_TOWN
-	object_event 30,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCHIKORITA, EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
 	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, -1
 	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_PlayersRampagingTauros, -1
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_JadesRampagingTauros, -1
