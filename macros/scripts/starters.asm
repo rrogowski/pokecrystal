@@ -103,7 +103,7 @@ Script_ChooseStarter_\1:
 	applymovement ROCK_SALT_LAB_PROF, Movement_ProfLeavesLab
 	disappear ROCK_SALT_LAB_PROF
 
-	setscene SCENE_ROCK_SALT_LAB_NOOP
+	setscene SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
 	setmapscene ROCK_SALT_TOWN, SCENE_TAUROS_LOOSE
 	end
 ENDM

@@ -15,6 +15,7 @@ RockSaltLab_MapScripts:
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_GONE
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
     scene_script SceneSetup_RockSaltLabNoop, SCENE_CHOOSE_STARTER
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
@@ -27,10 +28,14 @@ Callback_RockSaltLabMoveObjects:
     ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Callback_ProfGone
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
     ifequal SCENE_CHOOSE_STARTER, .Callback_ChooseStarter
+    ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .Callback_ProfAndAideGone
     sjump .Callback_Noop
 
 .Callback_ProfGone:
     appear ROCK_SALT_LAB_AIDE_IN_FRONT
+    endcallback
+
+.Callback_ProfAndAideGone:
     endcallback
 
 .Callback_MeetProf:
