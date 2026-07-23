@@ -735,30 +735,35 @@ Script_MeetJade:
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeApproachesYou
-	turnobject PLAYER, LEFT
+	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeApproachesYou
+	faceobject ROCK_SALT_TOWN_JADE_INTRO, PLAYER
 
 	opentext
 	writetext .Text_JadeIntro
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_JADE_BEHIND_LAB, .Movement_JadeGoesHome
-	disappear ROCK_SALT_TOWN_JADE_BEHIND_LAB
+	turnobject PLAYER, LEFT
+	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeGoesHome
+	disappear ROCK_SALT_TOWN_JADE_INTRO
 	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
 	end
 
 .Movement_JadeApproachesYou:
-	step RIGHT
-	step RIGHT
-	step RIGHT
-	step RIGHT
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
+	step LEFT
 	step_end
 
 .Movement_JadeGoesHome:
 	step LEFT
 	step LEFT
 	step LEFT
+	step LEFT
+	step UP
 	step UP
 	step UP
 	step UP
@@ -829,7 +834,7 @@ RockSaltTown_MapEvents:
 
 	def_object_events
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
-	object_event 24, 20, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_JADE_INTRO_IN_ROCK_SALT_TOWN
+	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_JADE_INTRO_IN_ROCK_SALT_TOWN
 	object_event 28, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_JADE_BEHIND_LAB_IN_ROCK_SALT_TOWN
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_JADE_BATTLING_TAUROS_IN_ROCK_SALT_TOWN
 	object_event 29,  6, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownAide, EVENT_AIDE_IN_ROCK_SALT_TOWN
