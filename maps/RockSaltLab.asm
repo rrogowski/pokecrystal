@@ -1,12 +1,20 @@
 	object_const_def
     const ROCK_SALT_LAB_PROF
-    const ROCK_SALT_LAB_AIDE
+    const ROCK_SALT_LAB_AIDE_IN_FRONT
+    const ROCK_SALT_LAB_AIDE_IN_BACK
     const ROCK_SALT_LAB_JADE
+    const ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    const ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    const ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    ; const ROCK_SALT_LAB_CYNDAQUIL_ON_TABLE
+    ; const ROCK_SALT_LAB_TOTODILE_ON_TABLE
+    ; const ROCK_SALT_LAB_CHIKORITA_ON_TABLE
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
-    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_GONE
     scene_script SceneSetup_MeetProf, SCENE_MEET_PROF
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_RockSaltLabNoop, SCENE_CANT_LEAVE_LAB
     scene_script SceneSetup_HealingMachineTutorial, SCENE_HEALING_MACHINE_TUTORIAL
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
@@ -17,18 +25,26 @@ RockSaltLab_MapScripts:
 
 Callback_RockSaltLabMoveObjects:
     checkscene
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Callback_ProfGone
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
     ifequal SCENE_HEALING_MACHINE_TUTORIAL, .Callback_HealingMachineTutorial
+    sjump .Callback_Noop
+
+.Callback_ProfGone:
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
+    endcallback
+
+.Callback_Noop:
+    appear ROCK_SALT_LAB_PROF
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
     endcallback
 
 .Callback_MeetProf:
     appear ROCK_SALT_LAB_PROF
     appear ROCK_SALT_LAB_JADE
-
-    moveobject ROCK_SALT_LAB_AIDE, 4, 0
-    turnobject ROCK_SALT_LAB_AIDE, DOWN
-    disappear ROCK_SALT_LAB_AIDE
-
+    appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
     endcallback
 
 .Callback_HealingMachineTutorial:
@@ -57,7 +73,6 @@ RockSaltLab_ReceiveDexScene:
     end
 
 Script_MeetProf:
-    disappear ROCK_SALT_LAB_AIDE
     turnobject PLAYER, RIGHT
     turnobject ROCK_SALT_LAB_JADE, LEFT
     pause 20
@@ -73,7 +88,7 @@ Script_MeetProf:
 
     playsound SFX_ENTER_DOOR
 	waitsfx
-    appear ROCK_SALT_LAB_AIDE
+    appear ROCK_SALT_LAB_AIDE_IN_BACK
 
     opentext
     writetext .Text_AideExclaims
@@ -83,33 +98,36 @@ Script_MeetProf:
     turnobject PLAYER, UP
     turnobject ROCK_SALT_LAB_PROF, UP
     showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToProf
+    applymovement ROCK_SALT_LAB_AIDE_IN_BACK, .Movement_AideWalksToProf
 
     opentext
     writetext .Text_TheresTrouble
     promptbutton
-    writetext .Text_AreTheyHurt
-    promptbutton
-    turnobject ROCK_SALT_LAB_PROF, RIGHT
-    turnobject PLAYER, LEFT
-    writetext .Text_WeNeedYourHelp
+    writetext .Text_YouGoAhead
     waitbutton
     closetext
 
+    applymovement ROCK_SALT_LAB_AIDE_IN_BACK, .Movement_AideLeavesLab
+
+    opentext
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    turnobject PLAYER, LEFT
+    writetext .Text_LetsPause
+    waitbutton
+    closetext
+
+    pause 20
     showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
 
     opentext
     writetext .Text_WaitNoPokemon
     promptbutton
-    writetext Text_IllExplainMoreLater
+    writetext Text_WeWillContinueLater
     waitbutton
     closetext
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToBackExit
-    playsound SFX_ENTER_DOOR
-	waitsfx
-    disappear ROCK_SALT_LAB_AIDE
-    clearevent EVENT_AIDE_IN_ROCK_SALT_TOWN
+    applymovement ROCK_SALT_LAB_AIDE_IN_BACK, .Movement_AideLeavesLab
+    disappear ROCK_SALT_LAB_AIDE_IN_BACK
 
     applymovement ROCK_SALT_LAB_JADE, .Movement_JadeWalksToBackExit
     playsound SFX_ENTER_DOOR
@@ -142,11 +160,16 @@ Script_MeetProf:
     step DOWN
     step_end
 
-.Movement_AideWalksToBackExit:
-    step UP
+.Movement_AideLeavesLab:
     step RIGHT
-    step UP
-    step UP
+    step RIGHT
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
     step_end
 
 .Movement_JadeWalksToBackExit:
@@ -162,8 +185,7 @@ Script_MeetProf:
     text "Ah!"
 
     para "You must be"
-    line "JADE and"
-    cont "<PLAYER>!"
+    line "<PLAYER>!"
 
     para "I'm PROF. CARAWAY."
 
@@ -184,35 +206,33 @@ Script_MeetProf:
     done
 
 .Text_AideExclaims:
-    text "AIDE: PROF."
-    line "CARAWAY!"
+    text "AIDE: Professor!"
     done
 
 .Text_TheresTrouble:
     text "There's trouble!"
 
-    para "The gate near town"
-    line "has broken!"
-
-    para "Several Tauros"
+    para "Several TAUROS"
     line "have escaped!"
     done
 
-.Text_AreTheyHurt:
+.Text_YouGoAhead:
     text "CARAWAY: What?!"
     
-    para "Are they hurt?"
+    para "You go ahead!"
 
-    para "We need to act"
-    line "quickly!"
+    para "I will join you"
+    line "in a moment."
 
     done
 
-.Text_WeNeedYourHelp:
-    text "I'll explain later."
+.Text_LetsPause:
+    text "Let's pause"
+    line "for now."
 
-    para "Right now we need"
-    line "your help!"
+    para "I'd like for you"
+    line "two to help herd"
+    cont "those TAUROS home."
 
     done
 
@@ -238,27 +258,16 @@ Script_MeetProf:
     para "But I've never"
     line "owned one."
 
-    para "CARAWAY: There's"
-    line "no need to"
-    cont "apologize!"
+    para "CARAWAY: No need"
+    line "to apologize!"
 
-    para "Research takes"
-    line "many forms."
-
-    para "However..."
-
-    para "You'll need a"
-    line "partner in the"
-    cont "field."
-
-    para "Go behind the lab."
-
+    para "Look at the table."
+    
     para "There are some"
     line "#MON there."
 
-    para "You may each"
-    line "borrow one"
-    cont "for now."
+    para "You can borrow one"
+    line "for now."
 
     para "They'll help you"
     line "with the Tauros."
@@ -267,14 +276,14 @@ Script_MeetProf:
 
     done
 
-Text_IllExplainMoreLater:
-    text "I'll explain more"
-    line "after this is"
-    cont "over."
+Text_WeWillContinueLater:
+    text "We'll continue our"
+    line "conversation when"
+    cont "we're done."
 
     para "For now..."
 
-    para "We need your help!"
+    para "Let's get to work!"
 
     done
 
@@ -298,32 +307,32 @@ Script_CantLeaveLab:
     done
 
 Script_HealingMachineTutorial1:
-    disappear ROCK_SALT_LAB_AIDE
-    moveobject ROCK_SALT_LAB_AIDE, 4, 5
-    appear ROCK_SALT_LAB_AIDE
+    disappear ROCK_SALT_LAB_AIDE_IN_FRONT
+    moveobject ROCK_SALT_LAB_AIDE_IN_FRONT, 4, 5
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
     sjump Script_HealingMachineTutorial
 
 Script_HealingMachineTutorial2:
-    disappear ROCK_SALT_LAB_AIDE
-    moveobject ROCK_SALT_LAB_AIDE, 5, 5
-    appear ROCK_SALT_LAB_AIDE
+    disappear ROCK_SALT_LAB_AIDE_IN_FRONT
+    moveobject ROCK_SALT_LAB_AIDE_IN_FRONT, 5, 5
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
     sjump Script_HealingMachineTutorial
 
 Script_HealingMachineTutorial:
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToYou
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
     opentext
     writetext .Text_NeedToHeal
     promptbutton
-    turnobject ROCK_SALT_LAB_AIDE, LEFT
+    turnobject ROCK_SALT_LAB_AIDE_IN_FRONT, LEFT
     writetext .Text_UseThatMachine
     promptbutton
-    turnobject ROCK_SALT_LAB_AIDE, UP
+    turnobject ROCK_SALT_LAB_AIDE_IN_FRONT, UP
     writetext .Text_ItWillRestoreYourMon
     waitbutton
     closetext
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideLeavesLab
-    disappear ROCK_SALT_LAB_AIDE
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideLeavesLab
+    disappear ROCK_SALT_LAB_AIDE_IN_FRONT
     
     setscene SCENE_ROCK_SALT_LAB_NOOP
     end
@@ -409,7 +418,7 @@ RockSaltLab_ReceiveDexScript:
 	disappear ROCK_SALT_LAB_JADE
     pause 10
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksToYou
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
     turnobject PLAYER, LEFT
 
     opentext
@@ -422,7 +431,7 @@ RockSaltLab_ReceiveDexScript:
     waitbutton
     closetext
 
-    applymovement ROCK_SALT_LAB_AIDE, .Movement_AideWalksBack
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
     ; prevent aide from immediately spinning after walking back
     pause 15
 
@@ -498,8 +507,8 @@ RockSaltLab_ReceiveDexScript:
     turn_head DOWN
     step_end
 
-RockSaltLabProfScript:
-    jumptextfaceplayer Text_IllExplainMoreLater
+Script_Prof:
+    jumptextfaceplayer Text_WeWillContinueLater
 
 Script_HealingMachine:
     checkevent EVENT_CHOSE_STARTER
@@ -545,8 +554,8 @@ Script_HealingMachine:
     done
 
 Script_AideInLab:
-    checkevent EVENT_JADE_IN_ROCK_SALT_JADES_HOUSE
-    iffalse .Script_ProfNotHere
+    checkscene
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Script_ProfNotHere
 
     faceplayer
     opentext
@@ -591,6 +600,11 @@ RockSaltLab_MapEvents:
     bg_event  2,  1, BGEVENT_READ, Script_HealingMachine
 
 	def_object_events
-    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltLabProfScript, EVENT_PROF_IN_ROCK_SALT_LAB
-    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_AIDE_IN_ROCK_SALT_LAB
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_JADE_IN_ROCK_SALT_LAB
+    object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Prof, EVENT_ROCK_SALT_LAB_PROF
+    object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
+    object_event 4, 0, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_ROCK_SALT_LAB_JADE
+    object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, CyndaquilPokeBallScript, EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, TotodilePokeBallScript, EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+	object_event  8,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ChikoritaPokeBallScript, EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+

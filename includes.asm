@@ -74,4 +74,5 @@ endc
 
 INCLUDE "macros/legacy.asm"
 
+INCLUDE "macros/initialization.asm"
 INCLUDE "macros/scripts/starters.asm"

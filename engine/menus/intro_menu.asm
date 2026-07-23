@@ -1362,37 +1362,18 @@ InitializePlayerDefaultName:
 .DefaultName: db "KIT@"
 
 InitializeEvents:
-	ld de, EVENT_AIDE_IN_ROCK_SALT_TOWN
-	ld b, SET_FLAG
-	call EventFlagAction
+	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_INTRO
+	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 
-	ld de, EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
-	ld b, SET_FLAG
-	call EventFlagAction
+	setinitialevent EVENT_ROCK_SALT_LAB_PROF
+	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
+	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
+	setinitialevent EVENT_ROCK_SALT_LAB_JADE
+	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
 
-	ld de, EVENT_TOTODILE_IN_ROCK_SALT_TOWN
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_PROF_IN_ROCK_SALT_LAB
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_JADE_IN_ROCK_SALT_LAB
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
-	ld b, SET_FLAG
-	call EventFlagAction
-
-	ld de, EVENT_RECEIVED_DEX
-	ld b, SET_FLAG
-	call EventFlagAction
+	setinitialevent EVENT_ROCK_SALT_JADES_HOUSE_JADE
 
 	ret
 

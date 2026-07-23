@@ -3,7 +3,6 @@
 	const ROCK_SALT_TOWN_JADE_INTRO
 	const ROCK_SALT_TOWN_JADE_BEHIND_LAB
 	const ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	const ROCK_SALT_TOWN_AIDE
 	const ROCK_SALT_TOWN_CYNDAQUIL
 	const ROCK_SALT_TOWN_TOTODILE
 	const ROCK_SALT_TOWN_CHIKORITA
@@ -29,8 +28,13 @@ RockSaltTown_MapScripts:
 
 Callback_RockSaltTownMoveObjects:
 	checkscene
+	ifequal SCENE_MEET_JADE, .Callback_MeetJade
 	ifequal SCENE_MEET_AIDE_OUT_BACK, .Callback_MeetAideOutBack
 	ifequal SCENE_TAUROS_LOOSE, .Callback_TaurosLoose
+	endcallback
+
+.Callback_MeetJade:
+	appear ROCK_SALT_TOWN_JADE_INTRO
 	endcallback
 
 .Callback_MeetAideOutBack:
@@ -176,8 +180,6 @@ Script_MeetAideOutBack:
 	waitbutton
 	closetext
 
-	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideWalksToFence
-	disappear ROCK_SALT_TOWN_AIDE
 	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, UP
 	pause 15
 
@@ -460,20 +462,12 @@ Text_Hurry:
 	done
 
 Script_AideFinishesFixingFence:
-	moveobject ROCK_SALT_TOWN_AIDE, 32, 10
-	appear ROCK_SALT_TOWN_AIDE
-	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideReturns
 	turnobject PLAYER, DOWN
 	turnobject ROCK_SALT_TOWN_JADE_BEHIND_LAB, DOWN
 	opentext
 	writetext .Text_TheFenceIsFixed
 	waitbutton
 	closetext
-
-	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideWalksToLab
-	playsound SFX_ENTER_DOOR
-	waitsfx
-	disappear ROCK_SALT_TOWN_AIDE
 	end
 
 .Movement_AideReturns:
@@ -732,7 +726,6 @@ Script_MeetJade:
 	closetext
 
 	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeApproachesYou
-	faceplayer
 
 	opentext
 	writetext .Text_JadeIntro
@@ -752,6 +745,7 @@ Script_MeetJade:
 	step LEFT
 	step LEFT
 	step LEFT
+	turn_head UP
 	step_end
 
 .Movement_JadeGoesHome:
@@ -830,10 +824,9 @@ RockSaltTown_MapEvents:
 
 	def_object_events
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
-	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_JADE_INTRO_IN_ROCK_SALT_TOWN
+	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 28, 6, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_JADE_BEHIND_LAB_IN_ROCK_SALT_TOWN
-	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_JADE_BATTLING_TAUROS_IN_ROCK_SALT_TOWN
-	object_event 29,  6, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownAide, EVENT_AIDE_IN_ROCK_SALT_TOWN
+	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 	object_event 26,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCYNDAQUIL, EVENT_CYNDAQUIL_IN_ROCK_SALT_TOWN
 	object_event 28,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownTOTODILE, EVENT_TOTODILE_IN_ROCK_SALT_TOWN
 	object_event 30,  4, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownCHIKORITA, EVENT_CHIKORITA_IN_ROCK_SALT_TOWN
