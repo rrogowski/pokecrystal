@@ -48,7 +48,7 @@ ENDM
 	map_const ROUTE_39_BARN,                                4,  4 ; 10
 	map_const ROUTE_39_FARMHOUSE,                           4,  4 ; 11
 	map_const ROUTE_38,                                    20,  9 ; 12
-	map_const ROUTE_39,                                    10, 18 ; 13
+	; map_const ROUTE_39,                                    10, 18 ; 13
 	map_const OLIVINE_CITY,                                20, 18 ; 14
 	endgroup
 
@@ -516,7 +516,7 @@ ENDM
 
 	newgroup PEPPERCORN							  			   ; 28
 	map_const ROUTE_101,								30,  9 ;  1
-	map_const PEPPERCORN_VILLAGE,					    15, 9 ;  2		
+	map_const PEPPERCORN_VILLAGE,					    15, 9 ;  2
 	endgroup
-			
+
 DEF NUM_MAP_GROUPS EQU const_value ; 28

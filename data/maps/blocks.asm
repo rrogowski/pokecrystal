@@ -214,8 +214,8 @@ Route35_Blocks:
 Route43_Blocks:
 	INCBIN "maps/Route43.blk"
 
-Route39_Blocks:
-	INCBIN "maps/Route39.blk"
+; Route39_Blocks:
+; 	INCBIN "maps/Route39.blk"
 
 PlayersHouse1F_Blocks:
 	INCBIN "maps/PlayersHouse1F.blk"

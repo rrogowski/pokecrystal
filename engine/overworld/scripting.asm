@@ -243,6 +243,7 @@ ScriptCommandTable:
 	dw Script_isquestturnedin
 	dw Script_sketchunown
 	dw Script_opensketchpad
+	dw Script_dismisslandmark
 	assert_table_length NUM_EVENT_COMMANDS
 
 StartScript:
@@ -2480,4 +2481,10 @@ Script_opensketchpad:
 	farcall Sketchpad
 	call CloseSubmenu
 	call CloseText
+	ret
+
+Script_dismisslandmark:
+	xor a
+	ld [wLandmarkSignTimer], a
+	farcall PlaceMapNameSign
 	ret

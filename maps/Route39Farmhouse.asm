@@ -196,8 +196,8 @@ Route39Farmhouse_MapEvents:
 	db 0, 0 ; filler
 
 	def_warp_events
-	warp_event  2,  7, ROUTE_39, 2
-	warp_event  3,  7, ROUTE_39, 2
+	; warp_event  2,  7, ROUTE_39, 2
+	; warp_event  3,  7, ROUTE_39, 2
 
 	def_coord_events
 

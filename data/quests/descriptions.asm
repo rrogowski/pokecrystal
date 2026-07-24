@@ -1,25 +1,34 @@
 QuestDescriptions:
 ; entries correspond to item ids (see constants/quest_constants.asm)
 	table_width 2
-	dw .IntoTheUnownDescription
 	dw .TroubleWithTaurosDescription
+  dw .ACryForHelpDescription
+	dw .IntoTheUnownDescription
 	dw .BuggingOutDescription
 	dw .MorningMoonDescription
 	dw .CoverToCoverDescription
 	assert_table_length NUM_QUESTS
 
-.IntoTheUnownDescription:
-	text "Sketch all unown"
-  line "variants. Turn in"
-  cont "to Jade in Rock"
-  cont "Salt Town."
-  prompt
-
 .TroubleWithTaurosDescription:
   text "Defeat all escaped"
   line "Tauros. Turn in to"
-  cont "Prof. Caraway in"
+  cont "PROF. CARAWAY in"
   cont "Rock Salt Town."
+  prompt
+
+.ACryForHelpDescription:
+  text "Find the source of"
+  line "the cry inside"
+  cont "Rock Salt Cave."
+  cont "Turn in to JADE"
+  cont "in Rock Salt Town."
+  prompt
+
+.IntoTheUnownDescription:
+	text "Sketch all unown"
+  line "variants. Turn in"
+  cont "to JADE in Rock"
+  cont "Salt Town."
   prompt
 
 .BuggingOutDescription:

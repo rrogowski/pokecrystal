@@ -3636,13 +3636,14 @@ SECTION "Quests RAM", WRAM0
 
 ; index corresponds to QUEST_* (see constants/quest_constants.asm)
 wQuests::
-	quest_struct IntoTheUnown
 	quest_struct TroubleWithTauros
+	quest_struct ACryForHelp
+	quest_struct IntoTheUnown
 	quest_struct BuggingOut
 	quest_struct MorningMoon
 	quest_struct CoverToCover
 wQuestsEnd::
-	assert wQuestsEnd - wQuests == NUM_QUESTS * QUEST_STRUCT_LENGTH
+	assert wQuestsEnd - wQuests == NUM_QUESTS * QUEST_STRUCT_LENGTH, "wrong number of quest_structs defined"
 
 ; temporary storage for QUEST_* (see constants/quest_constants.asm)
 wCurQuest:: db

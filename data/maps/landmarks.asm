@@ -33,7 +33,7 @@ Landmarks:
 	landmark  70,  42, TinTowerName
 	landmark  66,  42, BurnedTowerName
 	landmark  52,  44, Route38Name
-	landmark  36,  48, Route39Name
+	; landmark  36,  48, Route39Name
 	landmark  36,  60, OlivineCityName
 	; landmark  38,  62, LighthouseName
 	landmark  28,  56, BattleTowerName
@@ -58,7 +58,7 @@ Landmarks:
 	landmark 99, 99, RockSaltCaveName
 	landmark 99, 98, Route101Name
 	landmark 98, 98, PeppercornVillageName
-	
+
 	assert_table_length KANTO_LANDMARK
 	landmark  52, 108, PalletTownName
 	landmark  52,  92, Route1Name
@@ -199,7 +199,7 @@ Route35Name:         db "ROUTE 35@"
 Route36Name:         db "ROUTE 36@"
 Route37Name:         db "ROUTE 37@"
 Route38Name:         db "ROUTE 38@"
-Route39Name:         db "ROUTE 39@"
+; Route39Name:         db "ROUTE 39@"
 Route40Name:         db "ROUTE 40@"
 Route41Name:         db "ROUTE 41@"
 Route42Name:         db "ROUTE 42@"

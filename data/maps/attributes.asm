@@ -141,7 +141,7 @@ ENDM
 	connection south, Route34, ROUTE_34, 5
 
 	map_attributes OlivineCity, OLIVINE_CITY, $35
-	connection north, Route39, ROUTE_39, 5
+	; connection north, Route39, ROUTE_39, 5
 	; connection west, Route40, ROUTE_40, 9
 
 	map_attributes EcruteakCity, ECRUTEAK_CITY, $05
@@ -213,12 +213,12 @@ ENDM
 	connection south, Route36, ROUTE_36, -10
 
 	map_attributes Route38, ROUTE_38, $05
-	connection west, Route39, ROUTE_39, 0
+	; connection west, Route39, ROUTE_39, 0
 	connection east, EcruteakCity, ECRUTEAK_CITY, -5
 
-	map_attributes Route39, ROUTE_39, $05
-	connection south, OlivineCity, OLIVINE_CITY, -5
-	connection east, Route38, ROUTE_38, 0
+	; map_attributes Route39, ROUTE_39, $05
+	; connection south, OlivineCity, OLIVINE_CITY, -5
+	; connection east, Route38, ROUTE_38, 0
 
 	; map_attributes Route40, ROUTE_40, $35
 	; connection south, Route41, ROUTE_41, -15
@@ -722,7 +722,7 @@ ENDM
 	map_attributes RockSaltBookwormsHouse, ROCK_SALT_BOOKWORMS_HOUSE, $00
 	map_attributes RockSaltOldMansHouse, ROCK_SALT_OLD_MANS_HOUSE, $00
 
-	
+
 	map_attributes RockSaltCave1F, ROCK_SALT_CAVE_1F, $09
 	map_attributes RockSaltCave1B, ROCK_SALT_CAVE_1B, $09
 	map_attributes RockSaltCave2B, ROCK_SALT_CAVE_2B, $09

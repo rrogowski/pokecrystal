@@ -49,7 +49,7 @@ SceneSetup_RockSaltCave1FNoop:
 	end
 
 Script_RockSaltCave1FJadeFollows:
-    setevent EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
+	setevent EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
     applymovement PLAYER, .Movement_StepUp
     turnobject PLAYER, DOWN
 
@@ -61,6 +61,7 @@ Script_RockSaltCave1FJadeFollows:
     waitsfx
     pause 30
     turnobject ROCK_SALT_CAVE_1F_JADE, DOWN
+    dismisslandmark
     pause 30
     turnobject ROCK_SALT_CAVE_1F_JADE, UP
 

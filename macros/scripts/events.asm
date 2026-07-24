@@ -1120,4 +1120,9 @@ MACRO opensketchpad
 	db opensketchpad_command
 ENDM
 
+	const dismisslandmark_command
+MACRO dismisslandmark
+	db dismisslandmark_command
+ENDM
+
 DEF NUM_EVENT_COMMANDS EQU const_value

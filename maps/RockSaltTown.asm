@@ -559,6 +559,7 @@ Script_JadeOutsideRockSaltCave:
 	writetext .Text_ThankYou
 	waitbutton
 	closetext
+	unlockquest QUEST_A_CRY_FOR_HELP
 
 	readvar VAR_FACING
 	ifequal RIGHT, .case1
