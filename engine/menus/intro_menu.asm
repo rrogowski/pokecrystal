@@ -61,9 +61,8 @@ NewGame:
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
 	call InitializePlayerNewName
-	; call InitializePlayerDefaultName
-	call InitializeEvents
-	; call OakSpeech
+	call InitializePlayerDefaultName
+	call OakSpeech
 	call IntroProfSpeech
 	call InitializeWorld
 
@@ -1359,31 +1358,6 @@ InitializePlayerDefaultName:
 	ret
 
 .DefaultName: db "KIT@"
-
-InitializeEvents:
-	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_INTRO
-	setinitialevent EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	setinitialevent EVENT_ROCK_SALT_TOWN_TAUROS
-	setinitialevent EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
-	setinitialevent EVENT_ROCK_SALT_TOWN_YOUNGSTER
-	setinitialevent EVENT_ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
-	setinitialevent EVENT_ROCK_SALT_TOWN_AIDE
-
-	setinitialevent EVENT_ROCK_SALT_LAB_PROF
-	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
-	setinitialevent EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
-	setinitialevent EVENT_ROCK_SALT_LAB_JADE_IN_FRONT
-	setinitialevent EVENT_ROCK_SALT_LAB_JADE_IN_BACK
-	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
-	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
-	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
-	setinitialevent EVENT_ROCK_SALT_LAB_CYNDAQUIL
-	setinitialevent EVENT_ROCK_SALT_LAB_TOTODILE
-	setinitialevent EVENT_ROCK_SALT_LAB_CHIKORITA
-
-	setinitialevent EVENT_ROCK_SALT_JADES_HOUSE_JADE
-
-	ret
 
 IntroProfSpeech:
 	ld de, MUSIC_ECRUTEAK_CITY

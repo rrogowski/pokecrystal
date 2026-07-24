@@ -7,16 +7,26 @@ RockSaltJadesHouse_MapScripts:
 	scene_script SceneSetup_RockSaltJadesHouseNoop, SCENE_ROCK_SALT_JADES_HOUSE_NOOP
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Callback_RockSaltJadesHouseMoveObjects
+	callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltJadesHouse
 
-Callback_RockSaltJadesHouseMoveObjects:
+CallbackObjects_RockSaltJadesHouse:
+	scall SpriteSetup_RockSaltJadesHouse
+	endcallback
+
+SpriteSetup_RockSaltJadesHouse:
 	checkscene
-	ifequal SCENE_VISIT_JADES_HOUSE, .Callback_VisitJadesHouse
-	endcallback
+	scall SpriteSetup_Jade
+	end
 
-.Callback_VisitJadesHouse:
+SpriteSetup_Jade:
+	ifequal SCENE_VISIT_JADES_HOUSE, .case1
+	sjump .default
+.case1
 	appear ROCK_SALT_JADES_HOUSE_JADE
-	endcallback
+	end
+.default
+	disappear ROCK_SALT_JADES_HOUSE_JADE
+	end
 
 SceneSetup_VisitJadesHouse:
 	sdefer Script_VisitJadesHouse

@@ -22,51 +22,127 @@ RockSaltLab_MapScripts:
     scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
 
     def_callbacks
-    callback MAPCALLBACK_OBJECTS, Callback_RockSaltLabMoveObjects
+    callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltLab
 
-Callback_RockSaltLabMoveObjects:
+CallbackObjects_RockSaltLab:
+    scall SpriteSetup_RockSaltLab
+    endcallback
+
+SpriteSetup_RockSaltLab:
     checkscene
-    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .Callback_ProfGone
-    ifequal SCENE_MEET_PROF, .Callback_MeetProf
-    ifequal SCENE_CHOOSE_STARTER, .Callback_ChooseStarter
-    ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .Callback_ProfAndAideGone
-    ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .Callback_TroubleWithTaurosReward
-    sjump .Callback_Noop
+    scall SpriteSetup_RockSaltLabProf
+    scall SpriteSetup_RockSaltLabAideInFront
+    scall SpriteSetup_RockSaltLabAideInBack
+    scall SpriteSetup_RockSaltLabJadeInFront
+    scall SpriteSetup_RockSaltLabJadeInBack
+    scall SpriteSetup_RockSaltLabMon
+    scall SpriteSetup_RockSaltLabMonInPokeball
+    end
 
-.Callback_ProfGone:
-    appear ROCK_SALT_LAB_AIDE_IN_FRONT
-    endcallback
-
-.Callback_ProfAndAideGone:
-    endcallback
-
-.Callback_MeetProf:
+SpriteSetup_RockSaltLabProf:
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .case1
+    ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .case1
+    ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .case2
+    sjump .default
+.case1
+    disappear ROCK_SALT_LAB_PROF
+    end
+.case2
+    moveobject ROCK_SALT_LAB_PROF, 4, 4
     appear ROCK_SALT_LAB_PROF
+    end
+.default
+    appear ROCK_SALT_LAB_PROF
+    end
+
+SpriteSetup_RockSaltLabAideInFront:
+    ifequal SCENE_MEET_PROF, .case1
+    ifequal SCENE_CHOOSE_STARTER, .case1
+    ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .case1
+    sjump .default
+.case1
+    disappear ROCK_SALT_LAB_AIDE_IN_FRONT
+    end
+.default
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
+    end
+
+SpriteSetup_RockSaltLabAideInBack:
+    disappear ROCK_SALT_LAB_AIDE_IN_BACK
+    end
+
+SpriteSetup_RockSaltLabJadeInFront:
+    ifequal SCENE_MEET_PROF, .case1
+    sjump .default
+.case1
     appear ROCK_SALT_LAB_JADE_IN_FRONT
+    end
+.default
+    disappear ROCK_SALT_LAB_JADE_IN_FRONT
+    end
+
+SpriteSetup_RockSaltLabJadeInBack:
+    ifequal SCENE_CHOOSE_STARTER, .case1
+    ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .case1
+    sjump .default
+.case1
+    appear ROCK_SALT_LAB_JADE_IN_BACK
+    end
+.default
+    disappear ROCK_SALT_LAB_JADE_IN_BACK
+    end
+
+SpriteSetup_RockSaltLabMon:
+    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .case1
+    ifequal SCENE_MEET_PROF, .case1
+    sjump .default
+.case1
+    disappear ROCK_SALT_LAB_CYNDAQUIL
+    disappear ROCK_SALT_LAB_TOTODILE
+    disappear ROCK_SALT_LAB_CHIKORITA
+    end
+.default
+    checkevent EVENT_CHOSE_STARTER_CYNDAQUIL
+    iftrue .chose_cyndaquil
+
+    checkevent EVENT_CHOSE_STARTER_TOTODILE
+    iftrue .chose_totodile
+
+    checkevent EVENT_CHOSE_STARTER_TOTODILE
+    iftrue .chose_chikorita
+
+    sjump .chose_none
+.chose_cyndaquil
+    appear ROCK_SALT_LAB_CHIKORITA
+    sjump .done
+.chose_totodile
+    appear ROCK_SALT_LAB_CYNDAQUIL
+    sjump .done
+.chose_chikorita
+    appear ROCK_SALT_LAB_TOTODILE
+    sjump .done
+.chose_none
+    appear ROCK_SALT_LAB_CHIKORITA
+    appear ROCK_SALT_LAB_CYNDAQUIL
+    appear ROCK_SALT_LAB_TOTODILE
+    sjump .done
+.done
+    checkscene
+    end
+
+SpriteSetup_RockSaltLabMonInPokeball:
+    ifequal SCENE_MEET_PROF, .case1
+    sjump .default
+.case1
     appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
     appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
     appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
-    endcallback
-
-.Callback_ChooseStarter:
-    appear ROCK_SALT_LAB_JADE_IN_BACK
-    appear ROCK_SALT_LAB_PROF
-    appear ROCK_SALT_LAB_CYNDAQUIL
-    appear ROCK_SALT_LAB_TOTODILE
-    appear ROCK_SALT_LAB_CHIKORITA
-    endcallback
-
-.Callback_TroubleWithTaurosReward:
-    moveobject ROCK_SALT_LAB_PROF, 4, 4
-    appear ROCK_SALT_LAB_AIDE_IN_FRONT
-    appear ROCK_SALT_LAB_JADE_IN_BACK
-    appear ROCK_SALT_LAB_PROF
-    endcallback
-
-.Callback_Noop:
-    appear ROCK_SALT_LAB_PROF
-    appear ROCK_SALT_LAB_AIDE_IN_FRONT
-    endcallback
+    end
+.default
+    disappear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    disappear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    disappear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    end
 
 SceneSetup_RockSaltLabNoop:
     end
@@ -940,6 +1016,7 @@ Script_TroubleWithTaurosReward:
     turninquest QUEST_TROUBLE_WITH_TAUROS
 
     setscene SCENE_ROCK_SALT_LAB_NOOP
+    setmapscene ROCK_SALT_TOWN, SCENE_YOUNGSTER_MISSING
     end
 
 .Movement_WalkToProf:

@@ -18,37 +18,100 @@ RockSaltTown_MapScripts:
 	def_scene_scripts
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_MEET_JADE
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_OLD_MAN_STOPS_YOU
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_RAMPAGING_TAUROS
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_TAUROS_RAMPAGING
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_YOUNGSTER_MISSING
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, Callback_RockSaltTownMoveObjects
+	callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltTown
 
-Callback_RockSaltTownMoveObjects:
+CallbackObjects_RockSaltTown:
+	scall SpriteSetup_RockSaltTown
+	endcallback
+
+SpriteSetup_RockSaltTown:
 	checkscene
-	ifequal SCENE_MEET_JADE, .Callback_MeetJade
-	ifequal SCENE_RAMPAGING_TAUROS, .Callback_RampagingTauros
-	sjump .Callback_Noop
+	scall SpriteSetup_JadeIntro
+	scall SpriteSetup_JadeBattlingTauros
+	scall SpriteSetup_Tauros
+	scall SpriteSetup_TaurosRampaging
+	scall SpriteSetup_Youngster
+	scall SpriteSetup_YoungsterTalkingToOldMan
+	scall SpriteSetup_Aide
+	end
 
-.Callback_MeetJade:
+SpriteSetup_JadeIntro:
+	ifequal SCENE_MEET_JADE, .case1
+	sjump .default
+.case1
 	appear ROCK_SALT_TOWN_JADE_INTRO
-	appear ROCK_SALT_TOWN_TAUROS_1
-	endcallback
+	end
+.default
+	disappear ROCK_SALT_TOWN_JADE_INTRO
+	end
 
-.Callback_RampagingTauros:
+SpriteSetup_JadeBattlingTauros:
+	ifequal SCENE_TAUROS_RAMPAGING, .case1
+	sjump .default
+.case1
 	appear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
-	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
-	appear ROCK_SALT_TOWN_YOUNGSTER
-	endcallback
+	end
+.default
+	disappear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	end
 
-.Callback_OldManAndYoungsterBlockYou:
-	appear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
-	endcallback
-
-.Callback_Noop
+SpriteSetup_Tauros:
+	ifequal SCENE_TAUROS_RAMPAGING, .case1
+	sjump .default
+.case1
+	disappear ROCK_SALT_TOWN_TAUROS_1
+	disappear ROCK_SALT_TOWN_TAUROS_2
+	disappear ROCK_SALT_TOWN_TAUROS_3
+	disappear ROCK_SALT_TOWN_TAUROS_4
+	end
+.default
 	appear ROCK_SALT_TOWN_TAUROS_1
-	endcallback
+	appear ROCK_SALT_TOWN_TAUROS_2
+	appear ROCK_SALT_TOWN_TAUROS_3
+	appear ROCK_SALT_TOWN_TAUROS_4
+	end
+
+SpriteSetup_TaurosRampaging:
+	ifequal SCENE_TAUROS_RAMPAGING, .case1
+	sjump .default
+.case1
+	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
+	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
+	end
+.default
+	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
+	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
+	end
+
+SpriteSetup_Youngster:
+	ifequal SCENE_YOUNGSTER_MISSING, .case1
+	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .case1
+	sjump .default
+.case1
+	disappear ROCK_SALT_TOWN_YOUNGSTER
+	end
+.default
+	appear ROCK_SALT_TOWN_YOUNGSTER
+	end
+
+SpriteSetup_YoungsterTalkingToOldMan:
+	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .case1
+	sjump .default
+.case1
+	appear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
+	end
+.default
+	disappear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
+	end
+
+SpriteSetup_Aide:
+	disappear ROCK_SALT_TOWN_AIDE
+	end
 
 SceneSetup_RockSaltTownNoop:
 	end
@@ -152,15 +215,8 @@ Script_PlayersRampagingTauros:
 	startbattle
 	setevent EVENT_CALMED_RAMPAGING_TAUROS
 	advancequest QUEST_TROUBLE_WITH_TAUROS
-	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
-	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
-	disappear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	disappear ROCK_SALT_TOWN_YOUNGSTER
-	appear ROCK_SALT_TOWN_TAUROS_1
-	appear ROCK_SALT_TOWN_TAUROS_2
-	appear ROCK_SALT_TOWN_TAUROS_3
-	appear ROCK_SALT_TOWN_TAUROS_4
-	appear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
+	setscene SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
+	scall SpriteSetup_RockSaltTown
 	reloadmapafterbattle
 	opentext
 	writetext Text_TaurosCalmedDown
@@ -201,7 +257,6 @@ Script_PlayersRampagingTauros:
 
 .done
 	disappear ROCK_SALT_TOWN_AIDE
-	setscene SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 	setmapscene ROCK_SALT_LAB, SCENE_TROUBLE_WITH_TAUROS_REWARD
 	end
 
@@ -438,6 +493,7 @@ Script_MeetJade:
 	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeGoesHome
 	disappear ROCK_SALT_TOWN_JADE_INTRO
 	setscene SCENE_OLD_MAN_STOPS_YOU
+	scall SpriteSetup_RockSaltTown
 	end
 
 .Movement_JadeApproachesYou:
