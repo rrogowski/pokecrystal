@@ -688,6 +688,7 @@ SECTION "Quests", ROMX
 
 INCLUDE "data/quests/descriptions.asm"
 INCLUDE "data/quests/names.asm"
+INCLUDE "engine/events/nickname.asm"
 INCLUDE "engine/menus/quests_menu.asm"
 INCLUDE "engine/quests/advance_quest.asm"
 INCLUDE "engine/quests/can_turn_in_quest.asm"

@@ -906,6 +906,11 @@ Script_TroubleWithTaurosReward:
     waitbutton
     closetext
 
+	opentext
+	special Nickname
+	closetext
+    pause 15
+
     turnobject ROCK_SALT_LAB_PROF, RIGHT
     opentext
     writetext .Text_SpendTimeWithThem
