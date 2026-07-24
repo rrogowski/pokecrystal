@@ -10,13 +10,16 @@
 	const ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
 	const ROCK_SALT_TOWN_FRUIT_TREE
 	const ROCK_SALT_TOWN_YOUNGSTER
+	const ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
 	const ROCK_SALT_TOWN_GARDENER
+	const ROCK_SALT_TOWN_AIDE
 
 RockSaltTown_MapScripts:
 	def_scene_scripts
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_MEET_JADE
-	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_OLD_MAN_STOPS_YOU
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_RAMPAGING_TAUROS
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, Callback_RockSaltTownMoveObjects
@@ -36,6 +39,11 @@ Callback_RockSaltTownMoveObjects:
 	appear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
 	appear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
+	appear ROCK_SALT_TOWN_YOUNGSTER
+	endcallback
+
+.Callback_OldManAndYoungsterBlockYou:
+	appear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
 	endcallback
 
 .Callback_Noop
@@ -92,34 +100,26 @@ Text_ItsDangerousAhead:
 
 	done
 
-RockSaltTownOldManScript:
-	faceplayer
+Script_OldMan:
+	checkscene
+	ifequal SCENE_OLD_MAN_STOPS_YOU, .Script_ItsDangerousAhead
+	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .Script_StayAway
+	sjump ObjectEvent
 
-	checkevent EVENT_CHOSE_STARTER
-	iffalse .NoStarter
+.Script_StayAway:
+	jumptextfaceplayer .Text_StayAway
 
-	opentext
-	writetext Text_RockSaltTownOldManHasStarter
-	waitbutton
-	closetext
-	end
+.Script_ItsDangerousAhead:
+	jumptextfaceplayer Text_ItsDangerousAhead
 
-.NoStarter:
-	opentext
-	writetext Text_ItsDangerousAhead
-	waitbutton
-	closetext
-	end
+.Text_StayAway:
+	text "Stay away from"
+	line "Rock Salt Cave!"
 
-Text_RockSaltTownOldManHasStarter:
-    text "That's a mighty"
-    line "fine #MON you've"
-    cont "got there!"
+	para "It's far too"
+	line "dangerous!"
 
-    para "NOW you're ready"
-    line "to take on the"
-    cont "tall grass!"
-    done
+	done
 
 Script_RockSaltTownJade:
 	checkscene
@@ -155,19 +155,133 @@ Script_PlayersRampagingTauros:
 	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_PLAYER
 	disappear ROCK_SALT_TOWN_TAUROS_RAMPAGING_AGAINST_JADE
 	disappear ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	disappear ROCK_SALT_TOWN_YOUNGSTER
 	appear ROCK_SALT_TOWN_TAUROS_1
 	appear ROCK_SALT_TOWN_TAUROS_2
 	appear ROCK_SALT_TOWN_TAUROS_3
 	appear ROCK_SALT_TOWN_TAUROS_4
+	appear ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
 	reloadmapafterbattle
 	opentext
 	writetext Text_TaurosCalmedDown
 	waitbutton
 	closetext
 
-	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
+	readvar VAR_FACING
+	ifequal DOWN, .location2
+	ifequal LEFT, .location3
+
+.location1
+	appear ROCK_SALT_TOWN_AIDE
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideWalksToYou1
+	turnobject PLAYER, UP
+	turnobject ROCK_SALT_TOWN_AIDE, DOWN
+	scall .Script_AideThanksYou
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideLeaves1
+	sjump .done
+
+.location2
+	moveobject ROCK_SALT_TOWN_AIDE, 18, 18
+	appear ROCK_SALT_TOWN_AIDE
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideWalksToYou2
+	turnobject PLAYER, LEFT
+	scall .Script_AideThanksYou
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideLeaves2
+	sjump .done
+
+.location3
+	moveobject ROCK_SALT_TOWN_AIDE, 19, 18
+	appear ROCK_SALT_TOWN_AIDE
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideWalksToYou3
+	turnobject PLAYER, UP
+	turnobject ROCK_SALT_TOWN_AIDE, DOWN
+	scall .Script_AideThanksYou
+	applymovement ROCK_SALT_TOWN_AIDE, .Movement_AideLeaves3
+	sjump .done
+
+.done
+	disappear ROCK_SALT_TOWN_AIDE
+	setscene SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 	setmapscene ROCK_SALT_LAB, SCENE_TROUBLE_WITH_TAUROS_REWARD
 	end
+
+.Script_AideThanksYou:
+	jumptext .Text_NiceWork
+
+.Movement_AideWalksToYou1:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+.Movement_AideWalksToYou2:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+.Movement_AideWalksToYou3:
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+.Movement_AideLeaves1:
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step_end
+
+.Movement_AideLeaves2:
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step UP
+	step UP
+	step UP
+	step_end
+
+.Movement_AideLeaves3:
+	step UP
+	step UP
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step UP
+	step UP
+	step_end
+
+.Text_NiceWork:
+	text "Nice work!"
+
+	para "The TAUROS are"
+	line "all safe now."
+
+	para "PROF. CARAWAY"
+	line "wants to see you."
+
+	para "JADE is already"
+	line "back at the lab."
+
+	para "Let's head back."
+
+	done
 
 Text_TaurosAttacked:
 	text "The rampaging"
@@ -220,29 +334,52 @@ Script_JadeBattlingTauros:
 	done
 
 Script_Youngster:
-    faceplayer
-    opentext
-    writetext .Text_YoureNewHereRight
-    waitbutton
-    closetext
-    end
+	faceplayer
+	opentext
+	writetext .Text_YoureNewHereRight
+	waitbutton
+	closetext
+	end
 
 .Text_YoureNewHereRight:
-    text "You're new here,"
-    line "right?"
+	text "You're new here,"
+	line "right?"
 
-    para "Have you seen the"
-    line "cave at the edge"
-    cont "of town?"
+	para "Have you seen the"
+	line "cave at the edge"
+	cont "of town?"
 
-		para "They say a really"
-		line "strong #MON"
-		cont "lives inside!"
+	para "They say a really"
+	line "strong #MON"
+	cont "lives inside!"
 
-		para "I wanna see it"
-		line "someday!"
+	para "I wanna see it"
+	line "someday!"
 
-    done
+	done
+
+Script_YoungsterTalkingToOldMan:
+	jumptextfaceplayer .Text_IfOnly
+
+.Text_IfOnly:
+	text "If only I had"
+	line "a #MON"
+	cont "of my own..."
+
+	para "Then I could"
+	line "have helped with"
+	cont "the Tauros..."
+
+	para "Wait!"
+
+	para "I should search"
+	line "Rock Salt Cave!"
+
+	para "It's said that a"
+	line "strong #MON"
+	cont "lives there!"
+
+	done
 
 Script_Gardener:
 	faceplayer
@@ -300,7 +437,7 @@ Script_MeetJade:
 	turnobject PLAYER, LEFT
 	applymovement ROCK_SALT_TOWN_JADE_INTRO, .Movement_JadeGoesHome
 	disappear ROCK_SALT_TOWN_JADE_INTRO
-	setscene SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU
+	setscene SCENE_OLD_MAN_STOPS_YOU
 	end
 
 .Movement_JadeApproachesYou:
@@ -372,14 +509,15 @@ RockSaltTown_MapEvents:
 
 	def_coord_events
 	coord_event 29, 20, SCENE_MEET_JADE, Script_MeetJade
-	coord_event 14, 19, SCENE_ROCK_SALT_TOWN_OLD_MAN_STOPS_YOU, Script_OldManStopsYouFromLeaving
+	coord_event 14, 19, SCENE_OLD_MAN_STOPS_YOU, Script_OldManStopsYouFromLeaving
+
 	def_bg_events
 	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
 	bg_event 27, 19, BGEVENT_READ, RockSaltTownPlayersHouseSign
 	bg_event 23, 15, BGEVENT_READ, RockSaltTownJadesHouseSign
 
 	def_object_events
-	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, RockSaltTownOldManScript, -1
+	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Script_OldMan, -1
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
@@ -389,5 +527,7 @@ RockSaltTown_MapEvents:
 	object_event 20, 18, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_JadesRampagingTauros, EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
 	object_event 23, 19, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_PlayersRampagingTauros, EVENT_ROCK_SALT_TOWN_TAUROS_RAMPAGING
 	object_event 26, 17, SPRITE_FRUIT_TREE, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, RockSaltTownFruitTree, -1
-	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_Youngster, -1
+	object_event 22, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_Youngster, EVENT_ROCK_SALT_TOWN_YOUNGSTER
+	object_event 14, 19, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_YoungsterTalkingToOldMan, EVENT_ROCK_SALT_TOWN_YOUNGSTER_TALKING_TO_OLD_MAN
 	object_event 31, 16, SPRITE_DAISY, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_Gardener, -1
+	object_event 17, 18, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_AIDE
