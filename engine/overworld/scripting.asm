@@ -2433,6 +2433,33 @@ Script_turninquest:
 	call GetScriptByte
 	ld c, a
 	farcall TurnInQuest
+	farcall GetQuestName
+
+	ld de, wStringBuffer1
+	ld a, STRING_BUFFER_3
+	call CopyConvertedText
+
+	ld b, BANK(.TurnInQuestScript)
+	ld de, .TurnInQuestScript
+	jp ScriptCall
+	ret
+
+.TurnInQuestScript:
+	opentext
+	playsound SFX_GET_EGG
+	writetext .Text_TurnedInQuest
+	waitsfx
+	waitbutton
+	closetext
+	end
+
+.Text_TurnedInQuest:
+	text "Quest Completed:"
+	line "@"
+	text_ram wStringBuffer3
+	text "!"
+	done
+
 	ret
 
 Script_isquestturnedin:

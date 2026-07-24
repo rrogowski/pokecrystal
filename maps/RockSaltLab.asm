@@ -937,6 +937,7 @@ Script_TroubleWithTaurosReward:
 
     applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeExitsLab
     disappear ROCK_SALT_LAB_JADE_IN_BACK
+    turninquest QUEST_TROUBLE_WITH_TAUROS
 
     setscene SCENE_ROCK_SALT_LAB_NOOP
     end
