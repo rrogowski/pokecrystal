@@ -484,10 +484,7 @@ INCLUDE "maps/Route10North.asm"
 
 SECTION "Map Scripts 25", ROMX
 
-;   Rock Salt Town  ;   1
 INCLUDE "maps/RockSaltTown.asm"
-INCLUDE "maps/RockSaltPlayersHouse.asm"
-INCLUDE "maps/RockSaltJadesHouse.asm"
 INCLUDE "maps/RockSaltLab.asm"
 INCLUDE "maps/RockSaltBookwormsHouse.asm"
 INCLUDE "maps/RockSaltOldMansHouse.asm"
@@ -495,12 +492,13 @@ INCLUDE "maps/RockSaltOldMansHouse.asm"
 
 SECTION "Map Scripts 26", ROMX
 
-;   Rock Salt Cave  ;   2
+INCLUDE "maps/RockSaltPlayersHouse.asm"
+INCLUDE "maps/RockSaltJadesHouse.asm"
 INCLUDE "maps/RockSaltCave1F.asm"
 INCLUDE "maps/RockSaltCave1B.asm"
 INCLUDE "maps/RockSaltCave2B.asm"
 INCLUDE "maps/RockSaltCaveCavern.asm"
-;   Peppercorn Village  ;   3
+
 INCLUDE "maps/Route101.asm"
 INCLUDE "maps/PeppercornVillage.asm"
 

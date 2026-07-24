@@ -2,6 +2,7 @@
 	const ROCK_SALT_TOWN_OLD_MAN
 	const ROCK_SALT_TOWN_JADE_INTRO
 	const ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	const ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
 	const ROCK_SALT_TOWN_TAUROS_1
 	const ROCK_SALT_TOWN_TAUROS_2
 	const ROCK_SALT_TOWN_TAUROS_3
@@ -213,7 +214,6 @@ Script_PlayersRampagingTauros:
 	loadwildmon TAUROS, 2
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
 	startbattle
-	setevent EVENT_CALMED_RAMPAGING_TAUROS
 	advancequest QUEST_TROUBLE_WITH_TAUROS
 	setscene SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 	scall SpriteSetup_RockSaltTown
@@ -550,6 +550,123 @@ Script_MeetJade:
 
 	done
 
+Script_JadeOutsideRockSaltCave:
+	faceplayer
+	opentext
+	writetext .Text_Wait
+	yesorno
+	iffalse .no
+	writetext .Text_ThankYou
+	waitbutton
+	closetext
+
+	readvar VAR_FACING
+	ifequal RIGHT, .case1
+	ifequal LEFT, .case2
+	sjump .case3
+.case1
+	applymovement ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, .Movement_StepRight
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, LEFT
+	scall .Script_IllFollow
+	applymovement PLAYER, .Movement_StepRight
+	sjump .entercave
+.case2
+	applymovement ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, .Movement_StepLeft
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, RIGHT
+	scall .Script_IllFollow
+	applymovement PLAYER, .Movement_StepLeft
+	sjump .entercave
+.case3
+	applymovement ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, .Movement_StepLeft
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, RIGHT
+	scall .Script_IllFollow
+	applymovement PLAYER, .Movement_StepUp
+	sjump .entercave
+	end
+
+.entercave
+	follow PLAYER, ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
+	applymovement PLAYER, .Movement_StepUp
+	stopfollow
+	warpcheck
+	end
+
+.no
+	writetext .Text_SomethingIsWrong
+	closetext
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, UP
+	end
+
+.Script_IllFollow:
+	opentext
+	writetext .Text_IllFollow
+	waitbutton
+	closetext
+	end
+
+.Movement_StepRight:
+	step RIGHT
+	step_end
+
+.Movement_StepLeft:
+	step LEFT
+	step_end
+
+.Movement_StepUp:
+	step UP
+	step_end
+
+.Text_Wait:
+	text "<PLAYER>!"
+
+	para "I heard a #MON"
+	line "cry from inside"
+	cont "the cave."
+
+	para "It sounded like"
+	line "it was in trouble."
+
+	para "I wanted to"
+	line "help..."
+
+	para "But I couldn't"
+	line "go in alone."
+
+	para "Can you help me?"
+	line "Please?"
+
+	done
+
+.Text_ThankYou:
+	text "Thank you!"
+
+	para "I knew I could"
+	line "count on you."
+
+	para "Let's find that"
+	line "#MON."
+
+	para "We have to hurry!"
+
+	done
+
+.Text_IllFollow:
+	text "I'll follow"
+	line "behind you."
+
+	para "Be careful!"
+
+	done
+
+.Text_SomethingIsWrong:
+	text "Something's wrong"
+	line "inside the cave."
+
+	para "I can't just"
+	line "ignore it."
+
+	done
+
 RockSaltTown_MapEvents:
 	db 0, 0 ; filler
 
@@ -576,6 +693,7 @@ RockSaltTown_MapEvents:
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Script_OldMan, -1
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
+	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeOutsideRockSaltCave, EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
 	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
 	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
