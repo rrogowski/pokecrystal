@@ -30,6 +30,7 @@ Callback_RockSaltLabMoveObjects:
     ifequal SCENE_MEET_PROF, .Callback_MeetProf
     ifequal SCENE_CHOOSE_STARTER, .Callback_ChooseStarter
     ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .Callback_ProfAndAideGone
+    ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .Callback_TroubleWithTaurosReward
     sjump .Callback_Noop
 
 .Callback_ProfGone:
@@ -53,6 +54,13 @@ Callback_RockSaltLabMoveObjects:
     appear ROCK_SALT_LAB_CYNDAQUIL
     appear ROCK_SALT_LAB_TOTODILE
     appear ROCK_SALT_LAB_CHIKORITA
+    endcallback
+
+.Callback_TroubleWithTaurosReward:
+    moveobject ROCK_SALT_LAB_PROF, 4, 4
+    appear ROCK_SALT_LAB_AIDE_IN_FRONT
+    appear ROCK_SALT_LAB_JADE_IN_BACK
+    appear ROCK_SALT_LAB_PROF
     endcallback
 
 .Callback_Noop:
@@ -777,6 +785,11 @@ RockSaltLab_ReceiveDexScript:
     step_end
 
 Script_Prof:
+    checkscene
+    ifequal SCENE_CHOOSE_STARTER, .Script_ChooseStarter
+    jumptextfaceplayer Text_BuildTrust
+
+.Script_ChooseStarter:
     jumptextfaceplayer Text_WeWillContinueLater
 
 Script_HealingMachine:
@@ -851,6 +864,211 @@ Script_AideInLab:
     text "I am an aide."
     done
 
+Script_TroubleWithTaurosReward1:
+    applymovement PLAYER, .Movement_WalkToProf
+    sjump Script_TroubleWithTaurosReward
+
+.Movement_WalkToProf:
+    step RIGHT
+    step UP
+    step UP
+    step_end
+
+Script_TroubleWithTaurosReward2:
+    applymovement PLAYER, .Movement_WalkToProf
+    sjump Script_TroubleWithTaurosReward
+
+.Movement_WalkToProf:
+    step UP
+    step UP
+    step_end
+
+Script_TroubleWithTaurosReward:
+    turnobject PLAYER, LEFT
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    opentext
+    writetext .Text_WelcomeBack
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, DOWN
+    writetext .Text_ThankYouBoth
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    writetext .Text_Impressed
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, DOWN
+    writetext .Text_KeepThem
+    waitbutton
+    closetext
+
+    showemote EMOTE_SHOCK, ROCK_SALT_LAB_JADE_IN_BACK, 30
+    opentext
+    writetext .Text_JadeThanksProf
+    waitbutton
+    closetext
+
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    opentext
+    writetext .Text_SpendTimeWithThem
+    promptbutton
+    writetext Text_BuildTrust
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, DOWN
+    writetext .Text_TallGrass
+    waitbutton
+    closetext
+
+    opentext
+    writetext .Text_JadeAgrees
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToYou
+    turnobject PLAYER, DOWN
+    turnobject ROCK_SALT_LAB_JADE_IN_BACK, UP
+    opentext
+    writetext .Text_LetsDoOurBest
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeExitsLab
+    disappear ROCK_SALT_LAB_JADE_IN_BACK
+
+    setscene SCENE_ROCK_SALT_LAB_NOOP
+    end
+
+.Movement_WalkToProf:
+    step UP
+    step UP
+    step_end
+
+.Movement_JadeWalksToYou:
+    step RIGHT
+    step_end
+
+.Movement_JadeExitsLab:
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step_end
+
+.Text_WelcomeBack:
+    text "Welcome back!"
+
+    para "I heard the"
+    line "TAUROS are safe."
+
+    done
+
+.Text_ThankYouBoth:
+    text "Thank you both."
+
+    para "You handled"
+    line "yourselves well."
+
+    done
+
+.Text_Impressed:
+    text "That brings me to"
+    line "something else..."
+
+    para "You borrowed those"
+    line "#MON to help"
+    cont "today."
+
+    para "I think they've"
+    line "made their choice."
+
+    para "They seem quite"
+    line "comfortable with"
+    cont "both of you."
+
+    done
+
+.Text_KeepThem:
+    text "So..."
+
+    para "Why don't you"
+    line "keep them?"
+
+    para "They'll make"
+    line "excellent research"
+    cont "partners."
+
+    done
+
+.Text_JadeThanksProf:
+    text "JADE: Really?"
+
+    para "Thank you,"
+    line "Professor!"
+
+    para "I'll take good"
+    line "care of it!"
+
+    done
+
+.Text_SpendTimeWithThem:
+    text "CARAWAY: Before"
+    line "we begin our"
+    cont "research..."
+
+    para "Spend some time"
+    line "with your"
+    cont "partners."
+
+    para "You've only just"
+    line "met, after all."
+
+    done
+
+.Text_TallGrass:
+    text "The tall grass"
+    line "outside town is"
+    cont "full of #MON."
+
+    para "It's the perfect"
+    line "place to start."
+
+    para "I'll have more"
+    line "work for you"
+    cont "soon enough."
+
+    done
+
+.Text_JadeAgrees:
+    text "JADE: Sounds good!"
+
+    para "I've read so much"
+    line "about #MON..."
+
+    para "But now I finally"
+    line "get to experience"
+    cont "it myself!"
+
+    done
+
+.Text_LetsDoOurBest:
+    text "Let's both do"
+    line "our best!"
+
+    para "I'll see you"
+    line "around!"
+
+    done
+
+Text_BuildTrust:
+    text "The best way to"
+    line "build trust..."
+    cont "is to travel"
+    cont "together."
+
+    para "And to battle"
+    line "together."
+
+    done
+
 RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
@@ -865,6 +1083,8 @@ RockSaltLab_MapEvents:
 	coord_event  5,  6, SCENE_CHOOSE_STARTER, Script_CantLeaveLab1
     coord_event  4,  0, SCENE_CHOOSE_STARTER, Script_CantLeaveLab2
 	coord_event  5,  0, SCENE_CHOOSE_STARTER, Script_CantLeaveLab2
+    coord_event  4,  6, SCENE_TROUBLE_WITH_TAUROS_REWARD, Script_TroubleWithTaurosReward1
+	coord_event  5,  6, SCENE_TROUBLE_WITH_TAUROS_REWARD, Script_TroubleWithTaurosReward2
 
 	def_bg_events
     bg_event  2,  1, BGEVENT_READ, Script_HealingMachine
@@ -873,7 +1093,7 @@ RockSaltLab_MapEvents:
     object_event 3, 4, SPRITE_OAK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Prof, EVENT_ROCK_SALT_LAB_PROF
     object_event 2, 9, SPRITE_SCIENTIST, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_AideInLab, EVENT_ROCK_SALT_LAB_AIDE_IN_FRONT
     object_event 4, 0, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_AIDE_IN_BACK
-    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE_IN_FRONT
+    object_event 5, 11, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_JADE_IN_FRONT
     object_event 4, 5, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeAsksYouToChooseFirst, EVENT_ROCK_SALT_LAB_JADE_IN_BACK
     object_event  6,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
 	object_event  7,  3, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_TOTODILE_IN_POKEBALL

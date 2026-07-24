@@ -491,6 +491,10 @@ INCLUDE "maps/RockSaltJadesHouse.asm"
 INCLUDE "maps/RockSaltLab.asm"
 INCLUDE "maps/RockSaltBookwormsHouse.asm"
 INCLUDE "maps/RockSaltOldMansHouse.asm"
+
+
+SECTION "Map Scripts 26", ROMX
+
 ;   Rock Salt Cave  ;   2
 INCLUDE "maps/RockSaltCave1F.asm"
 INCLUDE "maps/RockSaltCave1B.asm"
