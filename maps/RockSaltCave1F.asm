@@ -70,6 +70,7 @@ Script_RockSaltCave1FJadeFollows:
     stopfollow
 
     turnobject PLAYER, DOWN
+    moveobject ROCK_SALT_CAVE_1F_JADE, 11, 35
     scall Script_RockSaltCave1FJadeScared
     setscene SCENE_ROCK_SALT_CAVE_1F_JADE_SCARED
     end
