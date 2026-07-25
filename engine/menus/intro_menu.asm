@@ -60,8 +60,8 @@ NewGame:
 	call ResetWRAM
 	call NewGame_ClearTilemapEtc
 	call PlayerProfileSetup
+	; call InitializePlayerDefaultName
 	call InitializePlayerNewName
-	call InitializePlayerDefaultName
 	call IntroProfSpeech
 	call InitializeWorld
 
