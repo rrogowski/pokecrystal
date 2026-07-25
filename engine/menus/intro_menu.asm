@@ -62,7 +62,6 @@ NewGame:
 	call PlayerProfileSetup
 	call InitializePlayerNewName
 	call InitializePlayerDefaultName
-	call OakSpeech
 	call IntroProfSpeech
 	call InitializeWorld
 
