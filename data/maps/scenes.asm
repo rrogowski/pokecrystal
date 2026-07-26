@@ -89,5 +89,6 @@ MapScenes::
 	scene_var ROCK_SALT_JADES_HOUSE,                       wRockSaltJadesHouseSceneID
 	scene_var ROCK_SALT_LAB,                               wRockSaltLabSceneID
 	scene_var ROCK_SALT_CAVE_1F,                           wRockSaltCave1FSceneID
+	scene_var ROCK_SALT_CAVE_CAVERN,                       wRockSaltCaveCavernSceneID
 	scene_var ROUTE_101,                                   wRoute101SceneID
 	db -1 ; end

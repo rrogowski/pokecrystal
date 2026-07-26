@@ -3120,6 +3120,7 @@ wRockSaltTownSceneID::                            db
 wRockSaltJadesHouseSceneID::                      db
 wRockSaltLabSceneID::                             db
 wRockSaltCave1FSceneID::                          db
+wRockSaltCaveCavernSceneID::                      db
 wRoute101SceneID::                                db
 
 	ds 43
