@@ -18,7 +18,7 @@ RockSaltCaveCavernMonsterScript:
 	waitbutton
 	closetext
 
-	loadwildmon NIDORINO, 12
+	loadwildmon NIDORINO, 7
 	encountermusic
 	startbattle
 	disappear ROCK_SALT_CAVE_CAVERN_MONSTER
@@ -26,7 +26,7 @@ RockSaltCaveCavernMonsterScript:
 	appear ROCK_SALT_CAVE_CAVERN_JADE
 	reloadmapafterbattle
 	pause 10
-	
+
 	sjump RockSaltCaveCavernJadeAndProfEnterScript
 
 RockSaltCaveCavernMonsterText:
@@ -91,4 +91,3 @@ RockSaltCaveCavern_MapEvents:
 	object_event 6, 2, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, -1, EVENT_RESCUED_YOUNGSTER
 	object_event 4, 6, SPRITE_OAK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, -1, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
 	object_event 4, 7, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, -1, EVENT_RETURNED_TO_LAB_AFTER_ROCK_SALT_CAVE_MONSTER
-	

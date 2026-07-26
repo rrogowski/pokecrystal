@@ -389,11 +389,24 @@ Script_JadeBattlingTauros:
 	done
 
 Script_Youngster:
+	isquestturnedin QUEST_A_CRY_FOR_HELP
+	iftrue .Script_AfterQuest
+
+	canturninquest QUEST_A_CRY_FOR_HELP
+	iftrue .Script_TurnInQuest
+
+	jumptextfaceplayer .Text_YoureNewHereRight
+
+.Script_AfterQuest:
+	jumptextfaceplayer .Text_ICantBelieve
+
+.Script_TurnInQuest:
 	faceplayer
 	opentext
-	writetext .Text_YoureNewHereRight
+	writetext .Text_ICantBelieve
 	waitbutton
 	closetext
+	turninquest QUEST_A_CRY_FOR_HELP
 	end
 
 .Text_YoureNewHereRight:
@@ -410,6 +423,24 @@ Script_Youngster:
 
 	para "I wanna see it"
 	line "someday!"
+
+	done
+
+.Text_ICantBelieve:
+	text "I can't believe"
+	line "that was only a"
+	cont "NIDORINO..."
+
+	para "So then..."
+
+	para "What's the strong"
+	line "#MON everyone"
+	cont "talks about?"
+
+	para "I kinda wanna"
+	line "find out..."
+
+	para "Maybe someday!"
 
 	done
 
@@ -560,6 +591,7 @@ Script_JadeOutsideRockSaltCave:
 	waitbutton
 	closetext
 	unlockquest QUEST_A_CRY_FOR_HELP
+	setquestgoal QUEST_A_CRY_FOR_HELP, 1
 
 	readvar VAR_FACING
 	ifequal RIGHT, .case1

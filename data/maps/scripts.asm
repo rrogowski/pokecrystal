@@ -486,19 +486,22 @@ SECTION "Map Scripts 25", ROMX
 
 INCLUDE "maps/RockSaltTown.asm"
 INCLUDE "maps/RockSaltLab.asm"
-INCLUDE "maps/RockSaltBookwormsHouse.asm"
-INCLUDE "maps/RockSaltOldMansHouse.asm"
 
 
 SECTION "Map Scripts 26", ROMX
 
 INCLUDE "maps/RockSaltPlayersHouse.asm"
 INCLUDE "maps/RockSaltJadesHouse.asm"
+INCLUDE "maps/RockSaltOldMansHouse.asm"
+INCLUDE "maps/RockSaltBookwormsHouse.asm"
 INCLUDE "maps/RockSaltCave1F.asm"
 INCLUDE "maps/RockSaltCave1B.asm"
 INCLUDE "maps/RockSaltCave2B.asm"
-INCLUDE "maps/RockSaltCaveCavern.asm"
 
+
+SECTION "Map Scripts 27", ROMX
+
+INCLUDE "maps/RockSaltCaveCavern.asm"
 INCLUDE "maps/Route101.asm"
 INCLUDE "maps/PeppercornVillage.asm"
 

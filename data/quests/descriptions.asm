@@ -20,8 +20,9 @@ QuestDescriptions:
   text "Find the source of"
   line "the cry inside"
   cont "Rock Salt Cave."
-  cont "Turn in to JADE"
-  cont "in Rock Salt Town."
+  cont "Turn in to"
+  cont "YOUNGSTER in Rock"
+  cont "Salt Town."
   prompt
 
 .IntoTheUnownDescription:
