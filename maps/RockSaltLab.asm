@@ -10,6 +10,9 @@
     const ROCK_SALT_LAB_CYNDAQUIL
     const ROCK_SALT_LAB_TOTODILE
     const ROCK_SALT_LAB_CHIKORITA
+    const ROCK_SALT_LAB_CYNDAQUIL_WANDERING
+    const ROCK_SALT_LAB_TOTODILE_WANDERING
+    const ROCK_SALT_LAB_CHIKORITA_WANDERING
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
@@ -37,6 +40,7 @@ SpriteSetup_RockSaltLab:
     scall SpriteSetup_RockSaltLabJadeInBack
     scall SpriteSetup_RockSaltLabMon
     scall SpriteSetup_RockSaltLabMonInPokeball
+    scall SpriteSetup_RockSaltLabMonWandering
     end
 
 SpriteSetup_RockSaltLabProf:
@@ -92,9 +96,27 @@ SpriteSetup_RockSaltLabJadeInBack:
     disappear ROCK_SALT_LAB_JADE_IN_BACK
     end
 
+SpriteSetup_RockSaltLabMonInPokeball:
+    ifequal SCENE_MEET_PROF, .case1
+    sjump .default
+.case1
+    appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    end
+.default
+    disappear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
+    disappear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
+    disappear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    end
+
 SpriteSetup_RockSaltLabMon:
     ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .case1
     ifequal SCENE_MEET_PROF, .case1
+
+    canturninquest QUEST_TROUBLE_WITH_TAUROS
+    iffalse .case1
+
     sjump .default
 .case1
     disappear ROCK_SALT_LAB_CYNDAQUIL
@@ -130,18 +152,39 @@ SpriteSetup_RockSaltLabMon:
     checkscene
     end
 
-SpriteSetup_RockSaltLabMonInPokeball:
-    ifequal SCENE_MEET_PROF, .case1
+SpriteSetup_RockSaltLabMonWandering:
+    canturninquest QUEST_TROUBLE_WITH_TAUROS
+    iffalse .case1
+
     sjump .default
 .case1
-    appear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
-    appear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
-    appear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
-    end
+    disappear ROCK_SALT_LAB_CYNDAQUIL_WANDERING
+    disappear ROCK_SALT_LAB_TOTODILE_WANDERING
+    disappear ROCK_SALT_LAB_CHIKORITA_WANDERING
+
 .default
-    disappear ROCK_SALT_LAB_CYNDAQUIL_IN_POKEBALL
-    disappear ROCK_SALT_LAB_TOTODILE_IN_POKEBALL
-    disappear ROCK_SALT_LAB_CHIKORITA_IN_POKEBALL
+    checkevent EVENT_CHOSE_STARTER_CYNDAQUIL
+    iftrue .chose_cyndaquil
+
+    checkevent EVENT_CHOSE_STARTER_TOTODILE
+    iftrue .chose_totodile
+
+    checkevent EVENT_CHOSE_STARTER_TOTODILE
+    iftrue .chose_chikorita
+
+    sjump .done
+.chose_cyndaquil
+    appear ROCK_SALT_LAB_CHIKORITA_WANDERING
+    sjump .done
+.chose_totodile
+    appear ROCK_SALT_LAB_CYNDAQUIL_WANDERING
+    sjump .done
+.chose_chikorita
+    appear ROCK_SALT_LAB_TOTODILE_WANDERING
+    sjump .done
+
+.done
+    checkscene
     end
 
 SceneSetup_RockSaltLabNoop:
@@ -1152,6 +1195,37 @@ Text_BuildTrust:
 
     done
 
+Script_WanderingCyndaquil:
+    faceplayer
+    reanchormap
+	pokepic CYNDAQUIL
+	cry CYNDAQUIL
+	waitbutton
+	closepokepic
+    jumptext Text_ItLooksHappy
+
+Script_WanderingTotodile:
+    faceplayer
+    reanchormap
+	pokepic TOTODILE
+	cry TOTODILE
+	waitbutton
+	closepokepic
+    jumptext Text_ItLooksHappy
+
+Script_WanderingChikorita:
+    faceplayer
+    reanchormap
+	pokepic CHIKORITA
+	cry CHIKORITA
+	waitbutton
+	closepokepic
+    jumptext Text_ItLooksHappy
+
+Text_ItLooksHappy:
+    text "It looks happy."
+    done
+
 RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
@@ -1184,3 +1258,6 @@ RockSaltLab_MapEvents:
     object_event  6,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CYNDAQUIL, EVENT_ROCK_SALT_LAB_CYNDAQUIL
 	object_event  7,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_TOTODILE, EVENT_ROCK_SALT_LAB_TOTODILE
 	object_event  8,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CHIKORITA, EVENT_ROCK_SALT_LAB_CHIKORITA
+    object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_WanderingCyndaquil, EVENT_ROCK_SALT_LAB_CYNDAQUIL_WANDERING
+	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_WanderingTotodile, EVENT_ROCK_SALT_LAB_TOTODILE_WANDERING
+	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_WanderingChikorita, EVENT_ROCK_SALT_LAB_CHIKORITA_WANDERING
