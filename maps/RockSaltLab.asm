@@ -906,10 +906,20 @@ RockSaltLab_ReceiveDexScript:
 Script_Prof:
     checkscene
     ifequal SCENE_CHOOSE_STARTER, .Script_ChooseStarter
-    jumptextfaceplayer Text_BuildTrust
+    jumptextfaceplayer .Text_PreparingNextAssignment
 
 .Script_ChooseStarter:
     jumptextfaceplayer Text_WeWillContinueLater
+
+.Text_PreparingNextAssignment:
+    text "I'm preparing"
+    line "for your next"
+    cont "assignment."
+
+    para "I'll let you know"
+    line "when it's ready."
+
+    done
 
 Script_HealingMachine:
     checkevent EVENT_CHOSE_STARTER
@@ -959,7 +969,7 @@ Script_AideInLab:
 
     faceplayer
     opentext
-    writetext .Text_Aide
+    writetext .Text_ThisMonNeedsSomeone
     waitbutton
     closetext
     end
@@ -979,8 +989,14 @@ Script_AideInLab:
 
     done
 
-.Text_Aide:
-    text "I am an aide."
+.Text_ThisMonNeedsSomeone:
+    text "This #MON"
+    line "needs someone,"
+    cont "too."
+
+    para "I'll make sure"
+    line "it's happy."
+
     done
 
 Script_TroubleWithTaurosReward1:
@@ -1034,7 +1050,7 @@ Script_TroubleWithTaurosReward:
     opentext
     writetext .Text_SpendTimeWithThem
     promptbutton
-    writetext Text_BuildTrust
+    writetext .Text_BuildTrust
     promptbutton
     turnobject ROCK_SALT_LAB_PROF, DOWN
     writetext .Text_TallGrass
@@ -1184,7 +1200,7 @@ Script_TroubleWithTaurosReward:
 
     done
 
-Text_BuildTrust:
+.Text_BuildTrust:
     text "The best way to"
     line "build trust..."
     cont "is to travel"
