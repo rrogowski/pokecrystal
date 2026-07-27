@@ -8,7 +8,7 @@ QuestsMenu::
 	ld b, SCREEN_HEIGHT - 2
 	ld c, SCREEN_WIDTH - 2
 	call Textbox
-	
+
 	ld hl, wQuestsMenuPage
 	ld b, [hl]
 
@@ -17,7 +17,7 @@ QuestsMenu::
 	add '1'
 	ld [hl], a
 
-	ld c, QUEST_INTO_THE_UNOWN
+	ld c, FIRST_QUEST
 	cp b
 	jr z, .PrintQuests
 
@@ -109,7 +109,7 @@ endr
 	call .IncrementCursor
 	jp .JoypadLoop
 
-.print_quest_description	
+.print_quest_description
 	ld a, [wQuestsMenuPage]
 	ld c, a
 	ld a, [wQuestsMenuCursor]
@@ -306,7 +306,7 @@ endr
 	jr .hlcoords_loop
 
 .hlcoords_done
-	
+
 rept 2
 	add hl, de
 endr
