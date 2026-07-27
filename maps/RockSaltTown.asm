@@ -381,7 +381,13 @@ Script_TaurosMoo:
     done
 
 Script_JadeBattlingTauros:
-	jumptextfaceplayer .Text_ICanHandleThisOne
+	faceplayer
+	opentext
+	writetext .Text_ICanHandleThisOne
+	waitbutton
+	closetext
+	turnobject ROCK_SALT_TOWN_JADE_BATTLING_TAUROS, UP
+	end
 
 .Text_ICanHandleThisOne:
 	text "I can handle"

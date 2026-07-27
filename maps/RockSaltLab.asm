@@ -115,49 +115,24 @@ SpriteSetup_RockSaltLabMonInPokeball:
     end
 
 SpriteSetup_RockSaltLabMon:
-    ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .case1
-    ifequal SCENE_MEET_PROF, .case1
-
-    canturninquest QUEST_TROUBLE_WITH_TAUROS
-    iffalse .case1
-
+    ifequal SCENE_CHOOSE_STARTER, .case1
     sjump .default
 .case1
+    appear ROCK_SALT_LAB_CYNDAQUIL
+    appear ROCK_SALT_LAB_TOTODILE
+    appear ROCK_SALT_LAB_CHIKORITA
+    sjump .done
+.default
+    disappear ROCK_SALT_LAB_CHIKORITA
     disappear ROCK_SALT_LAB_CYNDAQUIL
     disappear ROCK_SALT_LAB_TOTODILE
-    disappear ROCK_SALT_LAB_CHIKORITA
-    end
-.default
-    checkevent EVENT_CHOSE_STARTER_CYNDAQUIL
-    iftrue .chose_cyndaquil
-
-    checkevent EVENT_CHOSE_STARTER_TOTODILE
-    iftrue .chose_totodile
-
-    checkevent EVENT_CHOSE_STARTER_TOTODILE
-    iftrue .chose_chikorita
-
-    sjump .chose_none
-.chose_cyndaquil
-    appear ROCK_SALT_LAB_CHIKORITA
-    sjump .done
-.chose_totodile
-    appear ROCK_SALT_LAB_CYNDAQUIL
-    sjump .done
-.chose_chikorita
-    appear ROCK_SALT_LAB_TOTODILE
-    sjump .done
-.chose_none
-    appear ROCK_SALT_LAB_CHIKORITA
-    appear ROCK_SALT_LAB_CYNDAQUIL
-    appear ROCK_SALT_LAB_TOTODILE
     sjump .done
 .done
     checkscene
     end
 
 SpriteSetup_RockSaltLabMonWandering:
-    canturninquest QUEST_TROUBLE_WITH_TAUROS
+    isquestunlocked QUEST_TROUBLE_WITH_TAUROS
     iffalse .case1
 
     sjump .default
