@@ -13,6 +13,7 @@
     const ROCK_SALT_LAB_CYNDAQUIL_WANDERING
     const ROCK_SALT_LAB_TOTODILE_WANDERING
     const ROCK_SALT_LAB_CHIKORITA_WANDERING
+    const ROCK_SALT_LAB_DEX
 
 RockSaltLab_MapScripts:
 	def_scene_scripts
@@ -22,7 +23,7 @@ RockSaltLab_MapScripts:
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
-    scene_script RockSaltLab_ReceiveDexScene, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
+    scene_script Scene_ReceiveDex, SCENE_RECEIVE_DEX
 
     def_callbacks
     callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltLab
@@ -41,12 +42,14 @@ SpriteSetup_RockSaltLab:
     scall SpriteSetup_RockSaltLabMon
     scall SpriteSetup_RockSaltLabMonInPokeball
     scall SpriteSetup_RockSaltLabMonWandering
+    scall SpriteSetup_RockSaltLabDex
     end
 
 SpriteSetup_RockSaltLabProf:
     ifequal SCENE_ROCK_SALT_LAB_PROF_GONE, .case1
     ifequal SCENE_ROCK_SALT_LAB_PROF_AND_AIDE_GONE, .case1
     ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .case2
+    ifequal SCENE_RECEIVE_DEX, .case2
     sjump .default
 .case1
     disappear ROCK_SALT_LAB_PROF
@@ -88,6 +91,7 @@ SpriteSetup_RockSaltLabJadeInFront:
 SpriteSetup_RockSaltLabJadeInBack:
     ifequal SCENE_CHOOSE_STARTER, .case1
     ifequal SCENE_TROUBLE_WITH_TAUROS_REWARD, .case1
+    ifequal SCENE_RECEIVE_DEX, .case1
     sjump .default
 .case1
     appear ROCK_SALT_LAB_JADE_IN_BACK
@@ -187,6 +191,16 @@ SpriteSetup_RockSaltLabMonWandering:
     checkscene
     end
 
+SpriteSetup_RockSaltLabDex:
+    ifequal SCENE_RECEIVE_DEX, .case1
+    sjump .default
+.case1
+    appear ROCK_SALT_LAB_DEX
+    end
+.default
+    disappear ROCK_SALT_LAB_DEX
+    end
+
 SceneSetup_RockSaltLabNoop:
     end
 
@@ -194,8 +208,8 @@ SceneSetup_MeetProf:
     sdefer Script_MeetProf
     end
 
-RockSaltLab_ReceiveDexScene:
-    sdefer RockSaltLab_ReceiveDexScript
+Scene_ReceiveDex:
+    sdefer Script_ReceiveDex
     end
 
 Script_MeetProf:
@@ -764,72 +778,90 @@ Text_FollowMe:
     line "follow me."
     done
 
-RockSaltLab_ReceiveDexScript:
+Script_ReceiveDex:
     turnobject ROCK_SALT_LAB_PROF, RIGHT
-    turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
     turnobject PLAYER, LEFT
 
     opentext
-    writetext .Text_HelpWithProject
-    promptbutton
-
-    turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
-    turnobject PLAYER, UP
-
-    writetext .Text_WhatDoYouThink
-    promptbutton
-
-    turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
-    turnobject PLAYER, LEFT
-
-    writetext .Text_WeWillDoIt
-    promptbutton
-
-    writetext .Text_ReceiveDex
-    playsound SFX_ITEM
-    waitsfx
-    promptbutton
-    setflag ENGINE_POKEDEX
-
-    turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
-    turnobject PLAYER, UP
-
-    writetext .Text_LetsGetStarted
+    writetext .Text_ProfSpeechPart1
     waitbutton
     closetext
 
-    applymovement PLAYER, .Movement_PlayerMovesOutOfWay
-    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeStepsDown
-    follow ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
-    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToExit
-    stopfollow
-
-    opentext
-    writetext .Text_AideCallsOut
-    waitbutton
-    closetext
-
-    playsound SFX_ENTER_DOOR
-	waitsfx
-	disappear ROCK_SALT_LAB_JADE_IN_BACK
-    pause 10
-
-    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
-    turnobject PLAYER, LEFT
-
-    opentext
-    writetext .Text_ResearchCensus
-    promptbutton
-    getitemname STRING_BUFFER_4, POKE_BALL
-	scall .Script_ReceiveBalls
-	giveitem POKE_BALL, 5
-    writetext .Text_SomethingToHelp
-    waitbutton
-    closetext
-
-    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
-    ; prevent aide from immediately spinning after walking back
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToDex
     pause 15
+    playsound SFX_BUMP
+    disappear ROCK_SALT_LAB_DEX
+    waitsfx
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToJade
+
+    opentext
+    writetext .Text_ProfSpeechPart2
+    promptbutton
+    turnobject ROCK_SALT_LAB_PROF, RIGHT
+    writetext .Text_ProfSpeechPart3
+    promptbutton
+
+    writetext .Text_ReceivedDex
+	playsound SFX_ITEM
+	waitsfx
+	setflag ENGINE_POKEDEX
+
+    waitbutton
+    closetext
+
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfStartsToWalkAway
+    showemote EMOTE_SHOCK, ROCK_SALT_LAB_PROF, 30
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfComesBack
+    opentext
+    writetext .Text_OneMoreThing
+    waitbutton
+    closetext
+
+    ; turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
+    ; turnobject PLAYER, LEFT
+
+    ; writetext .Text_WeWillDoIt
+    ; promptbutton
+
+    ; turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
+    ; turnobject PLAYER, UP
+
+    ; writetext .Text_LetsGetStarted
+    ; waitbutton
+    ; closetext
+
+    ; applymovement PLAYER, .Movement_PlayerMovesOutOfWay
+    ; applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeStepsDown
+    ; follow ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
+    ; applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToExit
+    ; stopfollow
+
+    ; opentext
+    ; writetext .Text_AideCallsOut
+    ; waitbutton
+    ; closetext
+
+    ; playsound SFX_ENTER_DOOR
+	; waitsfx
+	; disappear ROCK_SALT_LAB_JADE_IN_BACK
+    ; pause 10
+
+    ; applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
+    ; turnobject PLAYER, LEFT
+
+    ; opentext
+    ; writetext .Text_ResearchCensus
+    ; promptbutton
+    ; getitemname STRING_BUFFER_4, POKE_BALL
+	; scall .Script_ReceiveBalls
+	; giveitem POKE_BALL, 5
+    ; writetext .Text_SomethingToHelp
+    ; waitbutton
+    ; closetext
+
+    ; applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
+    ; ; prevent aide from immediately spinning after walking back
+    ; pause 15
 
     setscene SCENE_ROCK_SALT_LAB_NOOP
     end
@@ -837,25 +869,158 @@ RockSaltLab_ReceiveDexScript:
 .Script_ReceiveBalls:
     jumpstd ReceiveItemScript
 
-.Text_HelpWithProject:
-    text "Help with project"
+.Movement_ProfWalksToDex:
+    step LEFT
+    step LEFT
+    turn_head DOWN
+    step_end
+
+.Movement_ProfWalksToJade:
+    step RIGHT
+    step RIGHT
+    turn_head DOWN
+    step_end
+
+.Movement_ProfStartsToWalkAway:
+    slow_step LEFT
+    step_end
+
+.Movement_ProfComesBack:
+    step RIGHT
+    step_end
+
+.Text_ProfSpeechPart1:
+    text "Excellent work!"
+
+    para "You both handled"
+    line "yourselves well."
+
+    para "Your knowledge of"
+    line "#MON is already"
+    cont "helping you adapt."
+
+    para "Research is about"
+    line "more than studying"
+    cont "from a book."
+
+    para "Sometimes, you"
+    line "must experience"
+    cont "the world"
+    cont "yourself."
+
+    para "Your mission will"
+    line "take you across"
+    cont "the region."
+
+    para "Every discovery"
+    line "helps us"
+    cont "understand this"
+    cont "region better."
+
     done
 
-.Text_WhatDoYouThink:
-    text "What say you?"
+.Text_ProfSpeechPart2:
+    text "This is called"
+    line "a #DEX."
+
+    para "It contains basic"
+    line "information on the"
+    cont "#MON found"
+    cont "here."
+
+    para "But the world is"
+    line "always changing."
+
+    para "New discoveries"
+    line "are made every"
+    cont "day."
+
     done
 
-.Text_WeWillDoIt:
-    text "We'll do it!"
+.Text_ProfSpeechPart3:
+    text "Each year,"
+    line "researchers"
+    cont "conduct a"
+    cont "regional census."
+
+    para "That is where you"
+    line "come in."
+
+    para "You and JADE will"
+    line "handle most of the"
+    cont "field research."
+
+    para "Observe #MON."
+
+    para "Record findings."
+
+    para "Help us discover"
+    line "what is still"
+    cont "unknown."
+
+    para "Take good care of"
+    line "this."
+
+    para "It will be your"
+    line "most important"
+    cont "research tool."
+
+    para "Together, you'll"
+    line "help expand our"
+    cont "knowledge of"
+    cont "#MON."
+
     done
 
-.Text_ReceiveDex:
+.Text_ReceivedDex:
     text "<PLAYER> received"
-    line "#DEX!"
+    line "the #DEX!"
     done
 
-.Text_LetsGetStarted:
-    text "Let's get started!"
+.Text_OneMoreThing:
+    text "Oh!"
+
+    para "There's one more"
+    line "thing."
+
+    para "I ordered a new"
+    line "device for your"
+    cont "field work."
+
+    para "It's called the"
+    line "#GEAR."
+
+    para "It will help you"
+    line "during your"
+    cont "research."
+
+    para "It can store"
+    line "important data..."
+
+    para "And connect you"
+    line "with others while"
+    cont "traveling."
+
+    para "The shipment has"
+    line "already arrived."
+
+    para "But it is waiting"
+    line "in Peppercorn."
+
+    para "Peppercorn is"
+    line "just beyond"
+    cont "Rock Salt Cave."
+
+    para "When you have"
+    line "the chance..."
+
+    para "Be sure to pick"
+    line "it up."
+
+    para "It will be a"
+    line "valuable tool for"
+    cont "your journey."
+
     done
 
 .Text_AideCallsOut:
@@ -1274,6 +1439,7 @@ RockSaltLab_MapEvents:
     object_event  6,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CYNDAQUIL, EVENT_ROCK_SALT_LAB_CYNDAQUIL
 	object_event  7,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_TOTODILE, EVENT_ROCK_SALT_LAB_TOTODILE
 	object_event  8,  3, SPRITE_MONSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_ChooseStarter_CHIKORITA, EVENT_ROCK_SALT_LAB_CHIKORITA
-    object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_WanderingCyndaquil, EVENT_ROCK_SALT_LAB_CYNDAQUIL_WANDERING
-	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_WanderingTotodile, EVENT_ROCK_SALT_LAB_TOTODILE_WANDERING
-	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_WanderingChikorita, EVENT_ROCK_SALT_LAB_CHIKORITA_WANDERING
+    object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, Script_WanderingCyndaquil, EVENT_ROCK_SALT_LAB_CYNDAQUIL_WANDERING
+	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_SCRIPT, 0, Script_WanderingTotodile, EVENT_ROCK_SALT_LAB_TOTODILE_WANDERING
+	object_event  2, 10, SPRITE_MONSTER, SPRITEMOVEDATA_WANDER, 1, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_WanderingChikorita, EVENT_ROCK_SALT_LAB_CHIKORITA_WANDERING
+	object_event  2, 5, SPRITE_POKEDEX, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_LAB_DEX

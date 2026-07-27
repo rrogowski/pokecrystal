@@ -131,8 +131,8 @@ Script_RockSaltCavernMonster:
 	special FadeOutToWhite
 	waitsfx
 	setmapscene ROCK_SALT_CAVE_1F, SCENE_ROCK_SALT_CAVE_1F_UNOWN_ENCOUNTER
-	setmapscene ROCK_SALT_LAB, SCENE_ROCK_SALT_LAB_RECEIVE_DEX
-	warp ROCK_SALT_LAB, 4, 5
+	setmapscene ROCK_SALT_LAB, SCENE_RECEIVE_DEX
+	warp ROCK_SALT_LAB, 5, 4
 
 	end
 
