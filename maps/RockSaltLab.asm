@@ -24,6 +24,7 @@ RockSaltLab_MapScripts:
     scene_script SceneSetup_RockSaltLabNoop, SCENE_ROCK_SALT_LAB_NOOP
     scene_script SceneSetup_RockSaltLabNoop, SCENE_TROUBLE_WITH_TAUROS_REWARD
     scene_script Scene_ReceiveDex, SCENE_RECEIVE_DEX
+    scene_script SceneSetup_RockSaltLabNoop, SCENE_AIDE_GIVES_POKEBALLS
 
     def_callbacks
     callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltLab
@@ -792,57 +793,17 @@ Script_ReceiveDex:
     waitbutton
     closetext
 
-    ; turnobject ROCK_SALT_LAB_JADE_IN_BACK, LEFT
-    ; turnobject PLAYER, LEFT
+    applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToComputer
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToYou
+    opentext
+    writetext .Text_MeetAtCave
+    waitbutton
+    closetext
+    applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeLeavesLab
+    disappear ROCK_SALT_LAB_JADE_IN_BACK
 
-    ; writetext .Text_WeWillDoIt
-    ; promptbutton
-
-    ; turnobject ROCK_SALT_LAB_JADE_IN_BACK, DOWN
-    ; turnobject PLAYER, UP
-
-    ; writetext .Text_LetsGetStarted
-    ; waitbutton
-    ; closetext
-
-    ; applymovement PLAYER, .Movement_PlayerMovesOutOfWay
-    ; applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeStepsDown
-    ; follow ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
-    ; applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToExit
-    ; stopfollow
-
-    ; opentext
-    ; writetext .Text_AideCallsOut
-    ; waitbutton
-    ; closetext
-
-    ; playsound SFX_ENTER_DOOR
-	; waitsfx
-	; disappear ROCK_SALT_LAB_JADE_IN_BACK
-    ; pause 10
-
-    ; applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
-    ; turnobject PLAYER, LEFT
-
-    ; opentext
-    ; writetext .Text_ResearchCensus
-    ; promptbutton
-    ; getitemname STRING_BUFFER_4, POKE_BALL
-	; scall .Script_ReceiveBalls
-	; giveitem POKE_BALL, 5
-    ; writetext .Text_SomethingToHelp
-    ; waitbutton
-    ; closetext
-
-    ; applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
-    ; ; prevent aide from immediately spinning after walking back
-    ; pause 15
-
-    setscene SCENE_ROCK_SALT_LAB_NOOP
+    setscene SCENE_AIDE_GIVES_POKEBALLS
     end
-
-.Script_ReceiveBalls:
-    jumpstd ReceiveItemScript
 
 .Movement_ProfWalksToDex:
     step LEFT
@@ -862,6 +823,26 @@ Script_ReceiveDex:
 
 .Movement_ProfComesBack:
     step RIGHT
+    step_end
+
+.Movement_ProfWalksToComputer:
+    step LEFT
+    step LEFT
+    turn_head DOWN
+    step_end
+
+.Movement_JadeWalksToYou:
+    step RIGHT
+    turn_head UP
+    step_end
+
+.Movement_JadeLeavesLab:
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
+    step DOWN
     step_end
 
 .Text_ProfSpeechPart1:
@@ -998,50 +979,27 @@ Script_ReceiveDex:
 
     done
 
-.Text_AideCallsOut:
-    text "<PLAYER>, wait!"
+.Text_MeetAtCave:
+    text "Wow..."
+
+    para "We're really"
+    line "doing this!"
+
+    para "Actual field"
+    line "research!"
+
+    para "I should head"
+    line "home and pack."
+
+    para "I don't want to"
+    line "forget anything!"
+
+    para "I'll meet you at"
+    line "the cave entrance."
+
+    para "Don't be late!"
+
     done
-
-.Text_ResearchCensus:
-    text "Research census..."
-
-    para "Here!"
-    done
-
-.Text_SomethingToHelp:
-    text "Something to help"
-    line "get you started."
-    cont "See ya 'round!"
-    done
-
-.Movement_PlayerMovesOutOfWay:
-    step RIGHT
-    turn_head LEFT
-    step_end
-
-.Movement_JadeStepsDown:
-    step DOWN
-    step_end
-
-.Movement_JadeWalksToExit:
-    step DOWN
-    step DOWN
-    step DOWN
-    step DOWN
-    step DOWN
-    step DOWN
-    step_end
-
-.Movement_AideWalksToYou:
-    step DOWN
-    step RIGHT
-    step_end
-
-.Movement_AideWalksBack:
-    step LEFT
-    step UP
-    turn_head DOWN
-    step_end
 
 Script_Prof:
     checkscene
@@ -1382,6 +1340,100 @@ Text_ItLooksHappy:
     text "It looks happy."
     done
 
+Script_AideGivesPokeballs1:
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
+    scall Script_AideGivesPokeballs
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
+    end
+
+.Movement_AideWalksToYou:
+    step RIGHT
+    step RIGHT
+    step_end
+
+.Movement_AideWalksBack:
+    step LEFT
+    step LEFT
+    ; prevent aide from immediately spinning after walking back
+    step_sleep 15
+    step_end
+
+Script_AideGivesPokeballs2:
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksToYou
+    scall Script_AideGivesPokeballs
+    applymovement ROCK_SALT_LAB_AIDE_IN_FRONT, .Movement_AideWalksBack
+    end
+
+.Movement_AideWalksToYou:
+    step RIGHT
+    step RIGHT
+    step RIGHT
+    step_end
+
+.Movement_AideWalksBack:
+    step LEFT
+    step LEFT
+    step LEFT
+    ; prevent aide from immediately spinning after walking back
+    step_sleep 15
+    step_end
+
+Script_AideGivesPokeballs:
+    turnobject ROCK_SALT_LAB_AIDE_IN_FRONT, UP
+    opentext
+    writetext .Text_BeforeYouGo
+    promptbutton
+    getitemname STRING_BUFFER_4, POKE_BALL
+	scall .Script_ReceiveBalls
+	giveitem POKE_BALL, 5
+    writetext .Text_SomethingToHelp
+    waitbutton
+    closetext
+    setscene SCENE_ROCK_SALT_LAB_NOOP
+    end
+
+.Script_ReceiveBalls:
+    jumpstd ReceiveItemScript
+
+.Text_AideCallsOut:
+    text "<PLAYER>, wait!"
+    done
+
+.Text_BeforeYouGo:
+    text "Hey, <PLAYER>!"
+
+    para "Before you go..."
+
+    para "Field research can"
+    line "take you anywhere."
+
+    para "You'll need these."
+
+    para "Poké Balls are"
+    line "essential tools."
+
+    para "You never know"
+    line "what you'll find."
+
+    done
+
+.Text_SomethingToHelp:
+    text "Something to help"
+    line "get you started."
+    cont "See ya 'round!"
+    done
+
+.Movement_AideWalksToYou:
+    step DOWN
+    step RIGHT
+    step_end
+
+.Movement_AideWalksBack:
+    step LEFT
+    step UP
+    turn_head DOWN
+    step_end
+
 RockSaltLab_MapEvents:
 	db 0, 0 ; filler
 
@@ -1398,6 +1450,8 @@ RockSaltLab_MapEvents:
 	coord_event  5,  0, SCENE_CHOOSE_STARTER, Script_CantLeaveLab2
     coord_event  4,  6, SCENE_TROUBLE_WITH_TAUROS_REWARD, Script_TroubleWithTaurosReward1
 	coord_event  5,  6, SCENE_TROUBLE_WITH_TAUROS_REWARD, Script_TroubleWithTaurosReward2
+    coord_event  4,  8, SCENE_AIDE_GIVES_POKEBALLS, Script_AideGivesPokeballs1
+	coord_event  5,  8, SCENE_AIDE_GIVES_POKEBALLS, Script_AideGivesPokeballs2
 
 	def_bg_events
     bg_event  2,  1, BGEVENT_READ, Script_HealingMachine
