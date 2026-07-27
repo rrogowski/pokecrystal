@@ -9,8 +9,8 @@ Route101_MapScripts:
 	def_callbacks
 
 Route101_JadeGivesSketchpadScene:
-	; wait for landmark name to disappear
-	pause 20
+	pause 30
+	dismisslandmark
 
 	applymovement ROUTE_101_JADE, .Movement_JadeRunsUpToYou
 
@@ -41,11 +41,8 @@ Route101_JadeGivesSketchpadScene:
 	opensketchpad
 
 	opentext
-	writetext .Text_IveNeverSeenThis
+	writetext .Text_IveSeenSomethingLikeThis
 	waitbutton
-	closetext
-
-	opentext
 	verbosegiveitem SKETCHPAD
 	closetext
 
@@ -106,7 +103,7 @@ Route101_JadeGivesSketchpadScene:
 	text "Let me see!"
 	done
 
-.Text_IveNeverSeenThis:
+.Text_IveSeenSomethingLikeThis:
 	text "Wait..."
 
 	para "I've seen"
@@ -131,6 +128,17 @@ Route101_JadeGivesSketchpadScene:
 	line "their secrets!"
 
 	para "You'll see!"
+
+	para "Oh! You can keep"
+	line "the SKETCHPAD."
+
+	para "You might find"
+	line "another strange"
+	cont "#MON."
+
+	para "Good luck with"
+	line "your research,"
+	cont "<PLAYER>!"
 
 	done
 
