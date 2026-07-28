@@ -96,6 +96,7 @@ Script_RockSaltCavernMonster:
 	disappear ROCK_SALT_CAVE_CAVERN_MONSTER
 	reloadmapafterbattle
 	advancequest QUEST_A_CRY_FOR_HELP
+	setevent EVENT_RESCUED_YOUNGSTER
 	pause 10
 
 	applymovement ROCK_SALT_CAVE_CAVERN_YOUNGSTER, .Movement_YoungsterWalksToYou
