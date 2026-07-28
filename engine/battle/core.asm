@@ -8984,9 +8984,9 @@ InitBattleDisplay:
 GetTrainerBackpic:
 ; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
 
-; Special exception for Dude.
-	ld b, BANK(DudeBackpic)
-	ld hl, DudeBackpic
+; Special exception for Old Man.
+	ld b, BANK(OldmanBackpic)
+	ld hl, OldmanBackpic
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jr z, .Decompress
