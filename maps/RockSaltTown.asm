@@ -167,23 +167,6 @@ Text_ItsDangerousAhead:
 
 	done
 
-Script_RockSaltTownJade:
-	checkscene
-	ifequal SCENE_CHOOSE_STARTER, .Script_JadeWaitsForYouToChooseStarter
-	end
-
-.Script_JadeWaitsForYouToChooseStarter:
-	jumptextfaceplayer .Text_CanYouChooseFirst
-
-.Text_CanYouChooseFirst:
-	text "Can you choose"
-	line "first?"
-
-	para "I think I'm a"
-	line "little nervous..."
-
-	done
-
 RockSaltTownFruitTree:
    fruittree FRUITTREE_ROCK_SALT_TOWN
 
@@ -569,7 +552,10 @@ Script_MeetJade:
 
 	done
 
-Script_JadeOutsideRockSaltCave:
+Script_RockSaltTownJade:
+	checkflag ENGINE_POKEDEX
+	iftrue .Script_BattleJade
+
 	faceplayer
 	opentext
 	writetext .Text_Wait
@@ -685,6 +671,242 @@ Script_JadeOutsideRockSaltCave:
 
 	para "I can't just"
 	line "ignore it."
+
+	done
+
+.Script_BattleJade:
+	opentext
+	writetext .Text_YoureHere
+	waitbutton
+	closetext
+
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, UP
+	pause 15
+	opentext
+	writetext .Text_IDidnt
+	waitbutton
+	closetext
+
+	faceplayer
+	showemote EMOTE_SAD, ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, 30
+	opentext
+	writetext .Text_WhatIf
+	waitbutton
+	closetext
+
+	readvar VAR_FACING
+	ifequal LEFT, .turnjadeleft
+	sjump .turnjaderight
+
+.turnjadeleft
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, LEFT
+	sjump .continue
+
+.turnjaderight
+	turnobject ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, RIGHT
+	sjump .continue
+
+.continue
+	opentext
+	writetext .Text_NotAgain
+	waitbutton
+	closetext
+	pause 30
+
+	faceplayer
+	opentext
+	writetext .Text_BattleMe
+	waitbutton
+	closetext
+
+	winlosstext .Text_JadeLoses, .Text_JadeWins
+
+	checkevent EVENT_CHOSE_STARTER_CYNDAQUIL
+	iftrue .starter_cyndaquil
+
+	checkevent EVENT_CHOSE_STARTER_CHIKORITA
+	iftrue .starter_chikorita
+
+	sjump .starter_totodile
+
+.starter_cyndaquil
+	loadtrainer JADE, JADE_1_TOTODILE
+	sjump .startbattle
+
+.starter_chikorita
+	loadtrainer JADE, JADE_1_CYNDAQUIL
+	sjump .startbattle
+
+.starter_totodile
+	loadtrainer JADE, JADE_1_CHIKORITA
+	sjump .startbattle
+
+.startbattle
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	startbattle
+	reloadmap
+	ifequal WIN, .victory
+	sjump .defeat
+
+.victory
+	opentext
+	writetext .Text_ILost
+	promptbutton
+	sjump .jadeleaves
+
+.defeat
+	opentext
+	writetext .Text_IWon
+	waitbutton
+	closetext
+
+	pause 20
+	opentext
+	writetext .Text_NotEnough
+	promptbutton
+	sjump .jadeleaves
+
+.jadeleaves
+	writetext .Text_ImGoingIn
+	waitbutton
+	closetext
+
+	applymovement ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE, .Movement_StepUp
+	playsound SFX_ENTER_DOOR
+	waitsfx
+	disappear ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
+	end
+
+.Text_YoureHere:
+	text "<PLAYER>!"
+
+	para "You're here!"
+
+	para "About what"
+	line "happened"
+	cont "earlier..."
+
+	para "You were amazing!"
+
+	para "You didn't"
+	line "hesitate."
+
+	para "You rushed in and"
+	line "helped YOUNGSTER."
+
+	done
+
+.Text_IDidnt:
+	text "But..."
+
+	para "I didn't."
+
+	para "I heard that cry."
+
+	para "I knew someone"
+	line "needed help..."
+
+	para "But I was too"
+	line "afraid to move."
+
+	done
+
+.Text_WhatIf:
+	text "What if you"
+	line "weren't there?"
+
+	para "What would I have"
+	line "done?"
+
+	done
+
+.Text_NotAgain
+	text "I don't want to"
+	line "feel that way"
+	cont "again."
+
+	para "I need to get"
+	line "stronger."
+
+	para "Not just as a"
+	line "researcher..."
+
+	para "But as a partner."
+
+	done
+
+.Text_BattleMe:
+	text "<PLAYER>..."
+
+	para "Battle me!"
+
+	para "I need to know"
+	line "how much I still"
+	cont "have to learn."
+
+	done
+
+.Text_JadeLoses:
+	text "Okay, you win..."
+	done
+
+.Text_JadeWins:
+	text "Yes! I did it!"
+	done
+
+.Text_ILost:
+	text "I lost..."
+
+	para "But I learned"
+	line "something."
+
+	para "You and your"
+	line "Pokemon trust each"
+	cont "other."
+
+	para "That's what I"
+	line "need to build."
+
+	para "I'll get stronger."
+
+	para "I'll protect the"
+	line "people I care"
+	cont "about."
+
+	done
+
+.Text_IWon:
+	text "I won!"
+
+	para "That means I could"
+	line "have beaten that"
+	cont "Nidorino..."
+
+	done
+
+.Text_NotEnough:
+	text "Wait..."
+
+	para "That's not enough."
+
+	para "Being strong"
+	line "isn't just about"
+	cont "winning battles."
+
+	para "I still need to"
+	line "grow."
+
+	para "I want to protect"
+	line "those I care about."
+
+	done
+
+.Text_ImGoingIn:
+	text "I'm going into"
+	line "the cave."
+
+	para "I'll see you"
+	line "around, <PLAYER>!"
 
 	done
 
@@ -886,7 +1108,7 @@ RockSaltTown_MapEvents:
 	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownOldMan, -1
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
-	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeOutsideRockSaltCave, EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
+	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownJade, EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
 	object_event 23, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
 	object_event 39, 12, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS
 	object_event 34, 10, SPRITE_TAUROS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, Script_Tauros, EVENT_ROCK_SALT_TOWN_TAUROS

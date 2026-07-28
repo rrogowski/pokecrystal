@@ -320,6 +320,7 @@ gfx/player/chris.2bpp: RGBGFXFLAGS += --columns
 gfx/player/chris_back.2bpp: RGBGFXFLAGS += --columns
 gfx/player/kris.2bpp: RGBGFXFLAGS += --columns
 gfx/player/kris_back.2bpp: RGBGFXFLAGS += --columns
+gfx/player/jade.2bpp: RGBGFXFLAGS += --columns
 
 gfx/trainer_card/chris_card.2bpp: RGBGFXFLAGS += --columns
 gfx/trainer_card/kris_card.2bpp: RGBGFXFLAGS += --columns

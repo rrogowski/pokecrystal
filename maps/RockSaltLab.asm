@@ -801,6 +801,7 @@ Script_ReceiveDex:
     closetext
     applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeLeavesLab
     disappear ROCK_SALT_LAB_JADE_IN_BACK
+    clearevent EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
 
     setscene SCENE_AIDE_GIVES_POKEBALLS
     end

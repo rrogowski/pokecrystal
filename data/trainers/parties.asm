@@ -3497,7 +3497,17 @@ MysticalmanGroup:
 	db -1 ; end
 
 JadeGroup:
-	; JADE1
+	; JADE_1_CYNDAQUIL
+	db "JADE@", TRAINERTYPE_ITEM
+	db 8, CYNDAQUIL, BERRY
+	db -1 ; end
+
+	; JADE_1_TOTODILE
+	db "JADE@", TRAINERTYPE_ITEM
+	db 8, TOTODILE, BERRY
+	db -1 ; end
+
+	; JADE_1_CHIKORITA
 	db "JADE@", TRAINERTYPE_ITEM
 	db 8, CHIKORITA, BERRY
 	db -1 ; end

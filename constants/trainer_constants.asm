@@ -705,6 +705,8 @@ DEF KRIS EQU __trainer_class__
 	const EUSINE
 
 	trainerclass JADE
-	const JADE1
+	const JADE_1_CYNDAQUIL
+	const JADE_1_TOTODILE
+	const JADE_1_CHIKORITA
 
 DEF NUM_TRAINER_CLASSES EQU __trainer_class__ - 1
