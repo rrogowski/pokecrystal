@@ -689,8 +689,6 @@ Script_JadeOutsideRockSaltCave:
 	done
 
 Script_RockSaltTownOldMan:
-	givepoke CYNDAQUIL, 5, BERRY
-
 	checkscene
 	ifequal SCENE_OLD_MAN_STOPS_YOU, .Script_ItsDangerousAhead
 	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .Script_StayAway
