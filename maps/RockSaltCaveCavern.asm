@@ -132,6 +132,7 @@ Script_RockSaltCavernMonster:
 	waitsfx
 	setmapscene ROCK_SALT_CAVE_1F, SCENE_ROCK_SALT_CAVE_1F_UNOWN_ENCOUNTER
 	setmapscene ROCK_SALT_LAB, SCENE_RECEIVE_DEX
+	setmapscene ROCK_SALT_TOWN, SCENE_CATCHING_TUTORIAL
 	warp ROCK_SALT_LAB, 5, 4
 
 	end

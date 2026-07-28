@@ -22,6 +22,8 @@ RockSaltTown_MapScripts:
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_TAUROS_RAMPAGING
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 	scene_script SceneSetup_RockSaltTownNoop, SCENE_YOUNGSTER_MISSING
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_CATCHING_TUTORIAL
+	scene_script SceneSetup_RockSaltTownNoop, SCENE_ROCK_SALT_TOWN_NOOP
 
 	def_callbacks
 	callback MAPCALLBACK_OBJECTS, CallbackObjects_RockSaltTown
@@ -118,7 +120,8 @@ SceneSetup_RockSaltTownNoop:
 	end
 
 Script_OldManStopsYouFromLeaving:
-	faceplayer
+	faceobject PLAYER, ROCK_SALT_TOWN_OLD_MAN
+	faceobject ROCK_SALT_TOWN_OLD_MAN, PLAYER
 	opentext
 	writetext .Text_StopRightThere
 	waitbutton
@@ -161,27 +164,6 @@ Text_ItsDangerousAhead:
 
 	para "Get yourself a"
 	line "#MON first!"
-
-	done
-
-Script_OldMan:
-	checkscene
-	ifequal SCENE_OLD_MAN_STOPS_YOU, .Script_ItsDangerousAhead
-	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .Script_StayAway
-	sjump ObjectEvent
-
-.Script_StayAway:
-	jumptextfaceplayer .Text_StayAway
-
-.Script_ItsDangerousAhead:
-	jumptextfaceplayer Text_ItsDangerousAhead
-
-.Text_StayAway:
-	text "Stay away from"
-	line "Rock Salt Cave!"
-
-	para "It's far too"
-	line "dangerous!"
 
 	done
 
@@ -706,6 +688,179 @@ Script_JadeOutsideRockSaltCave:
 
 	done
 
+Script_RockSaltTownOldMan:
+	givepoke CYNDAQUIL, 5, BERRY
+
+	checkscene
+	ifequal SCENE_OLD_MAN_STOPS_YOU, .Script_ItsDangerousAhead
+	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .Script_StayAway
+
+	checkevent EVENT_LEARNED_TO_CATCH_POKEMON
+	iffalse Script_CatchingTutorial
+	jumptextfaceplayer .Text_Partners
+
+.Script_StayAway:
+	jumptextfaceplayer .Text_StayAway
+
+.Script_ItsDangerousAhead:
+	jumptextfaceplayer Text_ItsDangerousAhead
+
+.Text_StayAway:
+	text "Stay away from"
+	line "Rock Salt Cave!"
+
+	para "It's far too"
+	line "dangerous!"
+
+	done
+
+.Text_Partners:
+	text "Remember..."
+
+	para "Pokemon aren't"
+	line "just tools."
+
+	para "They're partners."
+
+	done
+
+Script_CatchingTutorial:
+	faceobject PLAYER, ROCK_SALT_TOWN_OLD_MAN
+	faceobject ROCK_SALT_TOWN_OLD_MAN, PLAYER
+	opentext
+	writetext .Text_ShowHow
+	yesorno
+	iffalse .decline
+	writetext .Text_GoodChoice
+	waitbutton
+	closetext
+
+	follow ROCK_SALT_TOWN_OLD_MAN, PLAYER
+	applymovement ROCK_SALT_TOWN_OLD_MAN, .Movement_OldManWalksToGrass
+	stopfollow
+	turnobject ROCK_SALT_TOWN_OLD_MAN, RIGHT
+	opentext
+	writetext .Text_WatchClosely
+	waitbutton
+	closetext
+
+	turnobject ROCK_SALT_TOWN_OLD_MAN, LEFT
+	loadwildmon SENTRET, 3
+	catchtutorial BATTLETYPE_TUTORIAL
+
+	turnobject ROCK_SALT_TOWN_OLD_MAN, RIGHT
+	opentext
+	writetext .Text_AfterTutorial
+	getitemname STRING_BUFFER_4, POKE_BALL
+	scall .Script_ReceiveBalls
+	giveitem POKE_BALL, 10
+	writetext .Text_DontWasteThem
+	waitbutton
+	closetext
+
+	applymovement ROCK_SALT_TOWN_OLD_MAN, .Movement_OldManWalksBack
+
+	setevent EVENT_LEARNED_TO_CATCH_POKEMON
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
+	end
+
+.decline
+	writetext .Text_ThatsAlright
+	waitbutton
+	closetext
+	setscene SCENE_ROCK_SALT_TOWN_NOOP
+	end
+
+.Script_ReceiveBalls:
+  jumpstd ReceiveItemScript
+
+.Movement_OldManWalksToGrass:
+	step LEFT
+	step LEFT
+	step LEFT
+	step_end
+
+.Movement_OldManWalksBack:
+	step DOWN
+	step RIGHT
+	step RIGHT
+	step RIGHT
+	step UP
+	turn_head DOWN
+	step_end
+
+.Text_ShowHow:
+	text "Ah!"
+
+	para "You caught"
+	line "yourself a"
+	cont "#MON."
+
+	para "Good!"
+
+	para "Now you can begin"
+	line "your journey."
+
+	para "Have you ever"
+	line "caught a wild"
+	cont "#MON before?"
+
+	para "Would you like"
+	line "me to show"
+	cont "you how?"
+
+	done
+
+.Text_GoodChoice
+	text "Good choice!"
+	done
+
+.Text_WatchClosely:
+	text "Watch closely."
+
+	para "I'll show you how"
+	line "it's done."
+
+	done
+
+.Text_AfterTutorial:
+	text "See?"
+
+	para "With patience and"
+	line "care..."
+
+	para "Any Pokemon can"
+	line "become a partner."
+
+	para "You're willing"
+	line "to learn."
+
+	para "That reminds me"
+	line "of myself."
+
+	para "Here."
+
+	para "You'll need these"
+	line "on your journey."
+
+	done
+
+.Text_DontWasteThem:
+	text "Don't waste them!"
+
+	para "Use them wisely."
+
+	done
+
+.Text_ThatsAlright:
+	text "That's alright."
+
+	para "Let me know"
+	line "if you change"
+	cont "your mind."
+
+	done
+
 RockSaltTown_MapEvents:
 	db 0, 0 ; filler
 
@@ -722,6 +877,7 @@ RockSaltTown_MapEvents:
 	def_coord_events
 	coord_event 29, 20, SCENE_MEET_JADE, Script_MeetJade
 	coord_event 14, 19, SCENE_OLD_MAN_STOPS_YOU, Script_OldManStopsYouFromLeaving
+	coord_event 14, 19, SCENE_CATCHING_TUTORIAL, Script_CatchingTutorial
 
 	def_bg_events
 	bg_event 26, 14, BGEVENT_READ, RockSaltTownLabSign
@@ -729,7 +885,7 @@ RockSaltTown_MapEvents:
 	bg_event 23, 15, BGEVENT_READ, RockSaltTownJadesHouseSign
 
 	def_object_events
-	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Script_OldMan, -1
+	object_event 14, 18, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, Script_RockSaltTownOldMan, -1
 	object_event 35, 21, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ObjectEvent, EVENT_ROCK_SALT_TOWN_JADE_INTRO
 	object_event 20, 19, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeBattlingTauros, EVENT_ROCK_SALT_TOWN_JADE_BATTLING_TAUROS
 	object_event 12, 12, SPRITE_DAISY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, Script_JadeOutsideRockSaltCave, EVENT_ROCK_SALT_TOWN_JADE_OUTSIDE_CAVE
