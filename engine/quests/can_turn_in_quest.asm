@@ -29,10 +29,17 @@ endr
   ld b, [hl]
 
   cp b
-  ld a, 0
-  ld [wScriptVar], a
-  ret nz
+  jr nz, .false
 
-  inc a
+  ; quest goal must be nonzero
+  and a
+  jr z, .false
+
+  ld a, 1
+  ld [wScriptVar], a
+  ret
+
+.false
+  ld a, 0
   ld [wScriptVar], a
   ret
