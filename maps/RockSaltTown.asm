@@ -179,6 +179,14 @@ Script_PlayersRampagingTauros:
 	loadwildmon TAUROS, 2
 	loadvar VAR_BATTLETYPE, BATTLETYPE_TRAP
 	startbattle
+	ifequal LOSE, .defeat
+	sjump .victory
+
+.defeat
+	reloadmapafterbattle
+	end
+
+.victory
 	advancequest QUEST_TROUBLE_WITH_TAUROS
 	setscene SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU
 	scall SpriteSetup_RockSaltTown
