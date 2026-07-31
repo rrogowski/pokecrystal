@@ -675,6 +675,7 @@ Script_RockSaltTownJade:
 	done
 
 .Script_BattleJade:
+	faceplayer
 	opentext
 	writetext .Text_YoureHere
 	waitbutton
@@ -913,7 +914,9 @@ Script_RockSaltTownJade:
 Script_RockSaltTownOldMan:
 	checkscene
 	ifequal SCENE_OLD_MAN_STOPS_YOU, .Script_ItsDangerousAhead
-	ifequal SCENE_OLD_MAN_AND_YOUNGSTER_BLOCK_YOU, .Script_StayAway
+
+	checkflag ENGINE_POKEDEX
+	iffalse .Script_StayAway
 
 	checkevent EVENT_LEARNED_TO_CATCH_POKEMON
 	iffalse Script_CatchingTutorial

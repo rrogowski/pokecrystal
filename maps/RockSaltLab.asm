@@ -795,7 +795,8 @@ Script_ReceiveDex:
 
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToComputer
     applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToYou
-    opentext
+    faceobject PLAYER, ROCK_SALT_LAB_JADE_IN_BACK
+    faceobject ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
     writetext .Text_MeetAtCave
     waitbutton
     closetext
