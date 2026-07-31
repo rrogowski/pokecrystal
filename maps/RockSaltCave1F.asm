@@ -1,15 +1,14 @@
 	object_const_def
-    const ROCK_SALT_CAVE_1F_POKEFAN_M_WARNING
+    const ROCK_SALT_CAVE_1F_POKEFANM_WARNING
     const ROCK_SALT_CAVE_1F_JADE
-    ; const   ROCK_SALT_CAVE_1F_LASS_CASEY
-    ; const   ROCK_SALT_CAVE_1F_FISHER_PAUL
-    ; const   ROCK_SALT_CAVE_1F_POKEFAN_M_MICHAEL
-    ; const   ROCK_SALT_CAVE_1F_SCIENTIST_AUSTIN
-    ; const   ROCK_SALT_CAVE_1F_SCIENTIST_TRENT
-    ; const   ROCK_SALT_CAVE_1F_POKEBALL_1
-    ; const   ROCK_SALT_CAVE_1F_POKEBALL_2
-    ; const   ROCK_SALT_CAVE_1F_POKEBALL_3
-    ; const   ROCK_SALT_CAVE_1F_POKEBALL_4
+    const   ROCK_SALT_CAVE_1F_LASS_CASEY
+    const   ROCK_SALT_CAVE_1F_FISHER_PAUL2
+    const   ROCK_SALT_CAVE_1F_POKEFANM_MICHAEL2
+    const   ROCK_SALT_CAVE_1F_SCIENTIST_AUSTIN
+    const   ROCK_SALT_CAVE_1F_POKEBALL_1
+    const   ROCK_SALT_CAVE_1F_POKEBALL_2
+    const   ROCK_SALT_CAVE_1F_POKEBALL_3
+    const   ROCK_SALT_CAVE_1F_POKEBALL_4
     const ROCK_SALT_CAVE_1F_UNOWN
 
 RockSaltCave1F_MapScripts:
@@ -183,18 +182,167 @@ RockSaltCave1FPokefanMWarningText:
     para "I don't know if"
     line "you've heard,"
     cont "but a there's a"
-    line "dangerous wild"
-    cont "#MON running"
-    line "loose in this"
-    cont "cave!"
+
+    para "dangerous wild"
+    line "#MON running"
+    cont "loose in this"
+
+    para "cave!"
 
     para "I'm afraid I can't"
     line "let you go any"
     cont "further until"
-    line "things settle"
-    cont "down in here."
+
+    para "things settle"
+    line "down in here."
     done
 
+TrainerLassCasey:
+	trainer LASS, CASEY, EVENT_BEAT_LASS_CASEY, LassCaseySeenText, LassCaseyBeatenText, 0, .Script
+
+.Script:
+	endifjustbattled
+	opentext
+	writetext	LassCaseyAfterText
+	waitbutton
+	closetext
+	end
+
+LassCaseySeenText:
+	text "Coming from"
+	line "Rock Salt Town,"
+	cont "eh?"
+
+	para "Let's see how"
+	line "tough a trainer"
+	cont "from Rock Salt"
+
+    para "Town is."
+	done
+
+LassCaseyBeatenText:
+	text "Rock Salt Town"
+	line "trainers are"
+	cont "tough!"
+	done
+
+LassCaseyAfterText:
+	text "I sure learned"
+	line "my lesson!"
+
+	para "Don't mess with"
+	line "trainers from"
+	cont "Rock Salt Town!"
+	done
+
+TrainerFisherPaul2:
+	trainer FISHER, PAUL2, EVENT_BEAT_FISHER_PAUL2, FisherPaul2SeenText, FisherPaul2BeatenText, 0, .Script
+
+.Script:
+	endifjustbattled
+	opentext
+	writetext FisherPaul2AfterText
+	waitbutton
+	closetext
+	end
+
+FisherPaul2SeenText:
+	text "Cave fishing is"
+	line "the best!"
+
+	para "I love fishing"
+	line "in the dark!"
+	done
+
+FisherPaul2BeatenText:
+	text "Perhaps I should"
+	line "stick to fishing."
+	done
+
+FisherPaul2AfterText:
+	text "I'm happiest"
+	line "when I'm fishing!"
+
+	para "You should try"
+	line "it for yourself!"
+	done
+
+TrainerPokefanMMichael2:
+	trainer POKEFANM, MICHAEL2, EVENT_BEAT_POKEFANM_MICHAEL2, PokefanMMichael2SeenText, PokefanMMichael2BeatenText, 0, .Script
+
+.Script
+	endifjustbattled
+	opentext
+	writetext PokefanMMichael2AfterText
+	waitbutton
+	closetext
+	end
+
+PokefanMMichael2SeenText:
+	text "Well, well."
+	line "What do we"
+	cont "have here?"
+
+	para "How about a"
+	line "quick battle?"
+	done
+
+PokefanMMichael2BeatenText:
+	text "You sure know"
+	line "how to battle!"
+	done
+
+PokefanMMichael2AfterText:
+	text "My #MON"
+	line "fought hard!"
+
+	para "I'm the one who"
+	line "needs to train"
+	cont "more..."
+	done
+
+TrainerScientistAustin:
+	trainer SCIENTIST, AUSTIN, EVENT_BEAT_SCIENTIST_AUSTIN, ScientistAustinSeenText, ScientistAustinBeatenText, 0, .Script
+
+.Script
+	endifjustbattled
+	opentext
+	writetext ScientistAustinAfterText
+	waitbutton
+	closetext
+	end
+
+ScientistAustinSeenText:
+	text "Watch where"
+	line "you're stepping!"
+
+	para "I'm conducting"
+	line "very important"
+	cont "research here!"
+	done
+
+ScientistAustinBeatenText:
+	text "Fascinating!"
+	line "I must record"
+	cont "my findings!"
+
+ScientistAustinAfterText:
+	text "Thank you for"
+	line "allowing me to"
+	cont "collect some data!"
+	done
+
+RockSaltCave1FPotionScript:
+    itemball POTION
+
+RockSaltCave1FPokeBallScript:
+    itemball POKE_BALL
+
+RockSaltCave1FTMSpikesScript:
+    itemball SPIKES
+
+RockSaltCave1FNuggetScript:
+    itemball NUGGET
 
 RockSaltCave1F_MapEvents:
 	db 0, 0 ; filler
@@ -216,13 +364,12 @@ RockSaltCave1F_MapEvents:
 	def_object_events
 	object_event 21, 18, SPRITE_POKEFAN_M,   SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, PAL_NPC_BROWN,  OBJECTTYPE_SCRIPT,  0,  RockSaltCave1FPokefanMWarningScript, EVENT_RESCUED_YOUNGSTER
     object_event 11, 35, SPRITE_DAISY,   SPRITEMOVEDATA_STANDING_UP,   0,  0,  -1, -1, PAL_NPC_GREEN,  OBJECTTYPE_SCRIPT,  0,  Script_RockSaltCave1FJadeScared, EVENT_ROCK_SALT_CAVE_1F_JADE
-    ; object_event    11, 28, SPRITE_LASS,        SPRITEMOVEDATA_STANDING_DOWN,   0,  0,  -1, -1, PAL_NPC_RED,    OBJECTTYPE_TRAINER, 4,  RockSaltCave1FLassCaseyScript,    -1  ;
-    ; object_event    06, 18, SPRITE_FISHER,      SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, 0,    OBJECTTYPE_TRAINER, 0,  RockSaltCave1FFisherPaulScript,   -1  ;
-    ; object_event    13, 22, SPRITE_POKEFAN_M,        SPRITEMOVEDATA_STANDING_UP,     0,    0,  -1, -1, PAL_NPC_BLUE, 0, OBJECTTYPE_TRAINER, 2, RockSaltCave1FPokefanMichaelScript, -1 ;
-    ; object_event    21, 34, SPRITE_SCIENTIST,    SPRITEMOVEDATA_STANDING_DOWN,  0,    0,  -1, -1, 0, OBJECTTYPE_TRAINER, 3, RockSaltCave1FScientistAustinScript, -1   ;
-    ; object_event    21, 34, SPRITE_SCIENTIST,    SPRITEMOVEDATA_STANDING_RIGHT,  0,    0,  -1, -1, 0, OBJECTTYPE_TRAINER, 3, RockSaltCave1FScientistTrentScript, -1   ;
-    ; object_event    14, 32, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FPotionScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_POTION
-    ; object_event    19, 12, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FPokeBallScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_POKEBALL
-    ; object_event    7, 13, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FTMSpikesScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_TM_SPIKES
-    ; object_event    17, 24, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FNuggetScript, -1 ; EVENT_ROCK_SALT_CAVE_1F_NUGGET
+    object_event    11, 28, SPRITE_LASS,        SPRITEMOVEDATA_STANDING_DOWN,   0,  0,  -1, -1, PAL_NPC_RED,    OBJECTTYPE_TRAINER, 4,  TrainerLassCasey, -1
+    object_event    06, 18, SPRITE_FISHER,      SPRITEMOVEDATA_STANDING_LEFT,   0,  0,  -1, -1, 0,    OBJECTTYPE_TRAINER, 0,  TrainerFisherPaul2, -1
+    object_event    13, 22, SPRITE_POKEFAN_M,        SPRITEMOVEDATA_STANDING_UP,     0,    0,  -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 0, TrainerPokefanMMichael2, -1
+    object_event    21, 34, SPRITE_SCIENTIST,    SPRITEMOVEDATA_STANDING_DOWN,  0,    0,  -1, -1, 0, OBJECTTYPE_TRAINER, 3, TrainerScientistAustin, -1
+    object_event    14, 32, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FPotionScript, EVENT_ROCK_SALT_CAVE_1F_POTION
+    object_event    19, 12, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FPokeBallScript, EVENT_ROCK_SALT_CAVE_1F_POKEBALL
+    object_event    7, 13, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FTMSpikesScript, EVENT_ROCK_SALT_CAVE_1F_TM_SPIKES
+    object_event    17, 24, SPRITE_POKE_BALL,     SPRITEMOVEDATA_STILL, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_ITEMBALL, 0, RockSaltCave1FNuggetScript, EVENT_ROCK_SALT_CAVE_1F_NUGGET
     object_event 20, 5, SPRITE_UNOWN, SPRITEMOVEDATA_POKEMON, 0,  0,  -1, -1, 0,  OBJECTTYPE_SCRIPT, 0, -1, EVENT_UNOWN_FIRST_ENCOUNTERED

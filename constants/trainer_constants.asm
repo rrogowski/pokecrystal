@@ -107,6 +107,7 @@ DEF KRIS EQU __trainer_class__
 	const JED
 	const MARC
 	const RICH
+	const AUSTIN
 
 	trainerclass ERIKA ; 15
 	const ERIKA1
@@ -192,6 +193,7 @@ DEF KRIS EQU __trainer_class__
 	const DANA3
 	const DANA4
 	const DANA5
+	const CASEY
 
 	trainerclass JANINE ; 1a
 	const JANINE1
@@ -376,6 +378,7 @@ DEF KRIS EQU __trainer_class__
 	const RALPH4
 	const RALPH5
 	const TULLY4
+	const PAUL2
 
 	trainerclass SWIMMERM ; 26
 	const HAROLD
@@ -487,6 +490,7 @@ DEF KRIS EQU __trainer_class__
 	const PARRY3
 	const ANTHONY4
 	const ANTHONY5
+
 
 	trainerclass BIKER ; 2d
 	const BIKER_BENNY ; unused
@@ -655,6 +659,7 @@ DEF KRIS EQU __trainer_class__
 	const ALEX
 	const REX
 	const ALLAN
+    const MICHAEL2
 
 	trainerclass KIMONO_GIRL ; 3c
 	const NAOKO_UNUSED ; unused
