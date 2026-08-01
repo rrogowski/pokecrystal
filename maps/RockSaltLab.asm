@@ -149,7 +149,7 @@ SpriteSetup_RockSaltLabMonWandering:
     checkevent EVENT_CHOSE_STARTER_TOTODILE
     iftrue .chose_totodile
 
-    checkevent EVENT_CHOSE_STARTER_TOTODILE
+    checkevent EVENT_CHOSE_STARTER_CHIKORITA
     iftrue .chose_chikorita
 
     sjump .done
@@ -795,6 +795,8 @@ Script_ReceiveDex:
 
     applymovement ROCK_SALT_LAB_PROF, .Movement_ProfWalksToComputer
     applymovement ROCK_SALT_LAB_JADE_IN_BACK, .Movement_JadeWalksToYou
+    faceobject PLAYER, ROCK_SALT_LAB_JADE_IN_BACK
+    faceobject ROCK_SALT_LAB_JADE_IN_BACK, PLAYER
     opentext
     writetext .Text_MeetAtCave
     waitbutton
