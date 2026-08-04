@@ -1685,29 +1685,112 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROCK_SALT_TOWN
 	db 2 percent, 2 percent, 2 percent ; encounter rates: morn/day/nite
 	;	morn
-	db 4, PIDGEY
-	db 3, SENTRET
-	db 3, LEDYBA
-	db 4, SENTRET
-	db 3, HOPPIP
-	db 4, HOPPIP
-	db 5, TEDDIURSA
-	;	day
+	db 2, SENTRET
 	db 3, PIDGEY
-	db 4, RATTATA
-	db 3, CATERPIE
+	db 2, LEDYBA
+	db 4, HOPPIP
+	db 4, SENTRET
+	db 3, LEDYBA
+	db 4, LEDYBA
+	;	day
+	db 2, RATTATA
+	db 3, PIDGEY
 	db 3, SENTRET
-	db 4, CATERPIE
-	db 4, STANTLER
-	db 5, STANTLER
+	db 2, SENTRET
+	db 4, PIDGEY
+	db 3, RATTATA
+	db 4, RATTATA
 	;	nite
-	db 4, HOOTHOOT
-	db 3, SPINARAK
-	db 3, WEEDLE
-	db 4, POLIWAG
-	db 3, WEEDLE
-	db 4, GASTLY
-	db 5, MURKROW
+	db 2, SPINARAK
+	db 3, RATTATA
+	db 2, HOOTHOOT
+	db 3, HOOTHOOT
+	db 4, SPINARAK
+	db 4, SPINARAK
+	end_grass_wildmons
+
+	def_grass_wildmons ROCK_SALT_CAVE_1F
+	db 2 percent, 2 percent, 2 percent
+	; morn
+	db 3, ZUBAT
+	db 3, GEODUDE
+	db 3, SANDSHREW
+	db 4, ZUBAT
+	db 4, GEODUDE
+	db 4, SANDSHREW
+	db 4, SANDSHREW
+	; day
+	db 3, ZUBAT
+	db 3, GEODUDE
+	db 3, SANDSHREW
+	db 4, ZUBAT
+	db 4, GEODUDE
+	db 4, SANDSHREW
+	db 4, SANDSHREW
+	; nite
+	db 3, ZUBAT
+	db 3, GEODUDE
+	db 3, SANDSHREW
+	db 4, ZUBAT
+	db 4, GEODUDE
+	db 4, SANDSHREW
+	db 4, SANDSHREW
+	end_grass_wildmons
+
+	def_grass_wildmons ROCK_SALT_CAVE_1B
+	db 2 percent, 2 percent, 2 percent
+	; morn
+	db 3, ZUBAT
+	db 3, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, GEODUDE
+	db 5, GEODUDE
+	db 5, ONIX
+	; day
+	db 3, ZUBAT
+	db 3, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, GEODUDE
+	db 5, GEODUDE
+	db 5, ONIX
+	; nite
+	db 3, ZUBAT
+	db 3, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, GEODUDE
+	db 5, GEODUDE
+	db 5, ONIX
+	end_grass_wildmons
+
+	def_grass_wildmons ROCK_SALT_CAVE_2B
+	db 2 percent, 2 percent, 2 percent
+	; morn
+	db 4, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, ZUBAT
+	db 5, DUNSPARCE
+	db 5, ONIX
+	db 5, ONIX
+	; day
+	db 4, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, ZUBAT
+	db 5, DUNSPARCE
+	db 5, ONIX
+	db 5, ONIX
+	; nite
+	db 4, SANDSHREW
+	db 4, GEODUDE
+	db 4, ONIX
+	db 5, ZUBAT
+	db 5, DUNSPARCE
+	db 5, ONIX
+	db 5, ONIX
 	end_grass_wildmons
 
 	db -1 ; end
