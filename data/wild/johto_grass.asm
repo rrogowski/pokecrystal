@@ -1705,6 +1705,7 @@ JohtoGrassWildMons:
 	db 3, RATTATA
 	db 2, HOOTHOOT
 	db 3, HOOTHOOT
+	db 4, RATTATA
 	db 4, SPINARAK
 	db 4, SPINARAK
 	end_grass_wildmons
