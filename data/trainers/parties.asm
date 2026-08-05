@@ -799,8 +799,20 @@ LassGroup:
 	; LASS (18)
 	db "CASEY@", TRAINERTYPE_NORMAL
 	db 3, SENTRET
-	db 5, NIDORAN_F
+	db 5, ZUBAT
 	db -1 ; end
+
+	; LASS (19)
+	db "TATIANA@", TRAINERTYPE_NORMAL
+	db 4, PIDGEY
+	db 5, SPINARAK
+	db 6, RATTATA
+	db -1 ; end
+
+	; LASS (20)
+	db "BAILEY@", TRAINERTYPE_NORMAL
+	db 4, HOOTHOOT
+	db 5, ZUBAT
 
 JanineGroup:
 	; JANINE (1)
@@ -1791,6 +1803,13 @@ FisherGroup:
 	db "PAUL@", TRAINERTYPE_NORMAL
 	db 4, POLIWAG
 	db 5, MAGIKARP
+	db -1 ; end
+
+	; FISHER (27)
+	db "JAKE@", TRAINERTYPE_NORMAL
+	db 4, WOOPER
+	db 5, POLIWAG
+	db 7, MAGIKARP
 	db -1 ; end
 
 SwimmerMGroup:
@@ -3443,6 +3462,16 @@ PokefanFGroup:
 	; POKEFANF (6)
 	db "JAIME@", TRAINERTYPE_ITEM
 	db 16, MEOWTH,     BERRY
+	db -1 ; end
+
+	; POKEFANF (7)
+	db "RILEY@", TRAINERTYPE_NORMAL
+	db 2, LEDYBA
+	db 3, LEDYBA
+	db 4, LEDYBA
+	db 5, LEDYBA
+	db 6, LEDYBA
+	db 7, LEDYBA
 	db -1 ; end
 
 RedGroup:

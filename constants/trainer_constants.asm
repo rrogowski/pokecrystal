@@ -194,6 +194,8 @@ DEF KRIS EQU __trainer_class__
 	const DANA4
 	const DANA5
 	const CASEY
+	const TATIANA
+	const BAILEY2
 
 	trainerclass JANINE ; 1a
 	const JANINE1
@@ -379,6 +381,7 @@ DEF KRIS EQU __trainer_class__
 	const RALPH5
 	const TULLY4
 	const PAUL2
+	const JAKE2
 
 	trainerclass SWIMMERM ; 26
 	const HAROLD
@@ -688,6 +691,7 @@ DEF KRIS EQU __trainer_class__
 	const BEVERLY3 ; unused
 	const GEORGIA
 	const JAIME
+	const RILEY2
 
 	trainerclass RED ; 3f
 	const RED1
